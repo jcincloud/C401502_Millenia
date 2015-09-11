@@ -1,0 +1,117 @@
+﻿@charset "utf-8";
+
+/* Table of contents
+==================================================
+- mixins for Layout
+- mixins for Typography
+- mixins for Images / Icons
+*/
+
+
+/*  mixins for Layout
+-------------------------------------------------- */
+
+/* 頁尾置底 */
+@mixin footer-bottom($height, $spacing:0) {
+  html, body, #container {height: 100%;}
+  body > #container { height: auto; min-height: 100%; }
+  #main { overflow: hidden; padding-bottom: $height + $spacing; } 
+  #footer {
+    position: relative;
+    margin-top: -($height); /* negative value of footer height */
+    height: $height;
+    clear: both;
+  }
+}
+
+
+/*  mixins for Typography
+-------------------------------------------------- */
+
+/* px to em */
+@function px-em($px, $context: $font-size-base) {
+  @return ($px / $context) * 1em;
+}
+/* em to px */
+@function em-px($em, $context: $font-size-base) {
+  @return ($em * $context) * 1px;
+}
+
+/* CSS3 selection */ 
+@mixin selection {
+    &::-moz-selection {@content;}
+    &::selection      {@content;}
+}
+
+/* hover / active */
+@mixin hover ($hover:true, $active:true) {
+  @if $hover == true, $active == true {
+    &:hover, &:focus, &:hover:focus, &:active, &:active:focus {
+      @content;
+    }
+  }
+  @else if $hover == true, $active == false {
+    &:hover, &:hover:focus {
+      @content;
+    }
+  }
+  @else if $hover == false, $active == true {
+    &:active, &:focus, &:active:focus {
+      @content;
+    }
+  }
+}
+
+
+/*  mixins for Images / Icons
+-------------------------------------------------- */
+
+/* 不固定尺寸圖片 完全置中fix (支援IE8) */
+@mixin pic-center($max-width, $max-height) {
+  display: block;
+  width: $max-width;
+  text-align: center;
+  line-height: $max-height;
+  
+  img {
+    max-width: 100%;
+    max-height: $max-height;
+    vertical-align: middle;
+  }
+}
+
+/* 圖片代替文字 */
+@mixin pic-text($src, $display:block) {
+  display: $display;
+  text-indent: -9999px;
+  background: url($src) no-repeat;
+  border: 0;
+}
+
+/* 做三角形 */
+@mixin make-caret($direction, $color, $width, $height:$width/2, $display:block) {
+  display: $display;
+  width:0;
+  height:0;
+  border:$width/2 solid transparent;
+  @if $direction == up {
+    border-bottom-color:$color;
+    border-bottom-width:$height;
+    border-top-width:$width - $height;
+  }
+  @else if $direction == down {
+    border-top-color:$color;
+    border-top-width:$height;
+    border-bottom-width:$width - $height;
+  }
+  @else if $direction == left {
+    border-right-color:$color;
+    border-right-width:$height;
+    border-left-width:$width - $height;
+  }
+  @else if $direction == right {
+    border-left-color:$color;
+    border-left-width:$height;
+    border-right-width:$width - $height;
+  }
+}

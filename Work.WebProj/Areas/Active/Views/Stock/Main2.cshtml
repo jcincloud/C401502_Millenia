@@ -1,0 +1,183 @@
+﻿@{
+    Layout = "~/Views/Shared/Manage/RLayout.cshtml";
+}
+@section IncludeScript{
+    <script src="~/Scripts/jquery/jquery-2.1.4.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+}
+@section sidebar{
+    @Html.Partial("Manage/vucMenu")
+}
+
+<ul class="breadcrumb">
+    <li><i class="fa-list"></i> 客戶進貨登打</li>
+</ul>
+
+<h4 class="title">客戶進貨主檔</h4>
+
+<form action="" class="form-horizontal">
+    <div class="form-group">
+        <label for="" class="control-label col-xs-1">業務員</label>
+        <div class="col-xs-1">
+            <p class="form-control-static">jerry</p>
+        </div>
+        <label for="" class="control-label col-xs-1">進貨年</label>
+        <div class="col-xs-1">
+            <input type="text" class="form-control" value="2015" disabled>
+        </div>
+        <label for="" class="control-label col-xs-1">進貨月</label>
+        <div class="col-xs-1">
+            <input type="text" class="form-control" disabled>
+        </div>
+        <label for="" class="control-label col-xs-1">經銷商</label>
+        <div class="col-xs-2">
+            <select name="" id="" class="form-control" disabled>
+                <option value="">123</option>
+            </select>
+        </div>
+        <div class="col-xs-3 text-right">
+            <button class="btn-info"><i class="fa-pencil"></i> 修改</button>
+            <button><i class="fa-times"></i> 回前頁</button>
+        </div>
+    </div>
+</form>
+
+<hr class="expanded">
+
+<h4 class="title">客戶進貨明細檔</h4>
+
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th class="col-xs-1 text-center">編輯</th>
+                <th class="col-xs-2">產品A</th>
+                <th class="col-xs-2">產品B</th>
+                <th class="col-xs-2">產品C</th>
+                <th class="col-xs-2">產品D</th>
+                <th class="col-xs-3">產品E</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">
+                    <button class="btn-link btn-lg" onclick="location.href='Main3'"><i class="fa-pencil"></i></button>
+                    <button class="btn-link btn-lg text-danger"><i class="fa-trash-o"></i></button>
+                </td>
+                <td>WELLS太妃糖布丁啤酒330ml-24btl</td>
+                <td>YOUNG'S雙倍黑巧克力啤酒330ml瓶</td>
+                <td>艾斯利亞 Reposado龍舌蘭酒700ML</td>
+                <td>常陸野貓頭鷹-賀正新年限定啤酒</td>
+                <td>葛蘭斯GROLSCH 450ml-20bottles</td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <button class="btn-link btn-lg" onclick="location.href='Main3'"><i class="fa-pencil"></i></button>
+                    <button class="btn-link btn-lg text-danger"><i class="fa-trash-o"></i></button>
+                </td>
+                <td>WELLS太妃糖布丁啤酒330ml-24btl</td>
+                <td>YOUNG'S雙倍黑巧克力啤酒330ml瓶</td>
+                <td>艾斯利亞 Reposado龍舌蘭酒700ML</td>
+                <td>常陸野貓頭鷹-賀正新年限定啤酒</td>
+                <td>葛蘭斯GROLSCH 450ml-20bottles</td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <button class="btn-link btn-lg" onclick="location.href='Main3'"><i class="fa-pencil"></i></button>
+                    <button class="btn-link btn-lg text-danger"><i class="fa-trash-o"></i></button>
+                </td>
+                <td>WELLS太妃糖布丁啤酒330ml-24btl</td>
+                <td>YOUNG'S雙倍黑巧克力啤酒330ml瓶</td>
+                <td>艾斯利亞 Reposado龍舌蘭酒700ML</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div><!-- 後台常用列表 //-->
+
+<hr>
+
+<button class="btn-success" data-toggle="modal" data-target="#Modal-1"><i class="fa-plus-circle"></i> 新增明細資料</button>
+
+<div class="modal fade" id="Modal-1">
+<div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">選擇產品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    每次最多可選擇 <strong class="text-danger">5 種</strong> 產品
+                </div>
+                <table class="table-condensed">
+                    <thead>
+                        <tr>
+                            <th>產品編號</th>
+                            <th>產品名稱</th>
+                            <th class="text-center">加入</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>WTP330</td>
+                            <td>WELLS太妃糖布丁啤酒330ml-24btl</td>
+                            <td class="text-center">
+                                <label class="cbox">
+                                    <input type="checkbox">
+                                    <i class="fa-check"></i>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>YDC330</td>
+                            <td>YOUNG'S雙倍黑巧克力啤酒330ml瓶</td>
+                            <td class="text-center">
+                                <label class="cbox">
+                                    <input type="checkbox">
+                                    <i class="fa-check"></i>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>EXR700</td>
+                            <td>艾斯利亞 Reposado龍舌蘭酒700ML</td>
+                            <td class="text-center">
+                                <label class="cbox">
+                                    <input type="checkbox">
+                                    <i class="fa-check"></i>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>HNC330</td>
+                            <td>常陸野貓頭鷹-賀正新年限定啤酒</td>
+                            <td class="text-center">
+                                <label class="cbox">
+                                    <input type="checkbox">
+                                    <i class="fa-check"></i>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>GR450</td>
+                            <td>葛蘭斯GROLSCH 450ml-20bottles</td>
+                            <td class="text-center">
+                                <label class="cbox">
+                                    <input type="checkbox">
+                                    <i class="fa-check"></i>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn-primary" onclick="location.href='Main3'"><i class="fa-check"></i> 確定，下一步</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+

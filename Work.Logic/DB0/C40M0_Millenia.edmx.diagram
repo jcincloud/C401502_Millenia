@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0733ef7e70ac47eba82e3c5e39a8407a" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.AspNetRoles" Width="1.5" PointX="0.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.AspNetUsers" Width="1.5" PointX="3.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.Department" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.i_Currency" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.i_IDX" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.i_Lang" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.i_Parm" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.i_SN" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.i_UserLoginLog" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_AspNetUsers_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="C40M0_MilleniaModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.Visit" Width="1.5" PointX="9.75" PointY="4.5" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.VisitDetailProduct" Width="1.5" PointX="7.25" PointY="11.375" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.MapCustomerAgnet" Width="2.625" PointX="0.75" PointY="13.875" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.MapSalesProduct" Width="2.625" PointX="13.5" PointY="0.5" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_MapSalesProduct_AspNetUsers" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_MapSalesProduct_MapSalesProduct" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.Area" Width="1.5" PointX="12.375" PointY="15" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.MapSalesArea" Width="1.875" PointX="14.875" PointY="6.375" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_MapSalesArea_Area" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_MapSalesArea_MapSalesArea" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.Menu" Width="1.5" PointX="2.125" PointY="20.25" />
+        <AssociationConnector Association="C40M0_MilleniaModel.MenuRole" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.Product" Width="1.5" PointX="19.375" PointY="1.875" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.ProductBrand" Width="1.5" PointX="17.125" PointY="0.625" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.ProductCategory" Width="1.5" PointX="16.875" PointY="3.375" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_MapSalesProduct_Product" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_Product_ProductBrand" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_Product_ProductCategory" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_VisitDetailProduct_Product" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.VisitTimeRecorder" Width="1.5" PointX="15.25" PointY="10.375" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.Stock" Width="1.5" PointX="10.5" PointY="0.75" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_Stock_AspNetUsers" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_Stock_Stock" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.VisitDetail" Width="1.5" PointX="12.5" PointY="8.375" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_VisitDetail_Visit" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_VisitDetailProduct_VisitDetail" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_VisitTimeRecorder_VisitDetail" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.StockDetail" Width="1.5" PointX="21.625" PointY="2.125" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.StockDetailQty" Width="1.5" PointX="23.875" PointY="8.125" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_StockDetail_Product" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_StockDetail_Stock" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_StockDetailProduct_StockDetail" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.Agent" Width="1.5" PointX="8.25" PointY="17.625" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_Stock_Agent" />
+        <EntityTypeShape EntityType="C40M0_MilleniaModel.Customer" Width="1.5" PointX="14.625" PointY="14.875" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_Customer_Customer" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_StockDetailQty_Customer" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_VisitDetail_Customer" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_VisitDetailProduct_Customer" />
+        <AssociationConnector Association="C40M0_MilleniaModel.FK_VisitTimeRecorder_Customer" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

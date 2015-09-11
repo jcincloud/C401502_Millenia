@@ -1,0 +1,51 @@
+﻿@charset "utf-8";
+
+/* Table of contents
+==================================================
+- IE 8 fix
+  - checkbox
+  - file-upload
+  - form-inline
+  - pager
+*/
+
+
+/* # IE 8 fix
+================================================== */
+.ie8 {
+
+  /* checkbox */
+  .checkbox, .checkbox-inline {
+    span {display:inline-block; width:120px;}
+    span:before {display:none;}
+  }
+
+  /* file-upload */
+  .file-upload {
+    input[type="file"] {
+      filter: alpha(opacity=0);
+    }
+  }
+
+  /* form-inline (override the xs-screen styles) */
+  .form-inline {
+    .form-group {
+      label, .form-control {
+        display:inline;
+      }
+    }
+  }
+
+  /* pager */
+  .pager {
+    > li {
+      display: inline-block;
+    }
+    > .form-inline {
+      width:190px;
+      .form-control {
+        width:50px;
+      }
+    }
+  }
+}

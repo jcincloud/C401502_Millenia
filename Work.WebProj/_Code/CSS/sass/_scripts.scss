@@ -1,0 +1,41 @@
+﻿@charset "utf-8";
+
+/* Table of contents
+==================================================
+- Sortable
+- Typeahead
+*/
+
+
+/* # Sortable (drag n drop)
+-------------------------------------------------- */
+.draggable {
+  cursor:move;
+}
+.ghost, .sortable-ghost {
+  border:3px dashed $gray-light;
+  opacity: 0.4;
+}
+
+
+/* # Typeahead
+-------------------------------------------------- */
+.tt-dropdown-menu {
+  width: 100%;
+  max-height: 150px;
+  margin-top:3px;
+  border:1px solid #ccc;
+  box-shadow: 0 2px 3px hsla(0,0,0,0.1);
+  overflow-y: auto;
+  .tt-suggestion {
+    cursor: pointer;
+    p {
+      margin:0;
+      padding:3px;
+    }
+  }
+  .tt-cursor {
+    color: #fff;
+    background: #F2BB46;
+  }
+}

@@ -1,0 +1,124 @@
+﻿// set min-with in non-responsive web
+$min-width: 992px;
+
+
+@media (max-width: $min-width) {
+
+body {
+  width:     100%;
+  min-width: $min-width;
+}
+
+/* Non-responsive overrides
+ *
+ * Utilitze the following CSS to disable the responsive-ness of the container,
+ * grid system, navbar, and forms.
+ */
+
+/* Reset the container */
+.container {
+  width:     $min-width;
+  max-width: none !important;
+  .navbar-header,
+  .navbar-collapse {
+    margin-right: 0;
+    margin-left:  0;
+  }
+}
+
+/* Always float the navbar header */
+.navbar-header {
+  float: left;
+}
+
+/* Undo the collapsing navbar */
+.navbar-collapse {
+  display:        block   !important;
+  height:         auto    !important;
+  padding-bottom: 0;
+  overflow:       visible !important;
+}
+
+.navbar-toggle {
+  display: none;
+}
+.navbar-collapse {
+  padding-right:0;
+  border-top: 0;
+}
+
+.navbar-brand {
+  //margin-left: -15px;
+}
+
+/* Always apply the floated nav */
+.navbar-nav {
+  float:  left;
+  margin: 0;
+  > li {
+    float: left;
+    > a {
+      padding-top:    $navbar-padding-vertical;
+      padding-bottom: $navbar-padding-vertical;
+    }
+  }
+  &.navbar-right {
+    float: right;
+    //margin-right:$grid-gutter-width/2;
+  }
+}
+
+/* Undo custom dropdowns */
+.navbar .navbar-nav .open .dropdown-menu {
+  position:         absolute;
+  float:            left;
+  background-color: $dropdown-bg;
+  border:           1px solid $dropdown-border;
+  border:           1px solid $dropdown-fallback-border;
+  border-width:     0 1px 1px;
+  border-radius:    0 0 $border-radius-base $border-radius-base;
+  @include box-shadow(0 6px 12px rgba(0,0,0,.175));
+  > li {
+    > a {
+      color: $dropdown-link-color;
+    }
+    > a:hover,
+    > a:focus {
+      color:            $dropdown-link-hover-color !important;
+      background-color: $dropdown-link-hover-bg    !important;
+    }
+    &.active > a,
+    &.active > a:hover,
+    &.active > a:focus {
+      color:            $dropdown-link-active-color !important;
+      background-color: $dropdown-link-active-bg    !important;
+    }
+    &.disabled > a,
+    &.disabled > a:hover,
+    &.disabled > a:focus {
+      color: $dropdown-link-disabled-color !important;
+      background-color: transparent !important;
+    }
+  }
+}
+
+/* Undo forms 
+.form-inline {
+  [class*="-group"],
+  .form-control {
+    display:        inline-block;
+    width:          auto;
+    margin-bottom:  0;
+    vertical-align: middle;
+  }
+}
+.form-horizontal {
+  .control-label {
+    text-align:    right;
+    margin-bottom: 0;
+    padding-top:   ($padding-base-vertical + 1);
+  }
+}
+*/
+
+} // end of media queries

@@ -1,0 +1,2242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="C40M0_MilleniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="agent_id" Type="int" Nullable="false" />
+          <Property Name="agent_name" Type="nvarchar" MaxLength="64" />
+          <Property Name="agent_nick" Type="nvarchar" MaxLength="32" />
+          <Property Name="sno" Type="char" MaxLength="8" />
+          <Property Name="address" Type="nvarchar" MaxLength="128" />
+          <Property Name="tel" Type="varchar" MaxLength="16" />
+          <Property Name="fax" Type="varchar" MaxLength="16" />
+          <Property Name="contact_name" Type="nvarchar" MaxLength="32" />
+          <Property Name="contact_ext" Type="varchar" MaxLength="8" />
+          <Property Name="contact_mobile" Type="varchar" MaxLength="16" />
+          <Property Name="charge_name" Type="nvarchar" MaxLength="32" />
+          <Property Name="charge_ext" Type="varchar" MaxLength="8" />
+          <Property Name="charge_mobile" Type="varchar" MaxLength="16" />
+          <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="area_id" />
+          </Key>
+          <Property Name="area_id" Type="int" Nullable="false" />
+          <Property Name="area_name" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="department_id" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="user_name_c" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="sort" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_sn" Type="varchar" MaxLength="16" />
+          <Property Name="customer_name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="customer_all_name" Type="nvarchar" MaxLength="128" />
+          <Property Name="tw_zip" Type="varchar" MaxLength="5" />
+          <Property Name="tw_city" Type="nvarchar" MaxLength="5" />
+          <Property Name="tw_country" Type="nvarchar" MaxLength="5" />
+          <Property Name="tw_address" Type="nvarchar" MaxLength="128" />
+          <Property Name="contact_1" Type="nvarchar" MaxLength="64" />
+          <Property Name="birthday_1" Type="smalldatetime" />
+          <Property Name="contact_2" Type="nvarchar" MaxLength="16" />
+          <Property Name="birthday_2" Type="smalldatetime" />
+          <Property Name="tel" Type="varchar" MaxLength="16" />
+          <Property Name="fax" Type="varchar" MaxLength="16" />
+          <Property Name="mobile" Type="varchar" MaxLength="16" />
+          <Property Name="sno" Type="char" MaxLength="8" />
+          <Property Name="opening_time_1" Type="varchar" MaxLength="16" />
+          <Property Name="opening_time_2" Type="varchar" MaxLength="16" />
+          <Property Name="email" Type="varchar" MaxLength="128" />
+          <Property Name="customer_type" Type="tinyint" Nullable="false" />
+          <Property Name="channel_type" Type="tinyint" Nullable="false" />
+          <Property Name="evaluate" Type="tinyint" />
+          <Property Name="store_level" Type="tinyint" Nullable="false" />
+          <Property Name="store_type" Type="tinyint" Nullable="false" />
+          <Property Name="state" Type="tinyint" />
+          <Property Name="area_id" Type="int" Nullable="false" />
+          <Property Name="level_type" Type="tinyint" />
+          <Property Name="memo" Type="nvarchar" MaxLength="256" />
+          <Property Name="mark_err" Type="bit" Nullable="false" />
+          <Property Name="owner_name" Type="nvarchar" MaxLength="16" />
+          <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="int" Nullable="false" />
+          <Property Name="department_name" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="i_Hide" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_Currency">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name_currency" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="english_currency" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="sign" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="is_use" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_IDX">
+          <Key>
+            <PropertyRef Name="table_name" />
+          </Key>
+          <Property Name="table_name" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="IDX" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_Lang">
+          <Key>
+            <PropertyRef Name="lang" />
+          </Key>
+          <Property Name="lang" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="area" Type="nvarchar" MaxLength="32" />
+          <Property Name="memo" Type="nvarchar" MaxLength="32" />
+          <Property Name="isuse" Type="bit" Nullable="false" />
+          <Property Name="sort" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_Parm">
+          <Key>
+            <PropertyRef Name="ParmName" />
+          </Key>
+          <Property Name="ParmName" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="ParmType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="S" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="I" Type="int" Nullable="false" />
+          <Property Name="F" Type="smallmoney" Nullable="false" />
+          <Property Name="D" Type="datetime" Nullable="false" />
+          <Property Name="B" Type="bit" Nullable="false" />
+          <Property Name="Memo" Type="nvarchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="i_SN">
+          <Key>
+            <PropertyRef Name="sn_type" />
+          </Key>
+          <Property Name="sn_type" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="y" Type="int" Nullable="false" />
+          <Property Name="m" Type="int" Nullable="false" />
+          <Property Name="d" Type="int" Nullable="false" />
+          <Property Name="w" Type="int" Nullable="false" />
+          <Property Name="sn_max" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_UserLoginLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="account" Type="varchar" MaxLength="24" Nullable="false" />
+          <Property Name="logintime" Type="datetime" Nullable="false" />
+          <Property Name="browers" Type="varchar" MaxLength="2048" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapCustomerAgnet">
+          <Key>
+            <PropertyRef Name="customer_id" />
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="agent_id" Type="int" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapSalesArea">
+          <Key>
+            <PropertyRef Name="users_id" />
+            <PropertyRef Name="area_id" />
+          </Key>
+          <Property Name="users_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="area_id" Type="int" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapSalesProduct">
+          <Key>
+            <PropertyRef Name="users_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="map_sales_product_id" Type="int" Nullable="false" />
+          <Property Name="users_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="menu_id" />
+          </Key>
+          <Property Name="menu_id" Type="int" Nullable="false" />
+          <Property Name="parent_menu_id" Type="int" Nullable="false" />
+          <Property Name="menu_name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="128" />
+          <Property Name="area" Type="nvarchar" MaxLength="64" />
+          <Property Name="controller" Type="varchar" MaxLength="16" />
+          <Property Name="action" Type="varchar" MaxLength="16" />
+          <Property Name="icon_class" Type="varchar" MaxLength="16" />
+          <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="is_folder" Type="bit" Nullable="false" />
+          <Property Name="is_use" Type="bit" Nullable="false" />
+          <Property Name="is_on_tablet" Type="bit" Nullable="false" />
+          <Property Name="is_only_tablet" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuRole">
+          <Key>
+            <PropertyRef Name="menu_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="menu_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="product_sn" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="product_name_c" Type="nvarchar" MaxLength="64" />
+          <Property Name="standard" Type="nvarchar" MaxLength="256" />
+          <Property Name="product_brand_id" Type="int" Nullable="false" />
+          <Property Name="product_category_id" Type="int" Nullable="false" />
+          <Property Name="brand" Type="varchar" MaxLength="32" />
+          <Property Name="unit_name" Type="nvarchar" MaxLength="32" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductBrand">
+          <Key>
+            <PropertyRef Name="product_brand_id" />
+          </Key>
+          <Property Name="product_brand_id" Type="int" Nullable="false" />
+          <Property Name="product_brand_name" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="sort" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="product_category_id" />
+          </Key>
+          <Property Name="product_category_id" Type="int" Nullable="false" />
+          <Property Name="product_category_name" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="sort" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="stock_id" />
+          </Key>
+          <Property Name="stock_id" Type="int" Nullable="false" />
+          <Property Name="y" Type="smallint" Nullable="false" />
+          <Property Name="m" Type="tinyint" Nullable="false" />
+          <Property Name="agent_id" Type="int" Nullable="false" />
+          <Property Name="users_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="state" Type="varchar" MaxLength="16" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockDetail">
+          <Key>
+            <PropertyRef Name="stock_detail_id" />
+          </Key>
+          <Property Name="stock_detail_id" Type="int" Nullable="false" />
+          <Property Name="stock_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="item_no" Type="int" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockDetailQty">
+          <Key>
+            <PropertyRef Name="stock_detail_id" />
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="stock_detail_qty_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stock_detail_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="qty" Type="int" Nullable="false" />
+          <Property Name="unit_name" Type="nvarchar" MaxLength="32" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="visit_id" />
+          </Key>
+          <Property Name="visit_id" Type="int" Nullable="false" />
+          <Property Name="users_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="visit_date" Type="smalldatetime" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VisitDetail">
+          <Key>
+            <PropertyRef Name="visit_detail_id" />
+          </Key>
+          <Property Name="visit_detail_id" Type="int" Nullable="false" />
+          <Property Name="visit_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="users_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_time" Type="smalldatetime" />
+          <Property Name="end_time" Type="smalldatetime" />
+          <Property Name="cumulative_time" Type="int" Nullable="false" />
+          <Property Name="state" Type="tinyint" Nullable="false" />
+          <Property Name="step" Type="tinyint" Nullable="false" />
+          <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="no_visit_reason" Type="tinyint" Nullable="false" />
+          <Property Name="memo" Type="nvarchar" MaxLength="256" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VisitDetailProduct">
+          <Key>
+            <PropertyRef Name="visit_detail_product_id" />
+          </Key>
+          <Property Name="visit_detail_product_id" Type="int" Nullable="false" />
+          <Property Name="visit_detail_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="users_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="description" Type="ntext" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VisitTimeRecorder">
+          <Key>
+            <PropertyRef Name="visit_time_recorder_id" />
+          </Key>
+          <Property Name="visit_time_recorder_id" Type="int" Nullable="false" />
+          <Property Name="visit_detail_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="visit_date" Type="smalldatetime" Nullable="false" />
+          <Property Name="start_time" Type="datetime" />
+          <Property Name="end_time" Type="datetime" />
+          <Property Name="timespan" Type="int" />
+        </EntityType>
+        <Association Name="FK_AspNetUsers_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Customer">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapSalesArea_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="MapSalesArea" Type="Self.MapSalesArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="MapSalesArea">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapSalesArea_MapSalesArea">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="MapSalesArea" Type="Self.MapSalesArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MapSalesArea">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapSalesProduct_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="MapSalesProduct" Type="Self.MapSalesProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MapSalesProduct">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapSalesProduct_MapSalesProduct">
+          <End Role="MapSalesProduct" Type="Self.MapSalesProduct" Multiplicity="1" />
+          <End Role="MapSalesProduct1" Type="Self.MapSalesProduct" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MapSalesProduct">
+              <PropertyRef Name="users_id" />
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="MapSalesProduct1">
+              <PropertyRef Name="users_id" />
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapSalesProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="MapSalesProduct" Type="Self.MapSalesProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="MapSalesProduct">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuRole_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="MenuRole" Type="Self.MenuRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuRole">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuRole_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="MenuRole" Type="Self.MenuRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="menu_id" />
+            </Principal>
+            <Dependent Role="MenuRole">
+              <PropertyRef Name="menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductBrand">
+          <End Role="ProductBrand" Type="Self.ProductBrand" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBrand">
+              <PropertyRef Name="product_brand_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="product_brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="product_category_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="product_category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Stock">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="1" />
+          <End Role="Stock1" Type="Self.Stock" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="stock_id" />
+            </Principal>
+            <Dependent Role="Stock1">
+              <PropertyRef Name="stock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="StockDetail" Type="Self.StockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="StockDetail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockDetail_Stock">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="1" />
+          <End Role="StockDetail" Type="Self.StockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="stock_id" />
+            </Principal>
+            <Dependent Role="StockDetail">
+              <PropertyRef Name="stock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockDetailProduct_StockDetail">
+          <End Role="StockDetail" Type="Self.StockDetail" Multiplicity="1" />
+          <End Role="StockDetailQty" Type="Self.StockDetailQty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockDetail">
+              <PropertyRef Name="stock_detail_id" />
+            </Principal>
+            <Dependent Role="StockDetailQty">
+              <PropertyRef Name="stock_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockDetailQty_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="StockDetailQty" Type="Self.StockDetailQty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="StockDetailQty">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetail_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="VisitDetail" Type="Self.VisitDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="VisitDetail">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetail_Visit">
+          <End Role="Visit" Type="Self.Visit" Multiplicity="1" />
+          <End Role="VisitDetail" Type="Self.VisitDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visit">
+              <PropertyRef Name="visit_id" />
+            </Principal>
+            <Dependent Role="VisitDetail">
+              <PropertyRef Name="visit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetailProduct_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="VisitDetailProduct" Type="Self.VisitDetailProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="VisitDetailProduct">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetailProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="VisitDetailProduct" Type="Self.VisitDetailProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="VisitDetailProduct">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetailProduct_VisitDetail">
+          <End Role="VisitDetail" Type="Self.VisitDetail" Multiplicity="1" />
+          <End Role="VisitDetailProduct" Type="Self.VisitDetailProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitDetail">
+              <PropertyRef Name="visit_detail_id" />
+            </Principal>
+            <Dependent Role="VisitDetailProduct">
+              <PropertyRef Name="visit_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitTimeRecorder_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="VisitTimeRecorder" Type="Self.VisitTimeRecorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="VisitTimeRecorder">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitTimeRecorder_VisitDetail">
+          <End Role="VisitDetail" Type="Self.VisitDetail" Multiplicity="1" />
+          <End Role="VisitTimeRecorder" Type="Self.VisitTimeRecorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitDetail">
+              <PropertyRef Name="visit_detail_id" />
+            </Principal>
+            <Dependent Role="VisitTimeRecorder">
+              <PropertyRef Name="visit_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="C40M0_MilleniaModelStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="i_Currency" EntityType="Self.i_Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="i_IDX" EntityType="Self.i_IDX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="i_Lang" EntityType="Self.i_Lang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="i_Parm" EntityType="Self.i_Parm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="i_SN" EntityType="Self.i_SN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="i_UserLoginLog" EntityType="Self.i_UserLoginLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapCustomerAgnet" EntityType="Self.MapCustomerAgnet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapSalesArea" EntityType="Self.MapSalesArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapSalesProduct" EntityType="Self.MapSalesProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuRole" EntityType="Self.MenuRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductBrand" EntityType="Self.ProductBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockDetail" EntityType="Self.StockDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockDetailQty" EntityType="Self.StockDetailQty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visit" EntityType="Self.Visit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitDetail" EntityType="Self.VisitDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitDetailProduct" EntityType="Self.VisitDetailProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitTimeRecorder" EntityType="Self.VisitTimeRecorder" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUsers_Department" Association="Self.FK_AspNetUsers_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapSalesArea_Area" Association="Self.FK_MapSalesArea_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="MapSalesArea" EntitySet="MapSalesArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapSalesArea_MapSalesArea" Association="Self.FK_MapSalesArea_MapSalesArea">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MapSalesArea" EntitySet="MapSalesArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapSalesProduct_AspNetUsers" Association="Self.FK_MapSalesProduct_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MapSalesProduct" EntitySet="MapSalesProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapSalesProduct_MapSalesProduct" Association="Self.FK_MapSalesProduct_MapSalesProduct">
+            <End Role="MapSalesProduct" EntitySet="MapSalesProduct" />
+            <End Role="MapSalesProduct1" EntitySet="MapSalesProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapSalesProduct_Product" Association="Self.FK_MapSalesProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="MapSalesProduct" EntitySet="MapSalesProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuRole_AspNetRoles" Association="Self.FK_MenuRole_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuRole" EntitySet="MenuRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuRole_Menu" Association="Self.FK_MenuRole_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuRole" EntitySet="MenuRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductBrand" Association="Self.FK_Product_ProductBrand">
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory" Association="Self.FK_Product_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Agent" Association="Self.FK_Stock_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_AspNetUsers" Association="Self.FK_Stock_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Stock" Association="Self.FK_Stock_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="Stock1" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockDetail_Product" Association="Self.FK_StockDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="StockDetail" EntitySet="StockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockDetail_Stock" Association="Self.FK_StockDetail_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="StockDetail" EntitySet="StockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockDetailProduct_StockDetail" Association="Self.FK_StockDetailProduct_StockDetail">
+            <End Role="StockDetail" EntitySet="StockDetail" />
+            <End Role="StockDetailQty" EntitySet="StockDetailQty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockDetailQty_Customer" Association="Self.FK_StockDetailQty_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="StockDetailQty" EntitySet="StockDetailQty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetail_Customer" Association="Self.FK_VisitDetail_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="VisitDetail" EntitySet="VisitDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetail_Visit" Association="Self.FK_VisitDetail_Visit">
+            <End Role="Visit" EntitySet="Visit" />
+            <End Role="VisitDetail" EntitySet="VisitDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetailProduct_Customer" Association="Self.FK_VisitDetailProduct_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="VisitDetailProduct" EntitySet="VisitDetailProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetailProduct_Product" Association="Self.FK_VisitDetailProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="VisitDetailProduct" EntitySet="VisitDetailProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetailProduct_VisitDetail" Association="Self.FK_VisitDetailProduct_VisitDetail">
+            <End Role="VisitDetail" EntitySet="VisitDetail" />
+            <End Role="VisitDetailProduct" EntitySet="VisitDetailProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitTimeRecorder_Customer" Association="Self.FK_VisitTimeRecorder_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="VisitTimeRecorder" EntitySet="VisitTimeRecorder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitTimeRecorder_VisitDetail" Association="Self.FK_VisitTimeRecorder_VisitDetail">
+            <End Role="VisitDetail" EntitySet="VisitDetail" />
+            <End Role="VisitTimeRecorder" EntitySet="VisitTimeRecorder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="C40M0_MilleniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Menu" Relationship="C40M0_MilleniaModel.MenuRole" FromRole="AspNetRoles" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="department_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_AspNetUsers_Department" FromRole="AspNetUsers" ToRole="Department" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="MapSalesProduct" Relationship="C40M0_MilleniaModel.FK_MapSalesProduct_AspNetUsers" FromRole="AspNetUsers" ToRole="MapSalesProduct" />
+          <NavigationProperty Name="MapSalesArea" Relationship="C40M0_MilleniaModel.FK_MapSalesArea_MapSalesArea" FromRole="AspNetUsers" ToRole="MapSalesArea" />
+          <Property Name="user_name_c" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Stock" Relationship="C40M0_MilleniaModel.FK_Stock_AspNetUsers" FromRole="AspNetUsers" ToRole="Stock" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="Int32" Nullable="false" />
+          <Property Name="department_name" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_Department" FromRole="Department" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="i_Currency">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name_currency" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="english_currency" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sign" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="is_use" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_IDX">
+          <Key>
+            <PropertyRef Name="table_name" />
+          </Key>
+          <Property Name="table_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDX" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_Lang">
+          <Key>
+            <PropertyRef Name="lang" />
+          </Key>
+          <Property Name="lang" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="area" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="memo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="isuse" Type="Boolean" Nullable="false" />
+          <Property Name="sort" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_Parm">
+          <Key>
+            <PropertyRef Name="ParmName" />
+          </Key>
+          <Property Name="ParmName" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParmType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="S" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="I" Type="Int32" Nullable="false" />
+          <Property Name="F" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="D" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="B" Type="Boolean" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="i_SN">
+          <Key>
+            <PropertyRef Name="sn_type" />
+          </Key>
+          <Property Name="sn_type" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="y" Type="Int32" Nullable="false" />
+          <Property Name="m" Type="Int32" Nullable="false" />
+          <Property Name="d" Type="Int32" Nullable="false" />
+          <Property Name="w" Type="Int32" Nullable="false" />
+          <Property Name="sn_max" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="i_UserLoginLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="account" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="logintime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="browers" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AspNetUsers_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="C40M0_MilleniaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="i_Currency" EntityType="Self.i_Currency" />
+          <EntitySet Name="i_IDX" EntityType="Self.i_IDX" />
+          <EntitySet Name="i_Lang" EntityType="Self.i_Lang" />
+          <EntitySet Name="i_Parm" EntityType="Self.i_Parm" />
+          <EntitySet Name="i_SN" EntityType="Self.i_SN" />
+          <EntitySet Name="i_UserLoginLog" EntityType="Self.i_UserLoginLog" />
+          <AssociationSet Name="FK_AspNetUsers_Department" Association="Self.FK_AspNetUsers_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Visit" EntityType="C40M0_MilleniaModel.Visit" />
+          <EntitySet Name="VisitDetailProduct" EntityType="C40M0_MilleniaModel.VisitDetailProduct" />
+          <EntitySet Name="MapCustomerAgnet" EntityType="C40M0_MilleniaModel.MapCustomerAgnet" />
+          <EntitySet Name="MapSalesProduct" EntityType="C40M0_MilleniaModel.MapSalesProduct" />
+          <AssociationSet Name="FK_MapSalesProduct_AspNetUsers" Association="C40M0_MilleniaModel.FK_MapSalesProduct_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MapSalesProduct" EntitySet="MapSalesProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapSalesProduct_MapSalesProduct" Association="C40M0_MilleniaModel.FK_MapSalesProduct_MapSalesProduct">
+            <End Role="MapSalesProduct" EntitySet="MapSalesProduct" />
+            <End Role="MapSalesProduct1" EntitySet="MapSalesProduct" />
+          </AssociationSet>
+          <EntitySet Name="Area" EntityType="C40M0_MilleniaModel.Area" />
+          <EntitySet Name="MapSalesArea" EntityType="C40M0_MilleniaModel.MapSalesArea" />
+          <AssociationSet Name="FK_MapSalesArea_Area" Association="C40M0_MilleniaModel.FK_MapSalesArea_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="MapSalesArea" EntitySet="MapSalesArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapSalesArea_MapSalesArea" Association="C40M0_MilleniaModel.FK_MapSalesArea_MapSalesArea">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MapSalesArea" EntitySet="MapSalesArea" />
+          </AssociationSet>
+          <EntitySet Name="Menu" EntityType="C40M0_MilleniaModel.Menu" />
+          <AssociationSet Name="MenuRole" Association="C40M0_MilleniaModel.MenuRole">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <EntitySet Name="Product" EntityType="C40M0_MilleniaModel.Product" />
+          <EntitySet Name="ProductBrand" EntityType="C40M0_MilleniaModel.ProductBrand" />
+          <EntitySet Name="ProductCategory" EntityType="C40M0_MilleniaModel.ProductCategory" />
+          <AssociationSet Name="FK_MapSalesProduct_Product" Association="C40M0_MilleniaModel.FK_MapSalesProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="MapSalesProduct" EntitySet="MapSalesProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductBrand" Association="C40M0_MilleniaModel.FK_Product_ProductBrand">
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory" Association="C40M0_MilleniaModel.FK_Product_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetailProduct_Product" Association="C40M0_MilleniaModel.FK_VisitDetailProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="VisitDetailProduct" EntitySet="VisitDetailProduct" />
+          </AssociationSet>
+          <EntitySet Name="VisitTimeRecorder" EntityType="C40M0_MilleniaModel.VisitTimeRecorder" />
+          <EntitySet Name="Stock" EntityType="C40M0_MilleniaModel.Stock" />
+          <AssociationSet Name="FK_Stock_AspNetUsers" Association="C40M0_MilleniaModel.FK_Stock_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Stock" Association="C40M0_MilleniaModel.FK_Stock_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="Stock1" EntitySet="Stock" />
+          </AssociationSet>
+          <EntitySet Name="VisitDetail" EntityType="C40M0_MilleniaModel.VisitDetail" />
+          <AssociationSet Name="FK_VisitDetail_Visit" Association="C40M0_MilleniaModel.FK_VisitDetail_Visit">
+            <End Role="Visit" EntitySet="Visit" />
+            <End Role="VisitDetail" EntitySet="VisitDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetailProduct_VisitDetail" Association="C40M0_MilleniaModel.FK_VisitDetailProduct_VisitDetail">
+            <End Role="VisitDetail" EntitySet="VisitDetail" />
+            <End Role="VisitDetailProduct" EntitySet="VisitDetailProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitTimeRecorder_VisitDetail" Association="C40M0_MilleniaModel.FK_VisitTimeRecorder_VisitDetail">
+            <End Role="VisitDetail" EntitySet="VisitDetail" />
+            <End Role="VisitTimeRecorder" EntitySet="VisitTimeRecorder" />
+          </AssociationSet>
+          <EntitySet Name="StockDetail" EntityType="C40M0_MilleniaModel.StockDetail" />
+          <EntitySet Name="StockDetailQty" EntityType="C40M0_MilleniaModel.StockDetailQty" />
+          <AssociationSet Name="FK_StockDetail_Product" Association="C40M0_MilleniaModel.FK_StockDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="StockDetail" EntitySet="StockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockDetail_Stock" Association="C40M0_MilleniaModel.FK_StockDetail_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="StockDetail" EntitySet="StockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockDetailProduct_StockDetail" Association="C40M0_MilleniaModel.FK_StockDetailProduct_StockDetail">
+            <End Role="StockDetail" EntitySet="StockDetail" />
+            <End Role="StockDetailQty" EntitySet="StockDetailQty" />
+          </AssociationSet>
+          <EntitySet Name="Agent" EntityType="C40M0_MilleniaModel.Agent" />
+          <AssociationSet Name="FK_Stock_Agent" Association="C40M0_MilleniaModel.FK_Stock_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <EntitySet Name="Customer" EntityType="C40M0_MilleniaModel.Customer" />
+          <AssociationSet Name="FK_Customer_Customer" Association="C40M0_MilleniaModel.FK_Customer_Customer">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockDetailQty_Customer" Association="C40M0_MilleniaModel.FK_StockDetailQty_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="StockDetailQty" EntitySet="StockDetailQty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetail_Customer" Association="C40M0_MilleniaModel.FK_VisitDetail_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="VisitDetail" EntitySet="VisitDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitDetailProduct_Customer" Association="C40M0_MilleniaModel.FK_VisitDetailProduct_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="VisitDetailProduct" EntitySet="VisitDetailProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitTimeRecorder_Customer" Association="C40M0_MilleniaModel.FK_VisitTimeRecorder_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="VisitTimeRecorder" EntitySet="VisitTimeRecorder" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="visit_id" />
+          </Key>
+          <Property Name="visit_id" Type="Int32" Nullable="false" />
+          <Property Name="users_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="visit_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="VisitDetail" Relationship="C40M0_MilleniaModel.FK_VisitDetail_Visit" FromRole="Visit" ToRole="VisitDetail" />
+        </EntityType>
+        <EntityType Name="VisitDetailProduct">
+          <Key>
+            <PropertyRef Name="visit_detail_product_id" />
+          </Key>
+          <Property Name="visit_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="users_id" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="visit_detail_product_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="C40M0_MilleniaModel.FK_VisitDetailProduct_Product" FromRole="VisitDetailProduct" ToRole="Product" />
+          <NavigationProperty Name="VisitDetail" Relationship="C40M0_MilleniaModel.FK_VisitDetailProduct_VisitDetail" FromRole="VisitDetailProduct" ToRole="VisitDetail" />
+          <NavigationProperty Name="Customer" Relationship="C40M0_MilleniaModel.FK_VisitDetailProduct_Customer" FromRole="VisitDetailProduct" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="MapCustomerAgnet">
+          <Key>
+            <PropertyRef Name="customer_id" />
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="agent_id" Type="Int32" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MapSalesProduct">
+          <Key>
+            <PropertyRef Name="users_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="map_sales_product_id" Type="Int32" Nullable="false" />
+          <Property Name="users_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="C40M0_MilleniaModel.FK_MapSalesProduct_AspNetUsers" FromRole="MapSalesProduct" ToRole="AspNetUsers" />
+          <NavigationProperty Name="MapSalesProduct1" Relationship="C40M0_MilleniaModel.FK_MapSalesProduct_MapSalesProduct" FromRole="MapSalesProduct" ToRole="MapSalesProduct1" />
+          <NavigationProperty Name="MapSalesProduct2" Relationship="C40M0_MilleniaModel.FK_MapSalesProduct_MapSalesProduct" FromRole="MapSalesProduct1" ToRole="MapSalesProduct" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="C40M0_MilleniaModel.FK_MapSalesProduct_Product" FromRole="MapSalesProduct" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_MapSalesProduct_AspNetUsers">
+          <End Type="C40M0_MilleniaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.MapSalesProduct" Role="MapSalesProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MapSalesProduct">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapSalesProduct_MapSalesProduct">
+          <End Type="C40M0_MilleniaModel.MapSalesProduct" Role="MapSalesProduct" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.MapSalesProduct" Role="MapSalesProduct1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MapSalesProduct">
+              <PropertyRef Name="users_id" />
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="MapSalesProduct1">
+              <PropertyRef Name="users_id" />
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="area_id" />
+          </Key>
+          <Property Name="area_id" Type="Int32" Nullable="false" />
+          <Property Name="area_name" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="MapSalesArea" Relationship="C40M0_MilleniaModel.FK_MapSalesArea_Area" FromRole="Area" ToRole="MapSalesArea" />
+          <NavigationProperty Name="Customer" Relationship="C40M0_MilleniaModel.FK_Customer_Customer" FromRole="Area" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="MapSalesArea">
+          <Key>
+            <PropertyRef Name="users_id" />
+            <PropertyRef Name="area_id" />
+          </Key>
+          <Property Name="users_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="area_id" Type="Int32" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Area" Relationship="C40M0_MilleniaModel.FK_MapSalesArea_Area" FromRole="MapSalesArea" ToRole="Area" />
+          <NavigationProperty Name="AspNetUsers" Relationship="C40M0_MilleniaModel.FK_MapSalesArea_MapSalesArea" FromRole="MapSalesArea" ToRole="AspNetUsers" />
+        </EntityType>
+        <Association Name="FK_MapSalesArea_Area">
+          <End Type="C40M0_MilleniaModel.Area" Role="Area" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.MapSalesArea" Role="MapSalesArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="MapSalesArea">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapSalesArea_MapSalesArea">
+          <End Type="C40M0_MilleniaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.MapSalesArea" Role="MapSalesArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MapSalesArea">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="menu_id" />
+          </Key>
+          <Property Name="menu_id" Type="Int32" Nullable="false" />
+          <Property Name="parent_menu_id" Type="Int32" Nullable="false" />
+          <Property Name="menu_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="controller" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="action" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="icon_class" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="is_folder" Type="Boolean" Nullable="false" />
+          <Property Name="is_use" Type="Boolean" Nullable="false" />
+          <Property Name="is_on_tablet" Type="Boolean" Nullable="false" />
+          <Property Name="is_only_tablet" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetRoles" Relationship="C40M0_MilleniaModel.MenuRole" FromRole="Menu" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="MenuRole">
+          <End Type="C40M0_MilleniaModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="C40M0_MilleniaModel.Menu" Role="Menu" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="product_sn" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="product_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="product_name_c" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="standard" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="product_brand_id" Type="Int32" Nullable="false" />
+          <Property Name="product_category_id" Type="Int32" Nullable="false" />
+          <Property Name="brand" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="unit_name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MapSalesProduct" Relationship="C40M0_MilleniaModel.FK_MapSalesProduct_Product" FromRole="Product" ToRole="MapSalesProduct" />
+          <NavigationProperty Name="ProductBrand" Relationship="C40M0_MilleniaModel.FK_Product_ProductBrand" FromRole="Product" ToRole="ProductBrand" />
+          <NavigationProperty Name="ProductCategory" Relationship="C40M0_MilleniaModel.FK_Product_ProductCategory" FromRole="Product" ToRole="ProductCategory" />
+          <NavigationProperty Name="VisitDetailProduct" Relationship="C40M0_MilleniaModel.FK_VisitDetailProduct_Product" FromRole="Product" ToRole="VisitDetailProduct" />
+          <NavigationProperty Name="StockDetail" Relationship="C40M0_MilleniaModel.FK_StockDetail_Product" FromRole="Product" ToRole="StockDetail" />
+        </EntityType>
+        <EntityType Name="ProductBrand">
+          <Key>
+            <PropertyRef Name="product_brand_id" />
+          </Key>
+          <Property Name="product_brand_id" Type="Int32" Nullable="false" />
+          <Property Name="product_brand_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="C40M0_MilleniaModel.FK_Product_ProductBrand" FromRole="ProductBrand" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="product_category_id" />
+          </Key>
+          <Property Name="product_category_id" Type="Int32" Nullable="false" />
+          <Property Name="product_category_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="C40M0_MilleniaModel.FK_Product_ProductCategory" FromRole="ProductCategory" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_MapSalesProduct_Product">
+          <End Type="C40M0_MilleniaModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.MapSalesProduct" Role="MapSalesProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="MapSalesProduct">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductBrand">
+          <End Type="C40M0_MilleniaModel.ProductBrand" Role="ProductBrand" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBrand">
+              <PropertyRef Name="product_brand_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="product_brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductCategory">
+          <End Type="C40M0_MilleniaModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="product_category_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="product_category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetailProduct_Product">
+          <End Type="C40M0_MilleniaModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.VisitDetailProduct" Role="VisitDetailProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="VisitDetailProduct">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VisitTimeRecorder">
+          <Key>
+            <PropertyRef Name="visit_time_recorder_id" />
+          </Key>
+          <Property Name="visit_time_recorder_id" Type="Int32" Nullable="false" />
+          <Property Name="visit_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="visit_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="start_time" Type="DateTime" Precision="3" />
+          <Property Name="end_time" Type="DateTime" Precision="3" />
+          <Property Name="timespan" Type="Int32" />
+          <NavigationProperty Name="VisitDetail" Relationship="C40M0_MilleniaModel.FK_VisitTimeRecorder_VisitDetail" FromRole="VisitTimeRecorder" ToRole="VisitDetail" />
+          <NavigationProperty Name="Customer" Relationship="C40M0_MilleniaModel.FK_VisitTimeRecorder_Customer" FromRole="VisitTimeRecorder" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="stock_id" />
+          </Key>
+          <Property Name="stock_id" Type="Int32" Nullable="false" />
+          <Property Name="y" Type="Int16" Nullable="false" />
+          <Property Name="m" Type="Byte" Nullable="false" />
+          <Property Name="agent_id" Type="Int32" Nullable="false" />
+          <Property Name="users_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="C40M0_MilleniaModel.FK_Stock_AspNetUsers" FromRole="Stock" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Stock1" Relationship="C40M0_MilleniaModel.FK_Stock_Stock" FromRole="Stock" ToRole="Stock1" />
+          <NavigationProperty Name="Stock2" Relationship="C40M0_MilleniaModel.FK_Stock_Stock" FromRole="Stock1" ToRole="Stock" />
+          <NavigationProperty Name="StockDetail" Relationship="C40M0_MilleniaModel.FK_StockDetail_Stock" FromRole="Stock" ToRole="StockDetail" />
+          <NavigationProperty Name="Agent" Relationship="C40M0_MilleniaModel.FK_Stock_Agent" FromRole="Stock" ToRole="Agent" />
+        </EntityType>
+        <Association Name="FK_Stock_AspNetUsers">
+          <End Type="C40M0_MilleniaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Stock">
+          <End Type="C40M0_MilleniaModel.Stock" Role="Stock" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.Stock" Role="Stock1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="stock_id" />
+            </Principal>
+            <Dependent Role="Stock1">
+              <PropertyRef Name="stock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VisitDetail">
+          <Key>
+            <PropertyRef Name="visit_detail_id" />
+          </Key>
+          <Property Name="visit_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="visit_id" Type="Int32" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="users_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_time" Type="DateTime" Precision="0" />
+          <Property Name="end_time" Type="DateTime" Precision="0" />
+          <Property Name="cumulative_time" Type="Int32" Nullable="false" />
+          <Property Name="state" Type="Byte" Nullable="false" />
+          <Property Name="step" Type="Byte" Nullable="false" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="no_visit_reason" Type="Byte" Nullable="false" />
+          <Property Name="memo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Visit" Relationship="C40M0_MilleniaModel.FK_VisitDetail_Visit" FromRole="VisitDetail" ToRole="Visit" />
+          <NavigationProperty Name="VisitDetailProduct" Relationship="C40M0_MilleniaModel.FK_VisitDetailProduct_VisitDetail" FromRole="VisitDetail" ToRole="VisitDetailProduct" />
+          <NavigationProperty Name="VisitTimeRecorder" Relationship="C40M0_MilleniaModel.FK_VisitTimeRecorder_VisitDetail" FromRole="VisitDetail" ToRole="VisitTimeRecorder" />
+          <NavigationProperty Name="Customer" Relationship="C40M0_MilleniaModel.FK_VisitDetail_Customer" FromRole="VisitDetail" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_VisitDetail_Visit">
+          <End Type="C40M0_MilleniaModel.Visit" Role="Visit" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.VisitDetail" Role="VisitDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visit">
+              <PropertyRef Name="visit_id" />
+            </Principal>
+            <Dependent Role="VisitDetail">
+              <PropertyRef Name="visit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetailProduct_VisitDetail">
+          <End Type="C40M0_MilleniaModel.VisitDetail" Role="VisitDetail" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.VisitDetailProduct" Role="VisitDetailProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitDetail">
+              <PropertyRef Name="visit_detail_id" />
+            </Principal>
+            <Dependent Role="VisitDetailProduct">
+              <PropertyRef Name="visit_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitTimeRecorder_VisitDetail">
+          <End Type="C40M0_MilleniaModel.VisitDetail" Role="VisitDetail" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.VisitTimeRecorder" Role="VisitTimeRecorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitDetail">
+              <PropertyRef Name="visit_detail_id" />
+            </Principal>
+            <Dependent Role="VisitTimeRecorder">
+              <PropertyRef Name="visit_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StockDetail">
+          <Key>
+            <PropertyRef Name="stock_detail_id" />
+          </Key>
+          <Property Name="stock_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="stock_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="item_no" Type="Int32" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="C40M0_MilleniaModel.FK_StockDetail_Product" FromRole="StockDetail" ToRole="Product" />
+          <NavigationProperty Name="Stock" Relationship="C40M0_MilleniaModel.FK_StockDetail_Stock" FromRole="StockDetail" ToRole="Stock" />
+          <NavigationProperty Name="StockDetailQty" Relationship="C40M0_MilleniaModel.FK_StockDetailProduct_StockDetail" FromRole="StockDetail" ToRole="StockDetailQty" />
+        </EntityType>
+        <EntityType Name="StockDetailQty">
+          <Key>
+            <PropertyRef Name="stock_detail_id" />
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="stock_detail_qty_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stock_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Int32" Nullable="false" />
+          <Property Name="unit_name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="StockDetail" Relationship="C40M0_MilleniaModel.FK_StockDetailProduct_StockDetail" FromRole="StockDetailQty" ToRole="StockDetail" />
+          <NavigationProperty Name="Customer" Relationship="C40M0_MilleniaModel.FK_StockDetailQty_Customer" FromRole="StockDetailQty" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_StockDetail_Product">
+          <End Type="C40M0_MilleniaModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.StockDetail" Role="StockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="StockDetail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockDetail_Stock">
+          <End Type="C40M0_MilleniaModel.Stock" Role="Stock" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.StockDetail" Role="StockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="stock_id" />
+            </Principal>
+            <Dependent Role="StockDetail">
+              <PropertyRef Name="stock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockDetailProduct_StockDetail">
+          <End Type="C40M0_MilleniaModel.StockDetail" Role="StockDetail" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.StockDetailQty" Role="StockDetailQty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockDetail">
+              <PropertyRef Name="stock_detail_id" />
+            </Principal>
+            <Dependent Role="StockDetailQty">
+              <PropertyRef Name="stock_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="agent_id" Type="Int32" Nullable="false" />
+          <Property Name="agent_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="agent_nick" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="sno" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="fax" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="contact_name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="contact_ext" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="contact_mobile" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="charge_name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="charge_ext" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="charge_mobile" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Stock" Relationship="C40M0_MilleniaModel.FK_Stock_Agent" FromRole="Agent" ToRole="Stock" />
+        </EntityType>
+        <Association Name="FK_Stock_Agent">
+          <End Type="C40M0_MilleniaModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_sn" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="customer_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="customer_all_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="tw_zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="tw_city" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="tw_country" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="tw_address" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="contact_1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="birthday_1" Type="DateTime" Precision="0" />
+          <Property Name="contact_2" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="birthday_2" Type="DateTime" Precision="0" />
+          <Property Name="tel" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="fax" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="sno" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="opening_time_1" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="opening_time_2" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="customer_type" Type="Byte" Nullable="false" />
+          <Property Name="channel_type" Type="Byte" Nullable="false" />
+          <Property Name="evaluate" Type="Byte" />
+          <Property Name="store_level" Type="Byte" Nullable="false" />
+          <Property Name="store_type" Type="Byte" Nullable="false" />
+          <Property Name="state" Type="Byte" />
+          <Property Name="area_id" Type="Int32" Nullable="false" />
+          <Property Name="level_type" Type="Byte" />
+          <Property Name="memo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="mark_err" Type="Boolean" Nullable="false" />
+          <Property Name="owner_name" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Area" Relationship="C40M0_MilleniaModel.FK_Customer_Customer" FromRole="Customer" ToRole="Area" />
+          <NavigationProperty Name="StockDetailQty" Relationship="C40M0_MilleniaModel.FK_StockDetailQty_Customer" FromRole="Customer" ToRole="StockDetailQty" />
+          <NavigationProperty Name="VisitDetail" Relationship="C40M0_MilleniaModel.FK_VisitDetail_Customer" FromRole="Customer" ToRole="VisitDetail" />
+          <NavigationProperty Name="VisitDetailProduct" Relationship="C40M0_MilleniaModel.FK_VisitDetailProduct_Customer" FromRole="Customer" ToRole="VisitDetailProduct" />
+          <NavigationProperty Name="VisitTimeRecorder" Relationship="C40M0_MilleniaModel.FK_VisitTimeRecorder_Customer" FromRole="Customer" ToRole="VisitTimeRecorder" />
+        </EntityType>
+        <Association Name="FK_Customer_Customer">
+          <End Type="C40M0_MilleniaModel.Area" Role="Area" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockDetailQty_Customer">
+          <End Type="C40M0_MilleniaModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.StockDetailQty" Role="StockDetailQty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="StockDetailQty">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetail_Customer">
+          <End Type="C40M0_MilleniaModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.VisitDetail" Role="VisitDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="VisitDetail">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitDetailProduct_Customer">
+          <End Type="C40M0_MilleniaModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.VisitDetailProduct" Role="VisitDetailProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="VisitDetailProduct">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitTimeRecorder_Customer">
+          <End Type="C40M0_MilleniaModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="C40M0_MilleniaModel.VisitTimeRecorder" Role="VisitTimeRecorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="VisitTimeRecorder">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="C40M0_MilleniaModelStoreContainer" CdmEntityContainer="C40M0_MilleniaEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="user_name_c" ColumnName="user_name_c" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="i_Currency">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.i_Currency">
+              <MappingFragment StoreEntitySet="i_Currency">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_currency" ColumnName="name_currency" />
+                <ScalarProperty Name="english_currency" ColumnName="english_currency" />
+                <ScalarProperty Name="sign" ColumnName="sign" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="is_use" ColumnName="is_use" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="i_IDX">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.i_IDX">
+              <MappingFragment StoreEntitySet="i_IDX">
+                <ScalarProperty Name="table_name" ColumnName="table_name" />
+                <ScalarProperty Name="IDX" ColumnName="IDX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="i_Lang">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.i_Lang">
+              <MappingFragment StoreEntitySet="i_Lang">
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="isuse" ColumnName="isuse" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="i_Parm">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.i_Parm">
+              <MappingFragment StoreEntitySet="i_Parm">
+                <ScalarProperty Name="ParmName" ColumnName="ParmName" />
+                <ScalarProperty Name="ParmType" ColumnName="ParmType" />
+                <ScalarProperty Name="S" ColumnName="S" />
+                <ScalarProperty Name="I" ColumnName="I" />
+                <ScalarProperty Name="F" ColumnName="F" />
+                <ScalarProperty Name="D" ColumnName="D" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="i_SN">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.i_SN">
+              <MappingFragment StoreEntitySet="i_SN">
+                <ScalarProperty Name="sn_type" ColumnName="sn_type" />
+                <ScalarProperty Name="y" ColumnName="y" />
+                <ScalarProperty Name="m" ColumnName="m" />
+                <ScalarProperty Name="d" ColumnName="d" />
+                <ScalarProperty Name="w" ColumnName="w" />
+                <ScalarProperty Name="sn_max" ColumnName="sn_max" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="i_UserLoginLog">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.i_UserLoginLog">
+              <MappingFragment StoreEntitySet="i_UserLoginLog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="logintime" ColumnName="logintime" />
+                <ScalarProperty Name="browers" ColumnName="browers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="C40M0_MilleniaModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Visit">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.Visit">
+              <MappingFragment StoreEntitySet="Visit">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="visit_date" ColumnName="visit_date" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+                <ScalarProperty Name="visit_id" ColumnName="visit_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitDetailProduct">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.VisitDetailProduct">
+              <MappingFragment StoreEntitySet="VisitDetailProduct">
+                <ScalarProperty Name="visit_detail_product_id" ColumnName="visit_detail_product_id" />
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="visit_detail_id" ColumnName="visit_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapCustomerAgnet">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.MapCustomerAgnet">
+              <MappingFragment StoreEntitySet="MapCustomerAgnet">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapSalesProduct">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.MapSalesProduct">
+              <MappingFragment StoreEntitySet="MapSalesProduct">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+                <ScalarProperty Name="map_sales_product_id" ColumnName="map_sales_product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="area_name" ColumnName="area_name" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapSalesArea">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.MapSalesArea">
+              <MappingFragment StoreEntitySet="MapSalesArea">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="is_only_tablet" ColumnName="is_only_tablet" />
+                <ScalarProperty Name="is_on_tablet" ColumnName="is_on_tablet" />
+                <ScalarProperty Name="is_use" ColumnName="is_use" />
+                <ScalarProperty Name="is_folder" ColumnName="is_folder" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="icon_class" ColumnName="icon_class" />
+                <ScalarProperty Name="action" ColumnName="action" />
+                <ScalarProperty Name="controller" ColumnName="controller" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="menu_name" ColumnName="menu_name" />
+                <ScalarProperty Name="parent_menu_id" ColumnName="parent_menu_id" />
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MenuRole" TypeName="C40M0_MilleniaModel.MenuRole" StoreEntitySet="MenuRole">
+            <EndProperty Name="Menu">
+              <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="role_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="product_category_id" ColumnName="product_category_id" />
+                <ScalarProperty Name="product_brand_id" ColumnName="product_brand_id" />
+                <ScalarProperty Name="standard" ColumnName="standard" />
+                <ScalarProperty Name="product_name_c" ColumnName="product_name_c" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_sn" ColumnName="product_sn" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductBrand">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.ProductBrand">
+              <MappingFragment StoreEntitySet="ProductBrand">
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="product_brand_name" ColumnName="product_brand_name" />
+                <ScalarProperty Name="product_brand_id" ColumnName="product_brand_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategory">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="product_category_name" ColumnName="product_category_name" />
+                <ScalarProperty Name="product_category_id" ColumnName="product_category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitTimeRecorder">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.VisitTimeRecorder">
+              <MappingFragment StoreEntitySet="VisitTimeRecorder">
+                <ScalarProperty Name="timespan" ColumnName="timespan" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="visit_date" ColumnName="visit_date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="visit_detail_id" ColumnName="visit_detail_id" />
+                <ScalarProperty Name="visit_time_recorder_id" ColumnName="visit_time_recorder_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="m" ColumnName="m" />
+                <ScalarProperty Name="y" ColumnName="y" />
+                <ScalarProperty Name="stock_id" ColumnName="stock_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitDetail">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.VisitDetail">
+              <MappingFragment StoreEntitySet="VisitDetail">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="no_visit_reason" ColumnName="no_visit_reason" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="step" ColumnName="step" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="cumulative_time" ColumnName="cumulative_time" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="visit_id" ColumnName="visit_id" />
+                <ScalarProperty Name="visit_detail_id" ColumnName="visit_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockDetail">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.StockDetail">
+              <MappingFragment StoreEntitySet="StockDetail">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="item_no" ColumnName="item_no" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="stock_id" ColumnName="stock_id" />
+                <ScalarProperty Name="stock_detail_id" ColumnName="stock_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockDetailQty">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.StockDetailQty">
+              <MappingFragment StoreEntitySet="StockDetailQty">
+                <ScalarProperty Name="stock_detail_qty_id" ColumnName="stock_detail_qty_id" />
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="stock_detail_id" ColumnName="stock_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agent">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="charge_mobile" ColumnName="charge_mobile" />
+                <ScalarProperty Name="charge_ext" ColumnName="charge_ext" />
+                <ScalarProperty Name="charge_name" ColumnName="charge_name" />
+                <ScalarProperty Name="contact_mobile" ColumnName="contact_mobile" />
+                <ScalarProperty Name="contact_ext" ColumnName="contact_ext" />
+                <ScalarProperty Name="contact_name" ColumnName="contact_name" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="sno" ColumnName="sno" />
+                <ScalarProperty Name="agent_nick" ColumnName="agent_nick" />
+                <ScalarProperty Name="agent_name" ColumnName="agent_name" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="C40M0_MilleniaModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+                <ScalarProperty Name="mark_err" ColumnName="mark_err" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="level_type" ColumnName="level_type" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="store_type" ColumnName="store_type" />
+                <ScalarProperty Name="store_level" ColumnName="store_level" />
+                <ScalarProperty Name="evaluate" ColumnName="evaluate" />
+                <ScalarProperty Name="channel_type" ColumnName="channel_type" />
+                <ScalarProperty Name="customer_type" ColumnName="customer_type" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="opening_time_2" ColumnName="opening_time_2" />
+                <ScalarProperty Name="opening_time_1" ColumnName="opening_time_1" />
+                <ScalarProperty Name="sno" ColumnName="sno" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="birthday_2" ColumnName="birthday_2" />
+                <ScalarProperty Name="contact_2" ColumnName="contact_2" />
+                <ScalarProperty Name="birthday_1" ColumnName="birthday_1" />
+                <ScalarProperty Name="contact_1" ColumnName="contact_1" />
+                <ScalarProperty Name="tw_address" ColumnName="tw_address" />
+                <ScalarProperty Name="tw_country" ColumnName="tw_country" />
+                <ScalarProperty Name="tw_city" ColumnName="tw_city" />
+                <ScalarProperty Name="tw_zip" ColumnName="tw_zip" />
+                <ScalarProperty Name="customer_all_name" ColumnName="customer_all_name" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="customer_sn" ColumnName="customer_sn" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

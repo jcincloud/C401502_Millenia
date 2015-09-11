@@ -1,0 +1,93 @@
+// Import boostrap variables including default color palette and fonts
+@import "../bs/variables";
+
+// Import datepicker component
+@import "bootstrap-datetimepicker";
+
+.bootstrap-datetimepicker-widget {
+	font-size:0.9em;
+	border-radius:0;
+	table {border: none;}
+	tr, tr:hover {
+		margin-left:0;
+		margin-right:0;
+		background: none !important;
+	}
+	tr:before, tr:after {
+		display: none;
+	}
+	th, td {
+		background: none;
+		border: none;
+		border-radius:0;
+	}
+	.btn {
+		color:#000;
+		&:hover {
+			background: #eee;
+		}
+	}
+	td {
+		&.today {
+			background:#FFDB99;
+			&:hover, {background: darken(#FFDB99,5%);}
+		}
+		&.weekend {
+			color:#5CB85C;
+			&:first-child {
+				color:#D9534F;
+			}
+		}
+		&.active {
+			background:$brand-primary !important;
+			&:hover {background: darken($brand-primary,5%) !important;}
+			&.weekend {color: #fff;}
+		}
+		span {
+			height:34px !important;
+			line-height: 34px !important;
+			margin: 0;
+			border-radius:0;
+			&.timepicker-hour, &.timepicker-minute, &.timepicker-second {
+				border:1px solid #d5d5d5;
+			}
+		}
+	}
+	.timepicker {
+		td {
+			line-height: 34px;
+			.btn {
+				padding:0;
+				background: none;
+				border:none;
+				&:hover {
+					background: none;
+				}
+				&.btn-primary {
+					color:#fff;
+					background:$brand-primary;
+					border:3px solid $brand-primary;
+					&:hover {
+						background:darken($brand-primary,10%);
+					}
+				}
+			}
+		}
+	}
+	.picker-switch {
+		td {
+			line-height: 34px;
+			span {
+				width:100%;
+				font-size:1.3em;
+				text-align: center;
+				background: #eee;
+				border-radius: 0;
+				&:hover {
+					color:$brand-primary;
+					background: #E3EDF5;
+				}
+			}
+		}
+	}
+}

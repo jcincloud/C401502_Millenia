@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "~/Views/Shared/Manage/RLayout.cshtml";
+}
+@section IncludeScript{
+    <script src="~/Scripts/jquery/jquery-2.1.4.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+}
+@section sidebar{
+    @Html.Partial("Manage/vucMenu")
+}
+
+<ul class="breadcrumb">
+    <li><i class="fa-list"></i> 經銷商-客戶對應</li>
+</ul>
+
+<h3 class="title">經銷商-客戶對應</h3>
+
+<div class="table-header">
+    <div class="table-filter">
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="">選擇經銷商</label>
+                <select name="" id="" class="form-control">
+                    <option value="">111</option>
+                    <option value="">222</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="table-responsive">
+            <table class="table-condensed">
+                <caption>
+                    
+                    <div class="form-inline pull-right">
+                        <div class="form-group">
+                            <input type="text" class="form-control input-sm" placeholder="店名/客編">
+                            <select name="" id="" class="form-control input-sm">
+                                <option value="">區域群組</option>
+                                <option value="">北一區</option>
+                            </select>
+                            <select name="" id="" class="form-control input-sm">
+                                <option value="">縣市</option>
+                                <option value="">基隆市</option>
+                            </select>
+                        </div>
+                    </div>
+                    所有客戶
+                </caption>
+                <thead>
+                    <tr>
+                        <th>客戶名稱</th>
+                        <th class="text-center">加入</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AAAAA</td>
+                        <td class="text-center">
+                            <button class="btn-link text-success" type="button">
+                                <i class="fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>BBBBB</td>
+                        <td class="text-center">
+                            <button class="btn-link text-success" type="button">
+                                <i class="fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CCCCC</td>
+                        <td class="text-center">
+                            <button class="btn-link text-success" type="button">
+                                <i class="fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="table-responsive">
+            <table class="table-condensed">
+                <caption>已對應客戶</caption>
+                <thead>
+                    <tr>
+                        <th>客戶名稱</th>
+                        <th class="text-center">刪除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AAAAA</td>
+                        <td class="text-center">
+                            <button class="btn-link text-danger" type="button">
+                                <i class="fa-times"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>BBBBB</td>
+                        <td class="text-center">
+                            <button class="btn-link text-danger" type="button">
+                                <i class="fa-times"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CCCCC</td>
+                        <td class="text-center">
+                            <button class="btn-link text-danger" type="button">
+                                <i class="fa-times"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

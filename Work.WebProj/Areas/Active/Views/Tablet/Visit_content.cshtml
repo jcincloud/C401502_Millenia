@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/Manage/RLayout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/css/bootstrap-datetimepicker-build.css" />
+}
+@section Scripts{
+    @Html.Partial("Manage/JSGlobalVar")
+    <script src="~/Scripts/build/comminc.js"></script>
+    <script src="~/Scripts/app/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/build/func/t-Visit_content.js"></script>
+    <script>
+        var rootParm = {
+            webRoot: '@Url.Content("~")'
+        };
+
+        var gb_visit_detail_id = '@Request.QueryString["visit_detail_id"]';
+
+        var getRootDOM = document.getElementById('main');
+        var reactElement = React.createElement(GirdForm, rootParm);
+        var compObject = React.render(reactElement, getRootDOM);
+    </script>
+}

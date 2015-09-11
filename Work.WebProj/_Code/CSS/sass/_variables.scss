@@ -1,0 +1,37 @@
+﻿@charset "utf-8";
+
+
+
+/*  客製化
+--------------------------------*/
+
+/* Login */
+$login-bg:               '../../images/bg.gif';
+$login-bg-color:         transparent;
+$login-bg2:              '../../images/bg2.gif';
+$login-width:            675px;
+
+$login-title:            '../../images/logo.gif';
+$login-title-width:      471px;
+$login-title-height:     100px;
+
+$login-subtitle-color:   #0D4D4B; // for subtitle
+$login-subtitle-gutter:  50px; // for subtitle
+
+$login-box-bg:           '../../images/loginBox.png';
+$login-box-width:        506px;
+$login-box-height:       367px;
+$login-box-title-margin: 30px;
+
+$login-form-width:       450px;
+$login-form-padding:     25px;
+
+$login-label-align:      left;
+$login-label-color:      #fff;
+$login-label-size:       16px;
+
+/* Banner */
+$banner: '../../images/banner.jpg';
+$banner-bg: '../../images/bannerBg.gif';
+$banner-height: 80px;
+$navbar-btn-color: #69BB3F;

@@ -1,0 +1,406 @@
+﻿@{
+    ViewBag.Title = "新增客戶";
+    ViewBag.BodyClass = "New";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#add" aria-controls="home" role="tab" data-toggle="tab">
+
+                @* 新增時的文字如下 *@
+                <i class="glyphicon glyphicon-plus"></i> 新增客戶
+
+                @* 修改時的文字如下 *@
+                @* <i class="glyphicon glyphicon-edit"></i> 修改客戶資料 *@
+
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#added" aria-controls="profile" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-user"></i> 本日已新增客戶
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="add">
+
+            <form action="" class="form-horizontal">
+                <div class="col-md-12">
+                    <div class="form-group">
+
+                        @* 以下是第一筆新增完成後才會出現 *@
+                        <div class="col-md-9">
+                            <div class="alert alert-success"><strong><i class="glyphicon glyphicon-ok"></i> 新增完成，請繼續輸入下一筆資料</strong></div>
+                        </div>
+
+                        @* 以下是修改時才會出現 *@
+                        @* <div class="col-md-9 text-right">
+                                <small class="text-muted">異動日期: 2015/01/01</small>
+                            </div> *@
+
+                        <div class="col-md-3 text-right">
+                            <button class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> 存檔</button>
+                            <button class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> 存檔，排入今日行程</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">客戶編號</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                        <label for="" class="control-label col-xs-2">統一編號</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">店名</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">客戶全名</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">地址</label>
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-2">
+                            <select name="" id="" class="form-control">
+                                <option value="">桃園市</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <select name="" id="" class="form-control">
+                                <option value="">桃園區</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">電話</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                        <label for="" class="control-label col-xs-2">傳真</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">行動電話</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">E-mail</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">客戶類別</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">直客</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">通路別</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">即飲</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">客戶型態</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">夜店</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">客戶等級</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">G</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">銷售等級</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">A</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">客戶狀態</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">正常</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">直客</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">是</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">未訪原因</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">尚未營業</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">聯絡人1</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                        <label for="" class="control-label col-xs-2">生日</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">聯絡人2</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                        <label for="" class="control-label col-xs-2">生日</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">區域群組</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">北區</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">排序</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-1 col-xs-2">備註</label>
+                        <div class="col-md-11 col-xs-10">
+                            <textarea name="" id="" cols="30" rows="2" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-1 col-xs-2">編輯錯誤</label>
+                        <div class="col-md-1 col-xs-2">
+                            <select name="" id="" class="form-control">
+                                <option value="">否</option>
+                                <option value="">是</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="added">
+            <form action="" class="table-form form-inline">
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">全部縣市</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">全部鄉鎮市</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">店家/直客</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">即飲/外帶</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">客戶型態</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="店名/客編" class="form-control">
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <tr>
+                        <th class="text-center">修改</th>
+                        <th>店名</th>
+                        <th>縣市</th>
+                        <th>鄉鎮市</th>
+                        <th>地址</th>
+                        <th>店家/直客</th>
+                        <th>即飲/外帶</th>
+                        <th>客戶型態</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td>店家</td>
+                        <td>即飲</td>
+                        <td>夜店</td>
+                    </tr>
+                </table>
+            </div>
+            <form action="" class="form-inline text-center">
+                <ul class="pager list-inline list-unstyled">
+                    <li><button class="btn btn-link btn-sm">第一頁</button></li>
+                    <li><button class="btn btn-link btn-sm">上一頁</button></li>
+                    <li>
+                        <select name="" id="" class="form-control input-sm">
+                            <option value="">第1頁</option>
+                        </select>
+                    </li>
+                    <li><button class="btn btn-link btn-sm">下一頁</button></li>
+                    <li><button class="btn btn-link btn-sm">最末頁</button></li>
+                </ul>
+                <ul class="pagination list-inline list-unstyled">
+                    <li>
+                        <div class="input-group">
+                            <input type="text" value="1" class="form-control input-sm">
+                            <small class="input-group-addon"> / 32</small>
+                        </div>
+                    </li>
+                    <li>
+                        每頁
+                        <select name="" id="" class="form-control input-sm">
+                            <option value="">10</option>
+                        </select>
+                        筆
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+</div>

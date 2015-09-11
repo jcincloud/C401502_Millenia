@@ -1,0 +1,107 @@
+﻿@charset "utf-8";
+
+/* Table of contents
+==================================================
+- Base Styles
+- Typography
+- Table
+- Form / Button
+- Images
+*/
+
+
+/* # Base Styles
+-------------------------------------------------- */
+
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600"); // web font (Open Sans)
+
+* {
+  @include selection {
+    color: #fff;
+    background: #F2BB46;
+  }
+  @include placeholder(#ddd);
+  outline:none;
+}
+
+
+/* # Typography
+-------------------------------------------------- */
+
+a {
+  transition: color 0.3s, background 0.3s;
+  @include hover {
+    text-decoration:none;
+    outline:none;
+  }
+}
+
+mark {
+  background:#FCF5D6;
+}
+
+hr {
+  margin-top: $line-height-computed/2;
+  margin-bottom: $line-height-computed/2;
+}
+
+
+/* # table
+-------------------------------------------------- */
+
+table {
+  @extend .table;
+  @extend .table-striped;
+  @extend .table-bordered;
+  @extend .table-hover;
+  margin-bottom:0;
+  overflow:hidden; // fix for floating children
+  border-left:0;
+  border-right:0;
+  thead {overflow:hidden;}
+  tbody {overflow:hidden;}
+  tr {
+    @extend .row;
+    &:before, &:after {display:none;}
+  }
+  th {
+    font-weight: bold;
+    vertical-align: middle !important;
+    background:#f2f2f2;
+    background:linear-gradient(#f8f8f8, #ececec);
+  }
+}
+
+
+/* # Form / Button
+-------------------------------------------------- */
+input[type="date"] {
+  &::-webkit-calendar-picker-indicator {display: none;}
+  &::-webkit-outer-spin-button, /* Removes arrows */
+  &::-webkit-inner-spin-button, /* Removes arrows */
+  &::-webkit-clear-button { /* Removes blue cross */
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+button {
+  @extend .btn;
+  @extend .btn-default;
+  padding-left:10px !important;
+  padding-right:10px !important;
+  text-shadow:0 -1px 0 hsla(0,0,0,0.25);
+  @include hover {
+    outline:none;
+    box-shadow:none;
+    text-decoration: none;
+  }
+}
+
+
+/* # Images
+-------------------------------------------------- */
+
+img {
+  max-width: 100%;
+}

@@ -1,0 +1,331 @@
+﻿@{
+    ViewBag.Title = "拜訪客戶";
+    ViewBag.BodyClass = "Visit_list";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#visit" aria-controls="home" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-th-list"></i> 預計拜訪名單
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#visited" aria-controls="profile" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-ok"></i> 已拜訪名單
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="visit">
+            <form action="" class="table-form form-inline">
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">路線</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">全部縣市</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">全部鄉鎮市</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="店名/客編" class="form-control">
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <tr>
+                        <th class="text-center">檢視</th>
+                        <th>店名</th>
+                        <th>縣市</th>
+                        <th>鄉鎮市</th>
+                        <th>地址</th>
+                        <th>拜訪狀態</th>
+                        <th>系統狀態</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-warning">暫停</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-default">尚未拜訪</span></td>
+                        <td><button class="btn btn-success btn-sm">按此開始拜訪 <i class="glyphicon glyphicon-arrow-right"></i></button></td>
+                    </tr>
+                </table>
+            </div>
+            <form action="" class="form-inline text-center">
+                <ul class="pager list-inline list-unstyled">
+                    <li><button class="btn btn-link btn-sm">第一頁</button></li>
+                    <li><button class="btn btn-link btn-sm">上一頁</button></li>
+                    <li>
+                        <select name="" id="" class="form-control input-sm">
+                            <option value="">第1頁</option>
+                        </select>
+                    </li>
+                    <li><button class="btn btn-link btn-sm">下一頁</button></li>
+                    <li><button class="btn btn-link btn-sm">最末頁</button></li>
+                </ul>
+                <ul class="pagination list-inline list-unstyled">
+                    <li>
+                        <div class="input-group">
+                            <input type="text" value="1" class="form-control input-sm">
+                            <small class="input-group-addon"> / 32</small>
+                        </div>
+                    </li>
+                    <li>
+                        每頁
+                        <select name="" id="" class="form-control input-sm">
+                            <option value="">10</option>
+                        </select>
+                        筆
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="visited">
+            <form action="" class="table-form form-inline">
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">路線</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">全部縣市</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control">
+                        <option value="">全部鄉鎮市</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="店名/客編" class="form-control">
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <tr>
+                        <th class="text-center">檢視</th>
+                        <th>店名</th>
+                        <th>縣市</th>
+                        <th>鄉鎮市</th>
+                        <th>地址</th>
+                        <th>拜訪狀態</th>
+                        <th>系統狀態</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><button class="btn btn-link"><i class="glyphicon glyphicon-search"></i></button></td>
+                        <td>AAAAA</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中山路100號</td>
+                        <td><span class="label label-success">完成拜訪</span></td>
+                        <td> </td>
+                    </tr>
+                </table>
+            </div>
+            <form action="" class="form-inline text-center">
+                <ul class="pager list-inline list-unstyled">
+                    <li><button class="btn btn-link btn-sm">第一頁</button></li>
+                    <li><button class="btn btn-link btn-sm">上一頁</button></li>
+                    <li>
+                        <select name="" id="" class="form-control input-sm">
+                            <option value="">第1頁</option>
+                        </select>
+                    </li>
+                    <li><button class="btn btn-link btn-sm">下一頁</button></li>
+                    <li><button class="btn btn-link btn-sm">最末頁</button></li>
+                </ul>
+                <ul class="pagination list-inline list-unstyled">
+                    <li>
+                        <div class="input-group">
+                            <input type="text" value="1" class="form-control input-sm">
+                            <small class="input-group-addon"> / 32</small>
+                        </div>
+                    </li>
+                    <li>
+                        每頁
+                        <select name="" id="" class="form-control input-sm">
+                            <option value="">10</option>
+                        </select>
+                        筆
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>

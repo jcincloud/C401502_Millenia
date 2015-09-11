@@ -1,0 +1,410 @@
+﻿@{
+    ViewBag.Title = "拜訪客戶";
+    ViewBag.BodyClass = "Visit_content";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<form action="" class="form-inline">
+    <div class="form-group form-group-lg has-success col-sm-margin-right">
+        <label for="" class="control-label">日期</label>
+        <input type="text" value="2015/01/01" class="form-control" disabled>
+    </div>
+    <div class="form-group form-group-lg has-success">
+        @* 拜訪時的文字如下 *@
+        <label for="" class="control-label">正在拜訪</label>
+        @* 檢視時的文字如下 *@
+        @* <label for="" class="control-label">正在瀏覽</label> *@
+
+        <input type="text" value="AAA" class="form-control" disabled>
+    </div>
+</form>
+<hr />
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#profile" aria-controls="home" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-user"></i> 客戶資料
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#product" aria-controls="profile" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-glass"></i> 產品分布
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="profile">
+
+            <form action="" class="form-horizontal">
+                <div class="col-md-12">
+                    <div class="form-group">
+
+                        @* 以下是檢視時才會出現 *@
+                        @*  <div class="col-md-11 text-right">
+                                <small class="text-muted">異動日期: 2015/01/01</small>
+                            </div> *@
+
+                        @* 以下是拜訪時才會出現 *@
+                            <div class="col-md-3 col-md-offset-9 text-right">
+                                <button class="btn btn-success"><i class="glyphicon glyphicon-arrow-right"></i> 存檔，下一步</button>
+                                <button class="btn btn-default">暫停</button>
+                            </div>
+
+                        @* 以下是檢視時才會出現 *@
+                        @*  <div class="col-md-1 text-right">
+                                <button class="btn btn-default">結束瀏覽</button>
+                            </div> *@
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">客戶編號</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                        <label for="" class="control-label col-xs-2">統一編號</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">店名</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">客戶全名</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">地址</label>
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-2">
+                            <select name="" id="" class="form-control">
+                                <option value="">桃園市</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <select name="" id="" class="form-control">
+                                <option value="">桃園區</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">電話</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                        <label for="" class="control-label col-xs-2">傳真</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">行動電話</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">E-mail</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">客戶類別</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">直客</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">通路別</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">即飲</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">客戶型態</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">夜店</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">客戶等級</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">G</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">銷售等級</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">A</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">客戶狀態</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">正常</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">直客</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">是</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">未訪原因</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">尚未營業</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">聯絡人1</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                        <label for="" class="control-label col-xs-2">生日1</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">聯絡人2</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                        <label for="" class="control-label col-xs-2">生日2</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-2">區域群組</label>
+                        <div class="col-xs-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">北區</option>
+                            </select>
+                        </div>
+                        <label for="" class="control-label col-xs-2">排序</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-1 col-xs-2">備註</label>
+                        <div class="col-md-11 col-xs-10">
+                            <textarea name="" id="" cols="30" rows="2" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-1 col-xs-2">編輯錯誤</label>
+                        <div class="col-md-1 col-xs-2">
+                            <select name="" id="" class="form-control">
+                                <option value="">否</option>
+                                <option value="">是</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="product">
+            <form action="" class="form-horizontal clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+
+                        @* 以下是檢視時才會出現 *@
+                        @*  <div class="col-md-11 text-right">
+                                <small class="text-muted">異動日期: 2015/01/01</small>
+                            </div> *@
+
+                        @* 以下是拜訪時才會出現 *@
+                            <div class="col-md-3 col-md-offset-9 text-right">
+                                <button class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> 完成拜訪</button>
+                                <button class="btn btn-default">暫停</button>
+                            </div>
+
+                        @* 以下是檢視時才會出現 *@
+                        @*  <div class="col-md-1 text-right">
+                                <button class="btn btn-default">結束瀏覽</button>
+                            </div> *@
+
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="col-md-3 col-xs-6">品名</div>
+                        <div class="col-md-1 col-xs-2">售價</div>
+                        <div class="col-md-2 col-xs-4">備註</div>
+                        <div class="col-md-3 col-xs-6 hidden-sm hidden-xs">品名</div>
+                        <div class="col-md-1 col-xs-2 hidden-sm hidden-xs">售價</div>
+                        <div class="col-md-2 col-xs-4 hidden-sm hidden-xs">備註</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6"><input type="text" class="form-control" disabled></div>
+                        <div class="col-xs-2"><input type="text" class="form-control"></div>
+                        <div class="col-xs-4"><input type="text" class="form-control"></div>
+                    </div>
+                </div>
+            </form>
+            <form action="" class="form-inline text-center">
+                <ul class="pager list-inline list-unstyled">
+                    <li><button class="btn btn-link btn-sm">第一頁</button></li>
+                    <li><button class="btn btn-link btn-sm">上一頁</button></li>
+                    <li>
+                        <select name="" id="" class="form-control input-sm">
+                            <option value="">第1頁</option>
+                        </select>
+                    </li>
+                    <li><button class="btn btn-link btn-sm">下一頁</button></li>
+                    <li><button class="btn btn-link btn-sm">最末頁</button></li>
+                </ul>
+                <ul class="pagination list-inline list-unstyled">
+                    <li>
+                        <div class="input-group">
+                            <input type="text" value="1" class="form-control input-sm">
+                            <small class="input-group-addon"> / 32</small>
+                        </div>
+                    </li>
+                    <li>
+                        每頁
+                        <select name="" id="" class="form-control input-sm">
+                            <option value="">16</option>
+                        </select>
+                        筆
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+</div>
