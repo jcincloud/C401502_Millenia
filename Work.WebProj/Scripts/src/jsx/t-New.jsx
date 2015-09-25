@@ -50,9 +50,7 @@ var GirdForm = React.createClass({
 
 		   }
 
-		if(this.state.edit_type==1){
-
-			if(this.state.fieldData['area_id'] == undefined){
+		   	if(this.state.fieldData['area_id'] == undefined){
 				tosMessage(gb_title_from_invalid,'區域群組未選擇',3);
 				return;
 			}
@@ -65,6 +63,8 @@ var GirdForm = React.createClass({
 				tosMessage(gb_title_from_invalid,'地址需填寫完整',3);
 				return;
 			}
+
+		if(this.state.edit_type==1){
 
 			jqPost(this.props.apiPathName,this.state.fieldData)
 			.done(function(data, textStatus, jqXHRdata) {

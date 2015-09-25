@@ -40,6 +40,7 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 var items = db0.Stock
+                    .OrderBy(x => x.users_id)
                     .OrderByDescending(x => x.y)//依日期排序(新到舊)
                     .OrderByDescending(x => x.m)
                     .Select(x => new
@@ -48,14 +49,22 @@ namespace DotWeb.Api
                         x.users_id,
                         x.Agent.agent_name,
                         x.y,
-                        x.m
+                        x.m,
+                        x.AspNetUsers.UserName
                     });
-                var getRoles = db0.AspNetUsers.FirstOrDefault(x => x.Id == this.UserId).AspNetRoles;
-                string getRolesName = getRoles.FirstOrDefault().Name;
-                if (getRolesName != "Admins" && getRolesName != "Managers")
+
+                var getRoles = db0.AspNetUsers.FirstOrDefault(x => x.Id == this.UserId).AspNetRoles.Select(x => x.Name);
+
+                //if (getRoles.Contains("Sales"))
+                //{
+                //    items = items.Where(x => x.users_id == this.UserId);
+                //}
+
+                if (q.view_type == (int)ViewType.sales && !getRoles.Contains("Admins"))//只要不是用管理頁面看就只顯示自己的
                 {
                     items = items.Where(x => x.users_id == this.UserId);
                 }
+
                 if (q.year != null)
                 {
                     items = items.Where(x => x.y == q.year);
@@ -63,6 +72,10 @@ namespace DotWeb.Api
                 if (q.month != null)
                 {
                     items = items.Where(x => x.m == q.month);
+                }
+                if (q.users_id != null)
+                {
+                    items = items.Where(x => x.users_id == q.users_id);
                 }
                 int page = (q.page == null ? 1 : (int)q.page);
                 int startRecord = PageCount.PageInfo(page, this.defPageSize, items.Count());
@@ -119,6 +132,7 @@ namespace DotWeb.Api
             var is_exist = db0.Stock.Any(
                 x =>
                         x.agent_id == md.agent_id &&
+                        x.users_id == this.UserId &&
                         x.m == md.m &&
                         x.y == md.y
                 );

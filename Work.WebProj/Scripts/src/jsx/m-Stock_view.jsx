@@ -17,6 +17,7 @@ var GridRow = React.createClass({
 					<td>{this.props.itemData.y}</td>
 					<td>{this.props.itemData.m}</td>
 					<td>{this.props.itemData.agent_name}</td>					
+					<td>{this.props.itemData.UserName}</td>					
 				</tr>
 			);
 		}
@@ -28,7 +29,7 @@ var GirdForm = React.createClass({
 		return {
 			gridData:{rows:[],page:1},
 			fieldData:{},
-			searchData:{title:null},
+			searchData:{title:null,view_type:1},
 			searchCustomer:{customers:[]},
 			edit_type:0,
 			checkAll:false,
@@ -47,7 +48,8 @@ var GirdForm = React.createClass({
 			setQtyData:[],
 			year_list:[],
 			isSaveMasterData:true,
-			country_list:[]
+			country_list:[],
+			option_users:[]
 		};  
 	},
 	getDefaultProps:function(){
@@ -62,6 +64,7 @@ var GirdForm = React.createClass({
 	},
 	componentDidMount:function(){
 		this.queryGridData(1);
+		this.querySales();
 		this.setYearValue();
 		this.queryAllAgnet();
 		this.queryAllProduct();
@@ -676,6 +679,15 @@ var GirdForm = React.createClass({
 	editMasterVal:function(){
 		this.setState({isSaveMasterData:false});
 	},
+	querySales:function(){
+			jqGet(gb_approot + 'api/GetAction/GetUsers',{})
+			.done(function(data, textStatus, jqXHRdata) {
+				this.setState({option_users:data});
+			}.bind(this))
+			.fail(function( jqXHR, textStatus, errorThrown ) {
+				showAjaxError(errorThrown);
+			});		
+	},
 	render: function() {
 
  		var Button = ReactBootstrap.Button;
@@ -706,7 +718,19 @@ var GirdForm = React.createClass({
 										value={searchData.title}
 										onChange={this.changeGDValue.bind(this,'title')}
 										placeholder="請輸入關鍵字..." />*/}
-
+										<label>選擇業務</label> { }
+										<select className="form-control" 
+												onChange={this.changeGDValue.bind(this,'users_id')}
+												value={searchData.users_id}>
+												<option value="">全部</option>
+											{
+												this.state.option_users.map(function(itemData,i) {
+													var out_sub_html =                     
+															<option value={itemData.Id} key={itemData.Id}>{itemData.UserName}</option>;
+													return out_sub_html;
+												}.bind(this))
+											}
+										</select>
 										<label>年度</label> { }
 										<select className="form-control" 
 											value={searchData.year}
@@ -742,7 +766,8 @@ var GirdForm = React.createClass({
 									<th className="col-xs-1 text-center">檢視</th>
 									<th className="col-xs-1">年</th>
 									<th className="col-xs-1">月</th>
-									<th className="col-xs-4">經銷商</th>
+									<th className="col-xs-2">經銷商</th>
+									<th className="col-xs-2">負責業務</th>
 								</tr>
 							</thead>
 							<tbody>

@@ -22,6 +22,11 @@ namespace ProcCore.Business.DB0
         finish,
         pause
     }
+    public enum ViewType
+    {
+        manager = 1,
+        sales = 2
+    }
     #region set CodeSheet
 
     public static class CodeSheet
@@ -323,7 +328,8 @@ namespace ProcCore.Business.DB0
         public int m { get; set; }
         public DateTime? inester_datetime { get; set; }
     }
-    public class ExcelCustomerProduct : CustomerProduct {
+    public class ExcelCustomerProduct : CustomerProduct
+    {
         public List<decimal> p_qtys { get; set; }
         public bool is_hide { get; set; }
     }
@@ -387,6 +393,8 @@ namespace ProcCore.Business.DB0
     {
         public int? year { get; set; }
         public int? month { get; set; }
+        public string users_id { get; set; }
+        public int view_type { get; set; }
     }
     public class q_StockDetail : QueryBase
     {

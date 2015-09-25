@@ -28,6 +28,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -229,6 +230,7 @@
     <Content Include="Areas\Active\Views\Stock\Main2.cshtml" />
     <Content Include="Areas\Active\Views\Stock\Main3.cshtml" />
     <Content Include="Areas\Active\Views\MapCustomerAgent\Main2.cshtml" />
+    <Content Include="Areas\Active\Views\Stock\Manager.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\ReportToPdfController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />

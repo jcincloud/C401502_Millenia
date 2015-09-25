@@ -435,7 +435,7 @@ namespace DotWeb.Api
             try
             {
                 var products_id = db0.MapSalesProduct
-                    //.Where(x => x.users_id != "17bcea5f-0bad-4018-b782-5f3927d73c26" && x.users_id != "aa9bd408-8ab7-47d7-8717-fe9c4e5f51fd")
+                   //.Where(x => x.users_id != "17bcea5f-0bad-4018-b782-5f3927d73c26" && x.users_id != "aa9bd408-8ab7-47d7-8717-fe9c4e5f51fd")
                    .GroupBy(x => x.product_id)
                    .Select(x => new SalesProductSum() { product_id = x.Key, Sum = x.Count(y => y.product_id == x.Key) }).ToList();//取得產品負責業務統計數
 
@@ -528,6 +528,10 @@ namespace DotWeb.Api
                 if (parm.country != null)
                 {
                     items = items.Where(x => x.tw_country == parm.country);
+                }
+                if (parm.address != null)
+                {
+                    items = items.Where(x => x.tw_address.Contains(parm.address));
                 }
                 if (parm.word != null)
                 {
@@ -1495,16 +1499,16 @@ namespace DotWeb.Api
                 var items = await db0.StockDetail.Where(x => x.stock_id == parm.stock_id)
                     .GroupBy(x => x.item_no)
                     .Select(x => new
-                                        {
-                                            item_no = x.Key,
-                                            products = x.Select(y => new
-                                            {
-                                                y.stock_detail_id,
-                                                y.product_id,
-                                                y.Product.product_name,
-                                                y.Product.product_sn
-                                            })
-                                        })
+                    {
+                        item_no = x.Key,
+                        products = x.Select(y => new
+                        {
+                            y.stock_detail_id,
+                            y.product_id,
+                            y.Product.product_name,
+                            y.Product.product_sn
+                        })
+                    })
                     .ToListAsync();
                 return Ok(new { result = true, data = items, item_no = get_item_no });
                 #endregion
@@ -2000,6 +2004,7 @@ namespace DotWeb.Api
         public int page { get; set; }
         public string city { get; set; }
         public string country { get; set; }
+        public string address { get; set; }
         public string word { get; set; }
     }
     public class PutPauseCustomer

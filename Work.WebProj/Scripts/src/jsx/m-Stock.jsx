@@ -17,7 +17,8 @@ var GridRow = React.createClass({
 					<td className="text-center"><GridButtonModify modify={this.modify}/></td>
 					<td>{this.props.itemData.y}</td>
 					<td>{this.props.itemData.m}</td>
-					<td>{this.props.itemData.agent_name}</td>					
+					<td>{this.props.itemData.agent_name}</td>
+					<td>{this.props.itemData.UserName}</td>					
 				</tr>
 			);
 		}
@@ -29,7 +30,7 @@ var GirdForm = React.createClass({
 		return {
 			gridData:{rows:[],page:1},
 			fieldData:{},
-			searchData:{title:null},
+			searchData:{title:null,view_type:2},
 			searchCustomer:{customers:[]},
 			edit_type:0,
 			checkAll:false,
@@ -749,7 +750,8 @@ var GirdForm = React.createClass({
 									<th className="col-xs-1 text-center">修改</th>
 									<th className="col-xs-1">年</th>
 									<th className="col-xs-1">月</th>
-									<th className="col-xs-4">經銷商</th>
+									<th className="col-xs-2">經銷商</th>
+									<th className="col-xs-2">負責業務</th>
 								</tr>
 							</thead>
 							<tbody>
