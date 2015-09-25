@@ -652,15 +652,12 @@
     <Content Include="Scripts\app\ReactRouter.min.js" />
     <Content Include="Scripts\app\swipe.js" />
     <Content Include="Scripts\app\toastr.min.js" />
-    <Content Include="Scripts\build\comminc.js" />
-    <Content Include="Scripts\build\func\c-Comm.js" />
     <Content Include="Scripts\build\func\inc\c-Comm.js" />
     <Content Include="Scripts\build\func\inc\c-ImgFileSort.js" />
     <Content Include="Scripts\build\func\m-Agent.js" />
     <Content Include="Scripts\build\func\m-ChangePassword.js" />
     <Content Include="Scripts\build\func\m-Customer.js" />
     <Content Include="Scripts\build\func\m-CustomerAgent.js" />
-    <Content Include="Scripts\build\func\m-CustomerSales.js" />
     <Content Include="Scripts\build\func\m-login.js" />
     <Content Include="Scripts\build\func\m-Product.js" />
     <Content Include="Scripts\build\func\m-ProductBrand.js" />
@@ -676,7 +673,6 @@
     <Content Include="Scripts\build\func\m-Stock.js" />
     <Content Include="Scripts\build\func\m-Stock_view.js" />
     <Content Include="Scripts\build\func\m-Users.js" />
-    <Content Include="Scripts\build\func\t-Customer.js" />
     <Content Include="Scripts\build\func\t-login.js" />
     <Content Include="Scripts\build\func\t-New.js" />
     <Content Include="Scripts\build\func\t-Schedule.js" />
