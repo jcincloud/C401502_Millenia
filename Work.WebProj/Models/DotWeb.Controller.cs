@@ -108,9 +108,9 @@ namespace DotWeb.Controller
                 var db0 = getDB0();
                 var getRoles = db0.AspNetUsers.FirstOrDefault(x => x.Id == this.UserId).AspNetRoles.Select(x => x.Name);
 
-                if (getRoles.Contains("Sales"))
+                if (getRoles.Contains("Managers"))
                 {
-                    ViewBag.RoleName = "Sales";
+                    ViewBag.RoleName = "Managers";
                 }
                 else
                 {
