@@ -225,6 +225,7 @@ namespace ProcCore.Business.DB0
         public string users_id { get; set; }
         public string customer_name { get; set; }
         public string product_name { get; set; }
+        public int? area { get; set; }
         public int page { get; set; }
     }
     public class ParmReportR04 : ParmGetCustomerVisit
@@ -256,6 +257,7 @@ namespace ProcCore.Business.DB0
         public string users_id { get; set; }
         public bool checkInsert { get; set; }
         public string memo { get; set; }
+        public int area_id { get; set; }
     }
     public class VisitProduct
     {
@@ -270,6 +272,7 @@ namespace ProcCore.Business.DB0
         public int visit_detail_id { get; set; }
         public bool distributed { get; set; }
         public string description { get; set; }
+        public int area_id { get; set; }
     }
     public class CustomerAgent
     {

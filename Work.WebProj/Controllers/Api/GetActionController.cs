@@ -40,7 +40,8 @@ namespace DotWeb.Api
                                 visit_end = x.end_time,
                                 cumulative_time = x.cumulative_time,
                                 users_id = x.users_id,
-                                user_name = ""
+                                user_name = "",
+                                area_id = x.Customer.area_id
                             });
                 #region 驗證業務端只能看到自己的資料
                 var getRoles = db0.AspNetUsers.FirstOrDefault(x => x.Id == this.UserId).AspNetRoles.Select(x => x.Name);
@@ -62,6 +63,10 @@ namespace DotWeb.Api
                 if (parm.customer_name != null)
                 {
                     items = items.Where(x => x.customer_name.Contains(parm.customer_name));
+                }
+                if (parm.area != null)
+                {
+                    items = items.Where(x => x.area_id == parm.area);
                 }
 
 
@@ -114,7 +119,8 @@ namespace DotWeb.Api
                                 product_id = x.product_id,
                                 product_name = x.Product.product_name,
                                 price = x.price,
-                                visit_date = x.VisitDetail.Visit.visit_date
+                                visit_date = x.VisitDetail.Visit.visit_date,
+                                area_id=x.Customer.area_id
                             });
 
                 #region 驗證業務端只能看到自己的資料
@@ -142,6 +148,10 @@ namespace DotWeb.Api
                 if (parm.product_name != null)
                 {
                     items = items.Where(x => x.product_name.Contains(parm.product_name));
+                }
+                if (parm.area != null)
+                {
+                    items = items.Where(x => x.area_id == parm.area);
                 }
 
 

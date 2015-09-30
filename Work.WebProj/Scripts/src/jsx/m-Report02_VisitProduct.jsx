@@ -191,7 +191,7 @@ var GirdForm = React.createClass({
 									return out_sub_html;
 								}.bind(this))
 							}
-						</select>
+						</select> { }
 					</span>);
 			}
 
@@ -227,6 +227,20 @@ var GirdForm = React.createClass({
 									</div>
 									<div className="form-group">
 										{managerHtml}
+
+										<label className="sr-only">選擇區域</label>
+										<select className="form-control"
+														id="Users"
+														onChange={this.changeGDValue.bind(this,'area')}
+														value={searchData.area}>
+											<option value="">選擇區域</option>
+										{
+											CommData.AreasData.map(function(itemData,i) {
+												return <option key={itemData.id} value={itemData.id}>{itemData.label}</option>;
+											})
+										}
+										</select>
+										
 										<label className="sr-only">客戶名稱</label> { }
 										<input type="text" className="form-control" 
 										value={searchData.customer_name}
