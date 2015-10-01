@@ -68,19 +68,19 @@ namespace DotWeb.Api
                 }
 
                 var result = qr.Select(x => new m_Customer()
-                    {
-                        customer_id = x.customer_id,
-                        customer_sn = x.customer_sn,
-                        customer_name = x.customer_name,
-                        tw_city = x.tw_city,
-                        tw_country = x.tw_country,
-                        tw_address = x.tw_address,
-                        customer_type = x.customer_type,
-                        channel_type = x.customer_type,
-                        store_type = x.store_type,
-                        area_id = x.area_id,
-                        tel = x.tel
-                    });
+                {
+                    customer_id = x.customer_id,
+                    customer_sn = x.customer_sn,
+                    customer_name = x.customer_name,
+                    tw_city = x.tw_city,
+                    tw_country = x.tw_country,
+                    tw_address = x.tw_address,
+                    customer_type = x.customer_type,
+                    channel_type = x.customer_type,
+                    store_type = x.store_type,
+                    area_id = x.area_id,
+                    tel = x.tel
+                });
 
                 int page = (q.page == null ? 1 : (int)q.page);
                 int position = PageCount.PageInfo(page, this.defPageSize, qr.Count());
@@ -313,7 +313,7 @@ namespace DotWeb.Api
                     r.message = "已有同店名的客戶存在，請確認後在新增！！";
                 }
                 if (!exist_check & db0.Customer.Any(x => x.tw_city == md.tw_city
-                                // & x.tw_country == md.tw_country
+                                 // & x.tw_country == md.tw_country
                                  & x.tw_address == md.tw_address))
                 {
                     exist_check = true;
@@ -443,6 +443,16 @@ namespace DotWeb.Api
 
                 foreach (var id in ids)
                 {
+                    #region 刪除經銷商-客戶對應
+                    var getMapCustomerAgnet = db0.MapCustomerAgnet.Where(x => x.customer_id == id);
+
+                    foreach (var map in getMapCustomerAgnet)
+                    {
+                        db0.MapCustomerAgnet.Attach(map);
+                        db0.MapCustomerAgnet.Remove(map);
+                    }
+
+                    #endregion
                     item = new Customer() { customer_id = id };
                     db0.Customer.Attach(item);
                     db0.Customer.Remove(item);

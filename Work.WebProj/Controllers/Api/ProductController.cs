@@ -152,6 +152,16 @@ namespace DotWeb.Api
 
                 foreach (var id in ids)
                 {
+                    #region 刪除業務-產品對應
+                    var getMapSalesProduct = db0.MapSalesProduct.Where(x => x.product_id == id);
+
+                    foreach (var map in getMapSalesProduct)
+                    {
+                        db0.MapSalesProduct.Attach(map);
+                        db0.MapSalesProduct.Remove(map);
+                    }
+
+                    #endregion
                     item = new Product() { product_id = id };
                     db0.Product.Attach(item);
                     db0.Product.Remove(item);
