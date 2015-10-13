@@ -336,6 +336,20 @@ namespace ProcCore.Business.DB0
         public List<decimal> p_qtys { get; set; }
         public bool is_hide { get; set; }
     }
+    public class CustomerErrorMsg
+    {
+        public string error_name { get; set; }
+        public List<RepeatCustomer> r_customers { get; set; }
+    }
+    public class RepeatCustomer
+    {
+        public string customer_name { get; set; }
+        public string customer_sn { get; set; }
+        public string tel { get; set; }
+        public string tw_city { get; set; }
+        public string tw_country { get; set; }
+        public string tw_address { get; set; }
+    }
     #endregion
 
     #region q_Model_Define

@@ -658,10 +658,7 @@ var GirdForm = React.createClass({
 	},
 	handleSearchCustomer:function(){
 		var searchCustomer=this.state.searchCustomer;
-		
-		searchCustomer.agent_id=this.state.fieldData.agent_id;
-		this.state.searchCustomer.agent_id=this.state.fieldData.agent_id;
-		
+				
 		searchCustomer.stock_id=this.state.fieldData.stock_id;
 		this.state.searchCustomer.stock_id=this.state.fieldData.stock_id;
 

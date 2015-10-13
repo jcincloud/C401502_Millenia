@@ -3,6 +3,7 @@ using ProcCore.Business.DB0;
 using ProcCore.HandleResult;
 using ProcCore.WebCore;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -141,10 +142,24 @@ namespace DotWeb.Api
                 #region 驗證 電話、地址、客戶名稱
                 bool exist_check = false;
 
+                List<CustomerErrorMsg> ErrorMsgs = new List<CustomerErrorMsg>();
                 //客戶名稱
                 if (db0.Customer.Any(x => x.customer_name == md.customer_name & x.customer_id != md.customer_id))
                 {
                     exist_check = true;
+                    CustomerErrorMsg errorMsg = new CustomerErrorMsg();
+                    errorMsg.error_name = "店名重複";
+                    errorMsg.r_customers = db0.Customer.Where(x => x.customer_name == md.customer_name & x.customer_id != md.customer_id)
+                                                       .Select(x => new RepeatCustomer()
+                                                       {
+                                                           customer_sn = x.customer_sn,
+                                                           customer_name = x.customer_name,
+                                                           tel = x.tel,
+                                                           tw_city = x.tw_city,
+                                                           tw_country = x.tw_country,
+                                                           tw_address = x.tw_address
+                                                       }).ToList();
+                    ErrorMsgs.Add(errorMsg);
                     r.message = "已有同店名的客戶存在，請確認後在修改！！";
                 }
                 if (!exist_check & db0.Customer.Any(x => x.tw_city == md.tw_city
@@ -153,17 +168,43 @@ namespace DotWeb.Api
                                  & x.customer_id != md.customer_id))
                 {
                     exist_check = true;
+                    CustomerErrorMsg errorMsg = new CustomerErrorMsg();
+                    errorMsg.error_name = "地址重複";
+                    errorMsg.r_customers = db0.Customer.Where(x => x.tw_city == md.tw_city & x.tw_address == md.tw_address & x.customer_id != md.customer_id)
+                                                       .Select(x => new RepeatCustomer()
+                                                       {
+                                                           customer_sn = x.customer_sn,
+                                                           customer_name = x.customer_name,
+                                                           tel = x.tel,
+                                                           tw_city = x.tw_city,
+                                                           tw_country = x.tw_country,
+                                                           tw_address = x.tw_address
+                                                       }).ToList();
+                    ErrorMsgs.Add(errorMsg);
                     r.message = "已有同地址的客戶存在，請確認後在修改！！";
                 }
                 if (!exist_check & md.tel != null & db0.Customer.Any(x => x.tel == md.tel & x.customer_id != md.customer_id))
                 {
                     exist_check = true;
+                    CustomerErrorMsg errorMsg = new CustomerErrorMsg();
+                    errorMsg.error_name = "電話重複";
+                    errorMsg.r_customers = db0.Customer.Where(x => x.tel == md.tel & x.customer_id != md.customer_id)
+                                                       .Select(x => new RepeatCustomer()
+                                                       {
+                                                           customer_sn = x.customer_sn,
+                                                           customer_name = x.customer_name,
+                                                           tel = x.tel,
+                                                           tw_city = x.tw_city,
+                                                           tw_country = x.tw_country,
+                                                           tw_address = x.tw_address
+                                                       }).ToList();
+                    ErrorMsgs.Add(errorMsg);
                     r.message = "已有同電話的客戶存在，請確認後在修改！！";
                 }
                 if (exist_check)
                 {
                     r.result = false;
-                    return Ok(r);
+                    return Ok(new { result = false, message = r.message, error_data = ErrorMsgs });
                 }
                 #endregion
 
@@ -305,11 +346,24 @@ namespace DotWeb.Api
 
                 #region 驗證 電話、地址、客戶名稱
                 bool exist_check = false;
-
+                List<CustomerErrorMsg> ErrorMsgs = new List<CustomerErrorMsg>();
                 //客戶名稱
                 if (db0.Customer.Any(x => x.customer_name == md.customer_name))
                 {
                     exist_check = true;
+                    CustomerErrorMsg errorMsg = new CustomerErrorMsg();
+                    errorMsg.error_name = "店名重複";
+                    errorMsg.r_customers = db0.Customer.Where(x => x.customer_name == md.customer_name)
+                                                       .Select(x => new RepeatCustomer()
+                                                       {
+                                                           customer_sn = x.customer_sn,
+                                                           customer_name = x.customer_name,
+                                                           tel = x.tel,
+                                                           tw_city = x.tw_city,
+                                                           tw_country = x.tw_country,
+                                                           tw_address = x.tw_address
+                                                       }).ToList();
+                    ErrorMsgs.Add(errorMsg);
                     r.message = "已有同店名的客戶存在，請確認後在新增！！";
                 }
                 if (!exist_check & db0.Customer.Any(x => x.tw_city == md.tw_city
@@ -317,17 +371,43 @@ namespace DotWeb.Api
                                  & x.tw_address == md.tw_address))
                 {
                     exist_check = true;
+                    CustomerErrorMsg errorMsg = new CustomerErrorMsg();
+                    errorMsg.error_name = "地址重複";
+                    errorMsg.r_customers = db0.Customer.Where(x => x.tw_city == md.tw_city & x.tw_address == md.tw_address)
+                                                       .Select(x => new RepeatCustomer()
+                                                       {
+                                                           customer_sn = x.customer_sn,
+                                                           customer_name = x.customer_name,
+                                                           tel = x.tel,
+                                                           tw_city = x.tw_city,
+                                                           tw_country = x.tw_country,
+                                                           tw_address = x.tw_address
+                                                       }).ToList();
+                    ErrorMsgs.Add(errorMsg);
                     r.message = "已有同地址的客戶存在，請確認後在新增！！";
                 }
                 if (!exist_check & md.tel != null & db0.Customer.Any(x => x.tel == md.tel))
                 {
                     exist_check = true;
+                    CustomerErrorMsg errorMsg = new CustomerErrorMsg();
+                    errorMsg.error_name = "電話重複";
+                    errorMsg.r_customers = db0.Customer.Where(x => x.tel == md.tel)
+                                                       .Select(x => new RepeatCustomer()
+                                                       {
+                                                           customer_sn = x.customer_sn,
+                                                           customer_name = x.customer_name,
+                                                           tel = x.tel,
+                                                           tw_city = x.tw_city,
+                                                           tw_country = x.tw_country,
+                                                           tw_address = x.tw_address
+                                                       }).ToList();
+                    ErrorMsgs.Add(errorMsg);
                     r.message = "已有同電話的客戶存在，請確認後在新增！！";
                 }
                 if (exist_check)
                 {
                     r.result = false;
-                    return Ok(r);
+                    return Ok(new { result = false, message = r.message, error_data = ErrorMsgs });
                 }
                 #endregion
                 md.i_InsertUserID = this.UserId;
