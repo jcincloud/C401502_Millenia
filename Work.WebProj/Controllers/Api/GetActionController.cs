@@ -120,7 +120,7 @@ namespace DotWeb.Api
                                 product_name = x.Product.product_name,
                                 price = x.price,
                                 visit_date = x.VisitDetail.Visit.visit_date,
-                                area_id=x.Customer.area_id
+                                area_id = x.Customer.area_id
                             });
 
                 #region 驗證業務端只能看到自己的資料
@@ -865,11 +865,20 @@ namespace DotWeb.Api
             {
 
                 //var now_user_area = db0.MapSalesArea.Where(x => x.users_id == this.UserId).Select(x => x.area_id);
+                //取得已選取的客戶編號
+                var customer_id = db0.StockDetailQty.Where(x => x.StockDetail.stock_id == parm.stock_id && x.StockDetail.item_no == parm.item_no).Select(x => x.customer_id).ToList();
 
                 var items = db0.Customer
                     .OrderBy(x => x.customer_name)
                     //.Where(x => now_user_area.Contains(x.area_id))
-                    .Select(x => new { x.customer_id, x.customer_name, x.tw_city, x.tw_country, x.area_id });
+                    .Select(x => new GetAllCustomerModel()
+                    {
+                        customer_id = x.customer_id,
+                        customer_name = x.customer_name,
+                        tw_city = x.tw_city,
+                        tw_country = x.tw_country,
+                        area_id = x.area_id
+                    });
 
                 if (parm.city != null)
                 {
@@ -887,11 +896,16 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.customer_name.Contains(parm.word));
                 }
-                if (parm.customers != null)
+                var result = items.ToList();
+                foreach (var item in result)
                 {
-                    items = items.Where(x => !parm.customers.Contains(x.customer_id));
+                    if (customer_id.Contains(item.customer_id))
+                    {
+                        item.is_select = true;
+                    }
                 }
-                return Ok(items.ToList());
+
+                return Ok(result);
             }
             finally
             {
@@ -2006,7 +2020,8 @@ namespace DotWeb.Api
         public string country { get; set; }
         public string word { get; set; }
         public int? area { get; set; }
-        public int[] customers { get; set; }
+        public int stock_id { get; set; }
+        public int item_no { get; set; }
     }
     public class ParmGetMyCustomer
     {
@@ -2077,6 +2092,15 @@ namespace DotWeb.Api
     public class ParmGetNextId : q_Customer
     {
         public int now_id { get; set; }
+    }
+    public class GetAllCustomerModel
+    {
+        public int customer_id { get; set; }
+        public string customer_name { get; set; }
+        public string tw_city { get; set; }
+        public string tw_country { get; set; }
+        public int area_id { get; set; }
+        public bool is_select { get; set; }
     }
     #endregion
 }

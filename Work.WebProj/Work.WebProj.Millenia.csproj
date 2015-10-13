@@ -827,7 +827,6 @@
     <Content Include="Scripts\src\jsx\m-Stock.jsx" />
     <Content Include="Scripts\src\jsx\m-ProductCategory.jsx" />
     <Content Include="Scripts\src\jsx\m-Roles.jsx" />
-    <Content Include="_Code\CSS\sass\bs\.sublad4.tmp" />
     <Content Include="_Code\CSS\sass\bs\bootstrap.scss" />
     <Content Include="_Code\CSS\sass\bs\mixins\_alerts.scss" />
     <Content Include="_Code\CSS\sass\bs\mixins\_background-variant.scss" />

@@ -31,7 +31,7 @@ var GirdForm = React.createClass({
 			gridData:{rows:[],page:1},
 			fieldData:{},
 			searchData:{title:null,view_type:2},
-			searchCustomer:{customers:[]},
+			searchCustomer:{agent_id:0},
 			edit_type:0,
 			checkAll:false,
 			option_customer:[],
@@ -49,7 +49,8 @@ var GirdForm = React.createClass({
 			setQtyData:[],
 			year_list:[],
 			isSaveMasterData:true,
-			country_list:[]
+			country_list:[],
+			item_no:0
 		};  
 	},
 	getDefaultProps:function(){
@@ -463,7 +464,7 @@ var GirdForm = React.createClass({
 			{stock_id:this.state.fieldData.stock_id,item_no:item_no})
 		.done(function(data, textStatus, jqXHRdata) {
 			if(data.result){
-				this.setState({isShowQty:true,setQtyData:data.data,product_head:data.products});
+				this.setState({isShowQty:true,setQtyData:data.data,product_head:data.products,item_no:item_no});
 			}
 			else
 			{
@@ -657,13 +658,15 @@ var GirdForm = React.createClass({
 	},
 	handleSearchCustomer:function(){
 		var searchCustomer=this.state.searchCustomer;
-		//過濾已經有的客戶資料
-		var ids = [];
-        for (var key in this.state.setQtyData) {
-            ids.push(this.state.setQtyData[key].customers.customer_id);
-        }
-        searchCustomer.customers=ids;
-        this.state.searchCustomer.customers=ids;
+		
+		searchCustomer.agent_id=this.state.fieldData.agent_id;
+		this.state.searchCustomer.agent_id=this.state.fieldData.agent_id;
+		
+		searchCustomer.stock_id=this.state.fieldData.stock_id;
+		this.state.searchCustomer.stock_id=this.state.fieldData.stock_id;
+
+		searchCustomer.item_no=this.state.item_no;
+		this.state.searchCustomer.item_no=this.state.item_no;
 
   		this.setState({searchCustomer:searchCustomer});
   		this.queryAllCustomer();
@@ -900,11 +903,20 @@ var GirdForm = React.createClass({
 										</tr>
 										{
 											this.state.option_customer.map(function(itemData,i) {
-												var customer_out_html =                     
+												var customer_out_html=null;
+												if(itemData.is_select){
+													customer_out_html =                     
+													<tr key={itemData.customer_id}>
+														<td className="text-center"><span className="label label-danger">已選取</span></td>
+														<td>{itemData.customer_name}</td>
+													</tr>;
+												}else{
+													customer_out_html =                     
 													<tr key={itemData.customer_id}>
 														<td className="text-center"><input type="checkbox" checked={itemData.is_take} onChange={this.setSelectCustomer.bind(this,i)} /></td>
 														<td>{itemData.customer_name}</td>
-													</tr>;
+													</tr>;													
+												}
 												return customer_out_html;
 											}.bind(this))
 										}
