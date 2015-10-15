@@ -7,7 +7,8 @@ var GirdForm = React.createClass({
 			tableData:[	{name:'VisitDetail',isHaveData:false},
 						{name:'VisitDetailProduct',isHaveData:false},
 						{name:'VisitTimeRecorder',isHaveData:false},
-						{name:'StockDetailQty',isHaveData:false}],
+						{name:'StockDetailQty',isHaveData:false},
+						{name:'MapCustomerAgnet',isHaveData:false}],
 			select_type:1,
 			customer_list:[],
 			isShowCustomerSelect:false,
@@ -91,7 +92,8 @@ var GirdForm = React.createClass({
 		tableData=[	{name:'VisitDetail',isHaveData:false},
 					{name:'VisitDetailProduct',isHaveData:false},
 					{name:'VisitTimeRecorder',isHaveData:false},
-					{name:'StockDetailQty',isHaveData:false}];
+					{name:'StockDetailQty',isHaveData:false},
+					{name:'MapCustomerAgnet',isHaveData:false}];
 		fieldData={a_customer_id:null,b_customer_id:null};
 
 		this.setState({fieldData:fieldData,tableData:tableData});
@@ -346,7 +348,7 @@ var GirdForm = React.createClass({
 
 				<div className="row">
 					<div className="col-xs-2"></div>
-					<div className="col-xs-2">
+					<div className="col-xs-3">
 						<div className="table-responsive">
 							<table className="table-condensed">
 								<caption>A客戶相關資料</caption>

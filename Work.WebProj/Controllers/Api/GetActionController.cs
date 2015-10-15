@@ -2023,17 +2023,19 @@ namespace DotWeb.Api
                 bool check_VDP = db0.VisitDetailProduct.Any(x => x.customer_id == customer_id);
                 bool check_VTR = db0.VisitTimeRecorder.Any(x => x.customer_id == customer_id);
                 bool check_SDQ = db0.StockDetailQty.Any(x => x.customer_id == customer_id);
+                bool check_MCA = db0.MapCustomerAgnet.Any(x => x.customer_id == customer_id);
 
                 List<A_TableData> datas = new List<A_TableData>() {
                     new A_TableData() {name="VisitDetail",isHaveData=check_VD },
                     new A_TableData() {name="VisitDetailProduct",isHaveData=check_VDP },
                     new A_TableData() {name="VisitTimeRecorder",isHaveData=check_VTR },
-                    new A_TableData() {name="StockDetailQty",isHaveData=check_SDQ }
+                    new A_TableData() {name="StockDetailQty",isHaveData=check_SDQ },
+                    new A_TableData() {name="MapCustomerAgnet",isHaveData=check_MCA }
                 };
 
                 bool isHaveData = true;
 
-                if (!check_VD & !check_VDP & !check_VTR & !check_SDQ)
+                if (!check_VD & !check_VDP & !check_VTR & !check_SDQ & !check_MCA)
                 {
                     isHaveData = false;
                 }
