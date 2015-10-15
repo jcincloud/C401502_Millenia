@@ -191,6 +191,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Active\Controllers\ChangeDataController.cs" />
     <Compile Include="Areas\Active\Controllers\AgentController.cs" />
     <Compile Include="Areas\Active\Controllers\MapCustomeAgent.cs" />
     <Compile Include="Areas\Active\Controllers\ProductBrandController.cs" />
@@ -231,6 +232,7 @@
     <Content Include="Areas\Active\Views\Stock\Main3.cshtml" />
     <Content Include="Areas\Active\Views\MapCustomerAgent\Main2.cshtml" />
     <Content Include="Areas\Active\Views\Stock\Manager.cshtml" />
+    <Content Include="Areas\Active\Views\ChangeData\Main.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\ReportToPdfController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
@@ -823,6 +825,7 @@
     <Content Include="_Code\Ashx\ValidateCodeB.ashx" />
     <Content Include="Scripts\src\jsx\m-Agent.jsx" />
     <Content Include="Scripts\src\jsx\m-Users.jsx" />
+    <Content Include="Scripts\src\jsx\m-ChangeData.jsx" />
     <None Include="Scripts\src\jsx\m-CustomerAgent.jsx" />
     <Content Include="Scripts\src\jsx\m-Stock.jsx" />
     <Content Include="Scripts\src\jsx\m-ProductCategory.jsx" />
@@ -1074,6 +1077,7 @@
     <Content Include="Areas\Active\Views\ProductCategory\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\Report\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\ProductBrand\App_LocalResources\Main.cshtml.resx" />
+    <Content Include="Areas\Active\Views\ChangeData\App_LocalResources\Main.cshtml.resx" />
     <EmbeddedResource Include="_Code\RPTFile\MemeberLabel.rdlc" />
   </ItemGroup>
   <PropertyGroup>
