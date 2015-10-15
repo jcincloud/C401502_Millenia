@@ -4,7 +4,12 @@ var GirdForm = React.createClass({
 	getInitialState: function() {  
 		return {
 			fieldData:{a_customer_id:null,b_customer_id:null},
-			tableData:[	{name:'VisitDetail',isHaveData:false},
+			tableDataA:[{name:'VisitDetail',isHaveData:false},
+						{name:'VisitDetailProduct',isHaveData:false},
+						{name:'VisitTimeRecorder',isHaveData:false},
+						{name:'StockDetailQty',isHaveData:false},
+						{name:'MapCustomerAgnet',isHaveData:false}],
+			tableDataB:[{name:'VisitDetail',isHaveData:false},
 						{name:'VisitDetailProduct',isHaveData:false},
 						{name:'VisitTimeRecorder',isHaveData:false},
 						{name:'StockDetailQty',isHaveData:false},
@@ -75,28 +80,33 @@ var GirdForm = React.createClass({
 		if(this.state.now_select=='a_customer_id'){
 			jqGet(gb_approot + 'api/GetAction/GetTableData',{customer_id:id})
 			.done(function(data, textStatus, jqXHRdata) {			
-				this.setState({isShowCustomerSelect:false,fieldData:fieldData,tableData:data.datas,isHaveData:data.isHaveData});
+				this.setState({isShowCustomerSelect:false,fieldData:fieldData,tableDataA:data.datas,isHaveData:data.isHaveData});
 			}.bind(this))
 			.fail(function( jqXHR, textStatus, errorThrown ) {
 				showAjaxError(errorThrown);
 			});	
-		}else{
-			this.setState({isShowCustomerSelect:false,fieldData:fieldData});
+		}else if(this.state.now_select=='b_customer_id'){
+			jqGet(gb_approot + 'api/GetAction/GetTableData',{customer_id:id})
+			.done(function(data, textStatus, jqXHRdata) {			
+				this.setState({isShowCustomerSelect:false,fieldData:fieldData,tableDataB:data.datas});
+			}.bind(this))
+			.fail(function( jqXHR, textStatus, errorThrown ) {
+				showAjaxError(errorThrown);
+			});	
 		}
 
 	},
 	noneType:function(){
 		var fieldData=this.state.fieldData;
-		var tableData=this.state.tableData;
 
-		tableData=[	{name:'VisitDetail',isHaveData:false},
+		noneData=[{name:'VisitDetail',isHaveData:false},
 					{name:'VisitDetailProduct',isHaveData:false},
 					{name:'VisitTimeRecorder',isHaveData:false},
 					{name:'StockDetailQty',isHaveData:false},
 					{name:'MapCustomerAgnet',isHaveData:false}];
 		fieldData={a_customer_id:null,b_customer_id:null};
 
-		this.setState({fieldData:fieldData,tableData:tableData});
+		this.setState({fieldData:fieldData,tableDataA:noneData,tableDataB:noneData});
 	},
 	handleSearchCustomer:function(){
   		this.queryAllCustomer();
@@ -158,6 +168,7 @@ var GirdForm = React.createClass({
 	render: function() {
 		var outHtml = null;
 		var detail_html=null;
+		var tableDataB_html=null;
 		var fieldData=this.state.fieldData;
 		var searchCustomer=this.state.searchCustomer;
 
@@ -283,6 +294,32 @@ var GirdForm = React.createClass({
 						</div>
 					</div>
 				</form>;
+				tableDataB_html=
+					<div className="col-xs-3">
+						<div className="table-responsive">
+							<table className="table-condensed">
+								<caption>B客戶相關資料</caption>
+								<tbody>
+									<tr>
+										<th>有無資料</th>
+					                	<th className="text-center">資料表名稱</th>
+									</tr>
+									{
+										this.state.tableDataB.map(function(itemData,i) {
+											var out_sub_html =                     
+												<tr key={i}>
+							                        <td className="text-center">
+							                        {itemData.isHaveData?<span className="label label-primary">有</span>:<span className="label label-default">無</span>}
+							                        </td>
+				                        			<td className="text-center">{itemData.name}</td>
+												</tr>;
+											return out_sub_html;
+										}.bind(this))
+									}								
+								</tbody>
+	        				</table>
+	        			</div>
+        			</div>;
 			}else if(this.state.select_type==2){
 				detail_html=
 				<form className="form-horizontal clearfix" onSubmit={this.handleSubmit}>
@@ -316,6 +353,7 @@ var GirdForm = React.createClass({
 						</div>
 					</div>
 				</form>;
+				tableDataB_html=null;
 			}
 
 			outHtml =
@@ -347,7 +385,7 @@ var GirdForm = React.createClass({
 				{detail_html}
 
 				<div className="row">
-					<div className="col-xs-2"></div>
+					<div className="col-xs-1"></div>
 					<div className="col-xs-3">
 						<div className="table-responsive">
 							<table className="table-condensed">
@@ -358,7 +396,7 @@ var GirdForm = React.createClass({
 					                	<th className="text-center">資料表名稱</th>
 									</tr>
 									{
-										this.state.tableData.map(function(itemData,i) {
+										this.state.tableDataA.map(function(itemData,i) {
 											var out_sub_html =                     
 												<tr key={i}>
 							                        <td className="text-center">
@@ -373,10 +411,8 @@ var GirdForm = React.createClass({
 	        				</table>
 	        			</div>
         			</div>
-					<div className="col-xs-6">
-						<div className="table-responsive">
-        				</div>
-        			</div>
+        			<div className="col-xs-2"></div>
+        			{tableDataB_html}
 				</div>
 
 			</div>
