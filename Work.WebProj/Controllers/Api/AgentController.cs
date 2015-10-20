@@ -144,6 +144,15 @@ namespace DotWeb.Api
 
                 foreach (var id in ids)
                 {
+                    #region 刪除經銷商-客戶對應
+                    var getMapCustomerAgnet = db0.MapCustomerAgnet.Where(x => x.agent_id == id);
+
+                    foreach (var map in getMapCustomerAgnet)
+                    {
+                        db0.MapCustomerAgnet.Attach(map);
+                        db0.MapCustomerAgnet.Remove(map);
+                    }
+                    #endregion
                     item = new Agent() { agent_id = id };
                     db0.Agent.Attach(item);
                     db0.Agent.Remove(item);

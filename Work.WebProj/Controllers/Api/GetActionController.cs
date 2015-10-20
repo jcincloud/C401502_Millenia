@@ -40,7 +40,8 @@ namespace DotWeb.Api
                                 visit_end = x.end_time,
                                 cumulative_time = x.cumulative_time,
                                 users_id = x.users_id,
-                                user_name = ""
+                                user_name = "",
+                                area_id = x.Customer.area_id
                             });
                 #region 驗證業務端只能看到自己的資料
                 var getRoles = db0.AspNetUsers.FirstOrDefault(x => x.Id == this.UserId).AspNetRoles.Select(x => x.Name);
@@ -62,6 +63,10 @@ namespace DotWeb.Api
                 if (parm.customer_name != null)
                 {
                     items = items.Where(x => x.customer_name.Contains(parm.customer_name));
+                }
+                if (parm.area != null)
+                {
+                    items = items.Where(x => x.area_id == parm.area);
                 }
 
 
@@ -114,7 +119,8 @@ namespace DotWeb.Api
                                 product_id = x.product_id,
                                 product_name = x.Product.product_name,
                                 price = x.price,
-                                visit_date = x.VisitDetail.Visit.visit_date
+                                visit_date = x.VisitDetail.Visit.visit_date,
+                                area_id = x.Customer.area_id
                             });
 
                 #region 驗證業務端只能看到自己的資料
@@ -142,6 +148,10 @@ namespace DotWeb.Api
                 if (parm.product_name != null)
                 {
                     items = items.Where(x => x.product_name.Contains(parm.product_name));
+                }
+                if (parm.area != null)
+                {
+                    items = items.Where(x => x.area_id == parm.area);
                 }
 
 
@@ -435,7 +445,7 @@ namespace DotWeb.Api
             try
             {
                 var products_id = db0.MapSalesProduct
-                    //.Where(x => x.users_id != "17bcea5f-0bad-4018-b782-5f3927d73c26" && x.users_id != "aa9bd408-8ab7-47d7-8717-fe9c4e5f51fd")
+                   //.Where(x => x.users_id != "17bcea5f-0bad-4018-b782-5f3927d73c26" && x.users_id != "aa9bd408-8ab7-47d7-8717-fe9c4e5f51fd")
                    .GroupBy(x => x.product_id)
                    .Select(x => new SalesProductSum() { product_id = x.Key, Sum = x.Count(y => y.product_id == x.Key) }).ToList();//取得產品負責業務統計數
 
@@ -528,6 +538,10 @@ namespace DotWeb.Api
                 if (parm.country != null)
                 {
                     items = items.Where(x => x.tw_country == parm.country);
+                }
+                if (parm.address != null)
+                {
+                    items = items.Where(x => x.tw_address.Contains(parm.address));
                 }
                 if (parm.word != null)
                 {
@@ -851,11 +865,20 @@ namespace DotWeb.Api
             {
 
                 //var now_user_area = db0.MapSalesArea.Where(x => x.users_id == this.UserId).Select(x => x.area_id);
+                //取得已選取的客戶編號
+                var customer_id = db0.StockDetailQty.Where(x => x.StockDetail.stock_id == parm.stock_id && x.StockDetail.item_no == parm.item_no).Select(x => x.customer_id).ToList();
 
                 var items = db0.Customer
                     .OrderBy(x => x.customer_name)
                     //.Where(x => now_user_area.Contains(x.area_id))
-                    .Select(x => new { x.customer_id, x.customer_name, x.tw_city, x.tw_country, x.area_id });
+                    .Select(x => new GetAllCustomerModel()
+                    {
+                        customer_id = x.customer_id,
+                        customer_name = x.customer_name,
+                        tw_city = x.tw_city,
+                        tw_country = x.tw_country,
+                        area_id = x.area_id
+                    });
 
                 if (parm.city != null)
                 {
@@ -873,11 +896,16 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.customer_name.Contains(parm.word));
                 }
-                if (parm.customers != null)
+                var result = items.ToList();
+                foreach (var item in result)
                 {
-                    items = items.Where(x => !parm.customers.Contains(x.customer_id));
+                    if (customer_id.Contains(item.customer_id))
+                    {
+                        item.is_select = true;
+                    }
                 }
-                return Ok(items.ToList());
+
+                return Ok(result);
             }
             finally
             {
@@ -1495,16 +1523,16 @@ namespace DotWeb.Api
                 var items = await db0.StockDetail.Where(x => x.stock_id == parm.stock_id)
                     .GroupBy(x => x.item_no)
                     .Select(x => new
-                                        {
-                                            item_no = x.Key,
-                                            products = x.Select(y => new
-                                            {
-                                                y.stock_detail_id,
-                                                y.product_id,
-                                                y.Product.product_name,
-                                                y.Product.product_sn
-                                            })
-                                        })
+                    {
+                        item_no = x.Key,
+                        products = x.Select(y => new
+                        {
+                            y.stock_detail_id,
+                            y.product_id,
+                            y.Product.product_name,
+                            y.Product.product_sn
+                        })
+                    })
                     .ToListAsync();
                 return Ok(new { result = true, data = items, item_no = get_item_no });
                 #endregion
@@ -1942,6 +1970,197 @@ namespace DotWeb.Api
                 return null;
             }
         }
+
+        #region 客戶資料交換
+        public IHttpActionResult GetAllCustomerByC([FromUri]ParmMyCustomerQuery parm)
+        {
+            db0 = getDB0();
+            try
+            {
+
+                var items = db0.Customer
+                    .OrderBy(x => x.customer_name)
+                    .Select(x => new GetAllCustomerModel()
+                    {
+                        customer_id = x.customer_id,
+                        customer_name = x.customer_name,
+                        tw_city = x.tw_city,
+                        tw_country = x.tw_country,
+                        area_id = x.area_id
+                    });
+
+                if (parm.city != null)
+                {
+                    items = items.Where(x => x.tw_city == parm.city);
+                }
+                if (parm.country != null)
+                {
+                    items = items.Where(x => x.tw_country == parm.country);
+                }
+                if (parm.area != null)
+                {
+                    items = items.Where(x => x.area_id == parm.area);
+                }
+                if (parm.word != null)
+                {
+                    items = items.Where(x => x.customer_name.Contains(parm.word));
+                }
+                var result = items.ToList();
+
+                return Ok(result);
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+        }
+        public IHttpActionResult GetTableData(int customer_id)
+        {
+            db0 = getDB0();
+            try
+            {
+                bool check_VD = db0.VisitDetail.Any(x => x.customer_id == customer_id);
+                bool check_VDP = db0.VisitDetailProduct.Any(x => x.customer_id == customer_id);
+                bool check_VTR = db0.VisitTimeRecorder.Any(x => x.customer_id == customer_id);
+                bool check_SDQ = db0.StockDetailQty.Any(x => x.customer_id == customer_id);
+                bool check_MCA = db0.MapCustomerAgnet.Any(x => x.customer_id == customer_id);
+
+                List<A_TableData> datas = new List<A_TableData>() {
+                    new A_TableData() {name="VisitDetail",isHaveData=check_VD },
+                    new A_TableData() {name="VisitDetailProduct",isHaveData=check_VDP },
+                    new A_TableData() {name="VisitTimeRecorder",isHaveData=check_VTR },
+                    new A_TableData() {name="StockDetailQty",isHaveData=check_SDQ },
+                    new A_TableData() {name="MapCustomerAgnet",isHaveData=check_MCA }
+                };
+
+                bool isHaveData = true;
+
+                if (!check_VD & !check_VDP & !check_VTR & !check_SDQ & !check_MCA)
+                {
+                    isHaveData = false;
+                }
+
+                return Ok(new { datas = datas, isHaveData = isHaveData });
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+        }
+        [HttpPost]
+        public async Task<IHttpActionResult> PostChangeCustomerData([FromBody]ParmChangeCustomerData p)
+        {
+            db0 = getDB0();
+            try
+            {
+                bool check_a = await db0.Customer.AnyAsync(x => x.customer_id == p.a_customer_id);
+                if (!check_a)
+                {
+                    return Ok(new { result = false, message = "A客戶編號不存在!!" });
+                }
+
+                bool check_b = await db0.Customer.AnyAsync(x => x.customer_id == p.b_customer_id);
+                if (!check_b)
+                {
+                    return Ok(new { result = false, message = "B客戶編號不存在!!" });
+                }
+
+
+                var data_VD = await db0.VisitDetail.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+                var data_VDP = await db0.VisitDetailProduct.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+                var data_VTR = await db0.VisitTimeRecorder.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+                var data_SDQ = await db0.StockDetailQty.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+
+                foreach (var data in data_VD)
+                {
+                    data.customer_id = p.b_customer_id;
+                }
+                foreach (var data in data_VDP)
+                {
+                    data.customer_id = p.b_customer_id;
+                }
+                foreach (var data in data_VTR)
+                {
+                    data.customer_id = p.b_customer_id;
+                }
+                foreach (var data in data_SDQ)
+                {
+                    data.customer_id = p.b_customer_id;
+                }
+
+                await db0.SaveChangesAsync();
+
+
+                return Ok(new { result = true });
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+        }
+        [HttpPost]
+        public async Task<IHttpActionResult> deleteCustomerData([FromBody]ParmChangeCustomerData p)
+        {
+            db0 = getDB0();
+            try
+            {
+                bool check_customer = await db0.Customer.AnyAsync(x => x.customer_id == p.a_customer_id);
+                if (!check_customer)
+                {
+                    return Ok(new { result = false, message = "此客戶編號不存在!!" });
+                }
+
+                var data_VD = await db0.VisitDetail.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+                var data_VDP = await db0.VisitDetailProduct.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+                var data_VTR = await db0.VisitTimeRecorder.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+                var data_SDQ = await db0.StockDetailQty.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+                var data_Map = await db0.MapCustomerAgnet.Where(x => x.customer_id == p.a_customer_id).ToListAsync();
+
+                foreach (var data in data_VD)
+                {
+                    db0.VisitDetail.Attach(data);
+                    db0.VisitDetail.Remove(data);
+                }
+                foreach (var data in data_VDP)
+                {
+                    db0.VisitDetailProduct.Attach(data);
+                    db0.VisitDetailProduct.Remove(data);
+                }
+                foreach (var data in data_VTR)
+                {
+                    db0.VisitTimeRecorder.Attach(data);
+                    db0.VisitTimeRecorder.Remove(data);
+                }
+                foreach (var data in data_SDQ)
+                {
+                    db0.StockDetailQty.Attach(data);
+                    db0.StockDetailQty.Remove(data);
+                }
+                foreach (var data in data_Map)
+                {
+                    db0.MapCustomerAgnet.Attach(data);
+                    db0.MapCustomerAgnet.Remove(data);
+                }
+
+                var item = new Customer() { customer_id = p.a_customer_id };
+                db0.Customer.Attach(item);
+                db0.Customer.Remove(item);
+
+                await db0.SaveChangesAsync();
+
+
+                return Ok(new { result = true });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { result = false, message = ex.ToString() });
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+        }
+        #endregion
     }
     #region Parm
     public class ParmSetVisit
@@ -1992,7 +2211,8 @@ namespace DotWeb.Api
         public string country { get; set; }
         public string word { get; set; }
         public int? area { get; set; }
-        public int[] customers { get; set; }
+        public int stock_id { get; set; }
+        public int item_no { get; set; }
     }
     public class ParmGetMyCustomer
     {
@@ -2000,6 +2220,7 @@ namespace DotWeb.Api
         public int page { get; set; }
         public string city { get; set; }
         public string country { get; set; }
+        public string address { get; set; }
         public string word { get; set; }
     }
     public class PutPauseCustomer
@@ -2062,6 +2283,25 @@ namespace DotWeb.Api
     public class ParmGetNextId : q_Customer
     {
         public int now_id { get; set; }
+    }
+    public class GetAllCustomerModel
+    {
+        public int customer_id { get; set; }
+        public string customer_name { get; set; }
+        public string tw_city { get; set; }
+        public string tw_country { get; set; }
+        public int area_id { get; set; }
+        public bool is_select { get; set; }
+    }
+    public class A_TableData
+    {
+        public string name { get; set; }
+        public bool isHaveData { get; set; }
+    }
+    public class ParmChangeCustomerData
+    {
+        public int a_customer_id { get; set; }
+        public int b_customer_id { get; set; }
     }
     #endregion
 }

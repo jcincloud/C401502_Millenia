@@ -47,7 +47,8 @@ var GirdForm = React.createClass({
 			edit_type:0,
 			checkAll:false,
 			country_list:[],
-			next_id:null
+			next_id:null,
+			error_data:[]
 		};  
 	},
 	getDefaultProps:function(){
@@ -107,7 +108,9 @@ var GirdForm = React.createClass({
 					}
 					this.updateType(data.id);
 				}else{
+					console.log(data);
 					tosMessage(null,data.message,3);
+					this.setState({error_data:data.error_data});
 				}
 			}.bind(this))
 			.fail(function( jqXHR, textStatus, errorThrown ) {
@@ -139,6 +142,7 @@ var GirdForm = React.createClass({
 					}
 				}else{
 					tosMessage(null,data.message,3);
+					this.setState({error_data:data.error_data});
 				}
 			}.bind(this))
 			.fail(function( jqXHR, textStatus, errorThrown ) {
@@ -224,12 +228,12 @@ var GirdForm = React.createClass({
 		});
 	},
 	insertType:function(){
-		this.setState({edit_type:1,fieldData:{}});
+		this.setState({edit_type:1,fieldData:{},error_data:[]});
 	},
 	updateType:function(id){
 		jqGet(this.props.apiPathName,{id:id})
 		.done(function(data, textStatus, jqXHRdata) {
-			this.setState({edit_type:2,fieldData:data.data});
+			this.setState({edit_type:2,fieldData:data.data,error_data:[]});
 		}.bind(this))
 		.fail(function( jqXHR, textStatus, errorThrown ) {
 			showAjaxError(errorThrown);
@@ -238,7 +242,7 @@ var GirdForm = React.createClass({
 	noneType:function(){
 		this.gridData(0)
 		.done(function(data, textStatus, jqXHRdata) {
-			this.setState({edit_type:0,gridData:data});
+			this.setState({edit_type:0,gridData:data,error_data:[]});
 		}.bind(this))
 		.fail(function(jqXHR, textStatus, errorThrown) {
 			showAjaxError(errorThrown);
@@ -740,8 +744,30 @@ var GirdForm = React.createClass({
 						<button type="button" onClick={this.noneType}><i className="fa-times"></i> 回前頁</button>
 					</div>
 					<div className="alert alert-warning">
-						<p><strong className="text-danger">紅色標題</strong> 為必填欄位。</p>
-						<p>地址格式請依照郵局格式填寫，地址<strong className="text-danger">段</strong>以前請勿填寫阿拉伯數字。</p>
+						<p>1.<strong className="text-danger">紅色標題</strong> 為必填欄位。</p>
+						<p>2.地址格式請依照郵局格式填寫，地址<strong className="text-danger">段</strong>以前請勿填寫阿拉伯數字。</p>
+						<p>3.客戶資料維護之<strong className="text-danger">店名、電話、地址</strong>只要其中一項有重複就無法儲存及修改。</p>
+					</div>
+					<div className="alert alert-info">
+						<p><strong className="text-info">如有重複下表將列出重複的客戶清單</strong></p>
+						{
+							this.state.error_data.map(function(itemData,i) {
+								var error_html=
+								<p key={i}>
+									<strong className="text-danger">{itemData.error_name} : </strong> { }
+									{
+										itemData.r_customers.map(function(customer,i) {
+											return <span>
+											<span className="label label-primary">店名 - {customer.customer_name}</span> { }
+											<span className="label label-primary">電話 - {customer.tel}</span> { }
+											<span className="label label-primary">地址 - {customer.tw_city+customer.tw_country+customer.tw_address}</span>
+											</span>;
+										})
+									}
+								</p>;
+								return error_html;
+							})
+						}
 					</div>
 				</div>
 				</form>

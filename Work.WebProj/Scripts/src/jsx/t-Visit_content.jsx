@@ -629,7 +629,8 @@ var GirdForm = React.createClass({
 		                    	<ol>
                                     <li><strong className="text-danger">紅色標題</strong> 為必填欄位。</li>
 		                    		<li>地址格式請依照郵局格式填寫，地址<strong className="text-danger">段</strong>以前請勿填寫阿拉伯數字。</li>
-		                    		<li>點選暫停 <strong className="text-danger"> 不會存檔</strong>。</li>
+                                    <li>點選暫停 <strong className="text-danger"> 不會存檔</strong>。</li>
+		                    		<li>客戶資料維護之<strong className="text-danger">店名、電話、地址</strong>只要其中一項有重複就無法儲存及修改。</li>
 		                    	</ol>
 		                    </div>
 		                </div>

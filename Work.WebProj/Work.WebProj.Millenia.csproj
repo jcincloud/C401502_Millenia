@@ -28,6 +28,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -190,6 +191,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Active\Controllers\ChangeDataController.cs" />
     <Compile Include="Areas\Active\Controllers\AgentController.cs" />
     <Compile Include="Areas\Active\Controllers\MapCustomeAgent.cs" />
     <Compile Include="Areas\Active\Controllers\ProductBrandController.cs" />
@@ -229,6 +231,8 @@
     <Content Include="Areas\Active\Views\Stock\Main2.cshtml" />
     <Content Include="Areas\Active\Views\Stock\Main3.cshtml" />
     <Content Include="Areas\Active\Views\MapCustomerAgent\Main2.cshtml" />
+    <Content Include="Areas\Active\Views\Stock\Manager.cshtml" />
+    <Content Include="Areas\Active\Views\ChangeData\Main.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\ReportToPdfController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
@@ -650,15 +654,12 @@
     <Content Include="Scripts\app\ReactRouter.min.js" />
     <Content Include="Scripts\app\swipe.js" />
     <Content Include="Scripts\app\toastr.min.js" />
-    <Content Include="Scripts\build\comminc.js" />
-    <Content Include="Scripts\build\func\c-Comm.js" />
     <Content Include="Scripts\build\func\inc\c-Comm.js" />
     <Content Include="Scripts\build\func\inc\c-ImgFileSort.js" />
     <Content Include="Scripts\build\func\m-Agent.js" />
     <Content Include="Scripts\build\func\m-ChangePassword.js" />
     <Content Include="Scripts\build\func\m-Customer.js" />
     <Content Include="Scripts\build\func\m-CustomerAgent.js" />
-    <Content Include="Scripts\build\func\m-CustomerSales.js" />
     <Content Include="Scripts\build\func\m-login.js" />
     <Content Include="Scripts\build\func\m-Product.js" />
     <Content Include="Scripts\build\func\m-ProductBrand.js" />
@@ -674,7 +675,6 @@
     <Content Include="Scripts\build\func\m-Stock.js" />
     <Content Include="Scripts\build\func\m-Stock_view.js" />
     <Content Include="Scripts\build\func\m-Users.js" />
-    <Content Include="Scripts\build\func\t-Customer.js" />
     <Content Include="Scripts\build\func\t-login.js" />
     <Content Include="Scripts\build\func\t-New.js" />
     <Content Include="Scripts\build\func\t-Schedule.js" />
@@ -825,11 +825,11 @@
     <Content Include="_Code\Ashx\ValidateCodeB.ashx" />
     <Content Include="Scripts\src\jsx\m-Agent.jsx" />
     <Content Include="Scripts\src\jsx\m-Users.jsx" />
+    <Content Include="Scripts\src\jsx\m-ChangeData.jsx" />
     <None Include="Scripts\src\jsx\m-CustomerAgent.jsx" />
     <Content Include="Scripts\src\jsx\m-Stock.jsx" />
     <Content Include="Scripts\src\jsx\m-ProductCategory.jsx" />
     <Content Include="Scripts\src\jsx\m-Roles.jsx" />
-    <Content Include="_Code\CSS\sass\bs\.sublad4.tmp" />
     <Content Include="_Code\CSS\sass\bs\bootstrap.scss" />
     <Content Include="_Code\CSS\sass\bs\mixins\_alerts.scss" />
     <Content Include="_Code\CSS\sass\bs\mixins\_background-variant.scss" />
@@ -1077,6 +1077,7 @@
     <Content Include="Areas\Active\Views\ProductCategory\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\Report\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\ProductBrand\App_LocalResources\Main.cshtml.resx" />
+    <Content Include="Areas\Active\Views\ChangeData\App_LocalResources\Main.cshtml.resx" />
     <EmbeddedResource Include="_Code\RPTFile\MemeberLabel.rdlc" />
   </ItemGroup>
   <PropertyGroup>

@@ -9,7 +9,8 @@ var GirdForm = React.createClass({
 			edit_type:0,
 			checkAll:false,
 			show_insert_message:false,
-			is_SetVisit:false
+			is_SetVisit:false,
+			error_data:[]
 		};  
 	},
 	getDefaultProps:function(){
@@ -50,9 +51,7 @@ var GirdForm = React.createClass({
 
 		   }
 
-		if(this.state.edit_type==1){
-
-			if(this.state.fieldData['area_id'] == undefined){
+		   	if(this.state.fieldData['area_id'] == undefined){
 				tosMessage(gb_title_from_invalid,'區域群組未選擇',3);
 				return;
 			}
@@ -65,6 +64,8 @@ var GirdForm = React.createClass({
 				tosMessage(gb_title_from_invalid,'地址需填寫完整',3);
 				return;
 			}
+
+		if(this.state.edit_type==1){
 
 			jqPost(this.props.apiPathName,this.state.fieldData)
 			.done(function(data, textStatus, jqXHRdata) {
@@ -83,6 +84,7 @@ var GirdForm = React.createClass({
 						show_insert_message:true});
 				}else{
 					alert(data.message);
+					this.setState({error_data:data.error_data});
 				}
 			}.bind(this))
 			.fail(function( jqXHR, textStatus, errorThrown ) {
@@ -101,6 +103,7 @@ var GirdForm = React.createClass({
 					$('a[href="#added"]').tab('show');//修改完後,顯示list頁面
 				}else{
 					alert(data.message);
+					this.setState({error_data:data.error_data});
 				}
 			}.bind(this))
 			.fail(function( jqXHR, textStatus, errorThrown ) {
@@ -258,7 +261,7 @@ var GirdForm = React.createClass({
 		});
 	},
 	insertType:function(){
-		this.setState({edit_type:1,fieldData:{}});
+		this.setState({edit_type:1,fieldData:{},error_data:[]});
 	},
 	updateType:function(id){
 
@@ -276,7 +279,7 @@ var GirdForm = React.createClass({
 
 			jqGet(gb_approot + 'api/GetAction/GetIsCustomerSetVisit',{customer_id:id})
 			.done(function(data, textStatus, jqXHRdata) {
-				this.setState({is_SetVisit:data});
+				this.setState({is_SetVisit:data,error_data:[]});
 			}.bind(this));
 		}.bind(this))
 		.fail(function( jqXHR, textStatus, errorThrown ) {
@@ -286,7 +289,7 @@ var GirdForm = React.createClass({
 	noneType:function(){
 		this.gridData(0)
 		.done(function(data, textStatus, jqXHRdata) {
-			this.setState({edit_type:0,gridData:data});
+			this.setState({edit_type:0,gridData:data,error_data:[]});
 		}.bind(this))
 		.fail(function(jqXHR, textStatus, errorThrown) {
 			showAjaxError(errorThrown);
@@ -643,11 +646,37 @@ var GirdForm = React.createClass({
 			                <div className="col-md-12">
 				                <div className="form-group">
 				                    <div className="alert alert-warning">
-				                    	<p><strong className="text-danger">紅色標題</strong> 為必填欄位。</p>
-				                    	<p>地址格式請依照郵局格式填寫，地址<strong className="text-danger">段</strong>以前請勿填寫阿拉伯數字。</p>
+										<p>1.<strong className="text-danger">紅色標題</strong> 為必填欄位。</p>
+										<p>2.地址格式請依照郵局格式填寫，地址<strong className="text-danger">段</strong>以前請勿填寫阿拉伯數字。</p>
+										<p>3.客戶資料維護之<strong className="text-danger">店名、電話、地址</strong>只要其中一項有重複就無法儲存及修改。</p>
 				                    </div>
 			                    </div>
 			                </div>
+			                <div className="col-md-12">
+				                <div className="form-group">
+				                    <div className="alert alert-info">
+										<p><strong className="text-info">如有重複下表將列出重複的客戶清單</strong></p>
+										{
+											this.state.error_data.map(function(itemData,i) {
+												var error_html=
+												<p key={i}>
+													<strong className="text-danger">{itemData.error_name} : </strong> { }
+													{
+														itemData.r_customers.map(function(customer,i) {
+															return <span>
+															<span className="label label-primary">店名 - {customer.customer_name}</span> { }
+															<span className="label label-primary">電話 - {customer.tel}</span> { }
+															<span className="label label-primary">地址 - {customer.tw_city+customer.tw_country+customer.tw_address}</span>
+															</span>;
+														})
+													}
+												</p>;
+												return error_html;
+											})
+										}
+				                    </div>
+			                    </div>
+			                </div>			                
 			            </form>
 			        </div>
 			        <div role="tabpanel" className="tab-pane" id="added">

@@ -48,7 +48,8 @@ namespace DotWeb.Api
                 .Select(x => new { x.Id, x.user_name_c, x.UserName, x.Email })
                 .Where(x => x.UserName != "admin");
 
-            if (q.UserName != null) {
+            if (q.UserName != null)
+            {
                 items = items.Where(x => x.user_name_c.Contains(q.UserName));
             }
 
@@ -161,6 +162,32 @@ namespace DotWeb.Api
             ResultInfo rAjaxResult = new ResultInfo();
             try
             {
+                db0 = getDB0();
+
+                foreach (var id in ids)
+                {
+                    #region 刪除業務-產品對應&業務-區域對應
+                    //業務-產品
+                    var getMapSalesProduct = db0.MapSalesProduct.Where(x => x.users_id == id);
+
+                    foreach (var map_product in getMapSalesProduct)
+                    {
+                        db0.MapSalesProduct.Attach(map_product);
+                        db0.MapSalesProduct.Remove(map_product);
+                    }
+
+                    //業務-區域
+                    var getMapSalesArea = db0.MapSalesArea.Where(x => x.users_id == id);
+
+                    foreach (var map_area in getMapSalesArea)
+                    {
+                        db0.MapSalesArea.Attach(map_area);
+                        db0.MapSalesArea.Remove(map_area);
+                    }
+
+                    #endregion
+                }
+                await db0.SaveChangesAsync();
                 foreach (var id in ids)
                 {
                     var item = await UserManager.FindByIdAsync(id);
@@ -177,6 +204,7 @@ namespace DotWeb.Api
             }
             finally
             {
+                db0.Dispose();
             }
         }
     }

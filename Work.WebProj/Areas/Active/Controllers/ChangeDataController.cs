@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace DotWeb.Areas.Active.Controllers
 {
-    public class StockController : AdminController
+    public class ChangeDataController : AdminController
     {
         #region Action and function section
         public ActionResult Main()
@@ -15,22 +15,7 @@ namespace DotWeb.Areas.Active.Controllers
             ActionRun();
             return View();
         }
-        public ActionResult Manager()
-        {
-            ActionRun();
-            return View();
-        }
 
         #endregion
-
-        public ActionResult Main2()
-        {
-            return View();
-        }
-
-        public ActionResult Main3()
-        {
-            return View();
-        }
     }
 }

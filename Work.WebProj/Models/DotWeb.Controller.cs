@@ -104,7 +104,18 @@ namespace DotWeb.Controller
 
                 string asp_net_roles = aspnet_user.Roles.Select(x => x.RoleId).FirstOrDefault();
                 var role = roleManager.FindById(asp_net_roles);
-                ViewBag.RoleName = role.Name;
+
+                var db0 = getDB0();
+                var getRoles = db0.AspNetUsers.FirstOrDefault(x => x.Id == this.UserId).AspNetRoles.Select(x => x.Name);
+
+                if (getRoles.Contains("Managers"))
+                {
+                    ViewBag.RoleName = "Managers";
+                }
+                else
+                {
+                    ViewBag.RoleName = role.Name;
+                }
 
                 this.departmentId = aspnet_user.department_id;
 

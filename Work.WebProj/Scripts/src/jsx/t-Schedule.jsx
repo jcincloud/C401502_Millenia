@@ -168,7 +168,8 @@ var GirdForm = React.createClass({
 			page:this.state.customerGridPageIndex,
 			city:this.state.searchData.city,
 			word:this.state.searchData.word,
-			country:this.state.searchData.country
+			country:this.state.searchData.country,
+			address:this.state.searchData.address
 		};
 
 		jqGet(gb_approot+'api/GetAction/GetMyCustomer',parm)
@@ -357,8 +358,12 @@ var GirdForm = React.createClass({
 							})
 						}
 	                </select>
+	               	<input type="text" placeholder="地址..." 
+	                className="form-control" 
+	                value={this.state.searchData.address} 
+	                onChange={this.changeGDValue.bind(this,'address')} />
 	            </div>
-	            <div className="form-group">
+	            <div className="form-group">	            
 	                <input type="text" placeholder="店名/客編" 
 	                className="form-control" 
 	                value={this.state.searchData.word} 

@@ -22,6 +22,11 @@ namespace ProcCore.Business.DB0
         finish,
         pause
     }
+    public enum ViewType
+    {
+        manager = 1,
+        sales = 2
+    }
     #region set CodeSheet
 
     public static class CodeSheet
@@ -220,6 +225,7 @@ namespace ProcCore.Business.DB0
         public string users_id { get; set; }
         public string customer_name { get; set; }
         public string product_name { get; set; }
+        public int? area { get; set; }
         public int page { get; set; }
     }
     public class ParmReportR04 : ParmGetCustomerVisit
@@ -251,6 +257,7 @@ namespace ProcCore.Business.DB0
         public string users_id { get; set; }
         public bool checkInsert { get; set; }
         public string memo { get; set; }
+        public int area_id { get; set; }
     }
     public class VisitProduct
     {
@@ -265,6 +272,7 @@ namespace ProcCore.Business.DB0
         public int visit_detail_id { get; set; }
         public bool distributed { get; set; }
         public string description { get; set; }
+        public int area_id { get; set; }
     }
     public class CustomerAgent
     {
@@ -323,9 +331,24 @@ namespace ProcCore.Business.DB0
         public int m { get; set; }
         public DateTime? inester_datetime { get; set; }
     }
-    public class ExcelCustomerProduct : CustomerProduct {
+    public class ExcelCustomerProduct : CustomerProduct
+    {
         public List<decimal> p_qtys { get; set; }
         public bool is_hide { get; set; }
+    }
+    public class CustomerErrorMsg
+    {
+        public string error_name { get; set; }
+        public List<RepeatCustomer> r_customers { get; set; }
+    }
+    public class RepeatCustomer
+    {
+        public string customer_name { get; set; }
+        public string customer_sn { get; set; }
+        public string tel { get; set; }
+        public string tw_city { get; set; }
+        public string tw_country { get; set; }
+        public string tw_address { get; set; }
     }
     #endregion
 
@@ -387,6 +410,8 @@ namespace ProcCore.Business.DB0
     {
         public int? year { get; set; }
         public int? month { get; set; }
+        public string users_id { get; set; }
+        public int view_type { get; set; }
     }
     public class q_StockDetail : QueryBase
     {
