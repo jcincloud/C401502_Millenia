@@ -19,7 +19,7 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 item = await db0.Customer.FindAsync(id);
-                r = new ResultInfo<Customer>() { data = item };
+                r.data = item;
             }
 
             return Ok(r);
