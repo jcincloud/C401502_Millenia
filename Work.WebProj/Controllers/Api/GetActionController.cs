@@ -326,10 +326,10 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.customer_name.Contains(parm.customer_name));
                 }
-                if (parm.product_name != null)
-                {
-                    items = items.Where(x => x.product_name.Contains(parm.product_name));
-                }
+                //if (parm.product_name != null)
+                //{
+                //    items = items.Where(x => x.product_name.Contains(parm.product_name));
+                //}
                 if (parm.customer_type != null)
                 {
                     items = items.Where(x => x.customer_type == parm.customer_type);
@@ -350,6 +350,18 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.store_level == parm.store_level);
                 }
+
+                if (parm.products != null)
+                {
+                    List<int> p_list = new List<int>();
+                    foreach (var i in parm.products)
+                    {
+                        p_list.Add(i.product_id);
+                    }
+                    items = items.Where(x => p_list.Contains(x.product_id));
+                }
+
+
                 int page = (parm.page == 0 ? 1 : parm.page);
                 int startRecord = PageCount.PageInfo(page, page_size, items.Count());
                 var resultItems = await items.Skip(startRecord).Take(page_size).ToListAsync();
@@ -379,7 +391,7 @@ namespace DotWeb.Api
         /// </summary>
         /// <param name="parm"></param>
         /// <returns></returns>
-        public async Task<IHttpActionResult> GetCustomerAgent([FromUri]ParmGetCustomerVisit parm)
+        public async Task<IHttpActionResult> GetCustomerAgent([FromUri]ParmReportR04 parm)
         {
             db0 = getDB0();
             try
@@ -402,7 +414,12 @@ namespace DotWeb.Api
                                 customer_name = y.Customer.customer_name,
                                 qty = y.qty,
                                 y = x.Stock.y,
-                                m = x.Stock.m
+                                m = x.Stock.m,
+                                customer_type=y.Customer.customer_type,
+                                channel_type =y.Customer.channel_type,
+                                evaluate=y.Customer.evaluate,
+                                store_type=y.Customer.store_type,
+                                store_level=y.Customer.store_level
                             });
 
                 if (parm.start_date != null && parm.end_date != null)
@@ -418,7 +435,36 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.customer_name.Contains(parm.customer_name));
                 }
-
+                //
+                if (parm.customer_type != null)
+                {
+                    items = items.Where(x => x.customer_type == parm.customer_type);
+                }
+                if (parm.channel_type != null)
+                {
+                    items = items.Where(x => x.channel_type == parm.channel_type);
+                }
+                if (parm.evaluate != null)
+                {
+                    items = items.Where(x => x.evaluate == parm.evaluate);
+                }
+                if (parm.store_type != null)
+                {
+                    items = items.Where(x => x.store_type == parm.store_type);
+                }
+                if (parm.store_level != null)
+                {
+                    items = items.Where(x => x.store_level == parm.store_level);
+                }
+                if (parm.products != null)
+                {
+                    List<int> p_list = new List<int>();
+                    foreach (var i in parm.products)
+                    {
+                        p_list.Add(i.product_id);
+                    }
+                    items = items.Where(x => p_list.Contains(x.product_id));
+                }
 
                 int page = (parm.page == 0 ? 1 : parm.page);
                 int startRecord = PageCount.PageInfo(page, page_size, items.Count());

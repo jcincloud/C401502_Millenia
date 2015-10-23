@@ -288,6 +288,11 @@ namespace ProcCore.Business.DB0
         public int agent_id { get; set; }
         public int stock_detail_id { get; set; }
         public int stock_detail_qty_id { get; set; }
+        public byte customer_type { get; set; }
+        public byte channel_type { get; set; }
+        public byte? evaluate { get; set; }
+        public byte store_type { get; set; }
+        public byte store_level { get; set; }
     }
     public class ExcleCustomerAgent : CustomerAgent
     {

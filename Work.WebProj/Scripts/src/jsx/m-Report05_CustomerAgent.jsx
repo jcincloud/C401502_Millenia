@@ -31,9 +31,12 @@ var GirdForm = React.createClass({
 		return {
 			gridData:{rows:[],page:1},
 			fieldData:{},
-			searchData:{title:null,start_date:new Date().getFullYear()+'/1/1',end_date:moment(Date()).format('YYYY/MM/DD')},
+			searchData:{products:[],start_date:new Date().getFullYear()+'/1/1',end_date:moment(Date()).format('YYYY/MM/DD')},
 			edit_type:0,
-			checkAll:false
+			checkAll:false,
+			isShowProductSelect:false,
+			option_product:[],
+			show_product:''
 		};  
 	},
 	getDefaultProps:function(){
@@ -45,6 +48,7 @@ var GirdForm = React.createClass({
 	},	
 	componentDidMount:function(){
 		this.queryGridData(1);
+		this.queryAllProduct();
 	},
 	shouldComponentUpdate:function(nextProps,nextState){
 		return true;
@@ -93,6 +97,15 @@ var GirdForm = React.createClass({
 		.fail(function(jqXHR, textStatus, errorThrown) {
 			showAjaxError(errorThrown);
 		});
+	},
+	queryAllProduct:function(){
+			jqGet(gb_approot + 'api/GetAction/GetAllProduct',{})
+			.done(function(data, textStatus, jqXHRdata) {
+				this.setState({option_product:data});
+			}.bind(this))
+			.fail(function( jqXHR, textStatus, errorThrown ) {
+				showAjaxError(errorThrown);
+			});		
 	},
 	insertType:function(){
 		this.setState({edit_type:1,fieldData:{}});
@@ -146,19 +159,130 @@ var GirdForm = React.createClass({
 		$.extend(parms, this.state.searchData);
 
 		var url_parms = $.param(parms);
+		var ids = [];
+        for (var key in this.state.searchData.products) {
+            ids.push('ids=' + this.state.searchData.products[key].product_id);
+        }
+        var url_parms=url_parms+'&'+ids.join('&');
+
 		var print_url = gb_approot + 'Base/ExcelReport/downloadExcel_CustomerAgent?' + url_parms;
 
 		this.setState({download_src:print_url});
 		return;
 	},
+	showProductSelect:function(){
+		this.setState({isShowProductSelect:true});
+	},
+	closeProductSelect:function(){
+		var searchData = this.state.searchData;
+		var showName="";
+		var temp=[];
+
+		for(var i in this.state.option_product){
+			var item = this.state.option_product[i];
+			if(item.is_take){
+				temp.push(item);
+				showName+=item.product_name+"、";
+			}			
+		}
+		searchData.products=temp;
+
+		this.setState({isShowProductSelect:false,show_product:showName,searchData:searchData});
+		return;
+
+	},
+	cancelProductSelect:function(){
+		var searchData = this.state.searchData;
+		var temp=[];
+		var obj=this.state.option_product;
+
+		for(var i in obj){
+			var item = obj[i];
+			if(item.is_take){
+				obj[i].is_take=false;
+			}			
+		}
+		searchData.products=temp;
+
+		this.setState({option_product:obj,isShowProductSelect:false,show_product:"",searchData:searchData});
+		return;
+
+	},
+	setSelectProduct:function(index,e){
+		var obj = this.state.option_product;
+		//先修改
+		var item = obj[index];
+		item.is_take = !item.is_take;
+		//在計算
+		// var n = 0;
+		// for(var i in obj){
+			
+		// 	var product =  obj[i];
+		// 	if(product.is_take){
+		// 		n++;
+		// 	}
+		// }
+		//不限制
+		// if(n>5){
+		// 	alert('產品最多只能選5樣');
+		// 	var item = obj[index];
+		// 	item.is_take = false;
+		// }
+		this.setState({option_product:obj});
+	},
 	render: function() {
 		var outHtml = null;
 
 			var searchData = this.state.searchData;
+			var Button = ReactBootstrap.Button;
+			var ModalProduct = ReactBootstrap.Modal;
+			var product_out_html=null;
+
+			if(this.state.isShowProductSelect){
+				product_out_html = 					
+					<ModalProduct  onRequestHide={this.closeProductSelect}>
+							<div className='modal-header light'>
+									
+								<div className="pull-right">
+									<Button onClick={this.closeProductSelect} className="btn-success"><i className="fa-check"></i> { } 確認送出</Button>
+									<Button onClick={this.cancelProductSelect}><i className="fa-times"></i> { } 取消</Button>
+								</div>
+								<h4 className="modal-title">請選擇產品</h4>
+							</div>
+							<div className='modal-body'>
+								<table>
+									<tbody>
+										<tr>
+											<th className="col-xs-1 text-center">選擇</th>
+											<th className="col-xs-2">產品編號</th>
+											<th className="col-xs-9">產品名稱</th>
+										</tr>
+										{
+											this.state.option_product.map(function(itemData,i) {
+												
+												var product_out_html = 
+													<tr key={itemData.product_id}>
+														<td className="text-center"><input type="checkbox" checked={itemData.is_take} onChange={this.setSelectProduct.bind(this,i)}/></td>
+														<td>{itemData.product_sn}</td>
+														<td>{itemData.product_name}</td>
+													</tr>;
+												return product_out_html;
+											}.bind(this))
+										}
+									</tbody>
+								</table>
+							</div>
+							<div className='modal-footer'>
+								<Button onClick={this.closeProductSelect} className="btn-success"><i className="fa-check"></i> { } 確認送出</Button>
+								<Button onClick={this.cancelProductSelect} className="btn-default"><i className="fa-times"></i> { } 取消</Button>
+							</div>
+					</ModalProduct>;
+			}
 
 			outHtml =
 			(
 			<div>
+			{product_out_html}
 				<ul className="breadcrumb">
 					<li><i className="fa-list-alt"></i> {this.props.MenuName}</li>
 				</ul>
@@ -193,11 +317,67 @@ var GirdForm = React.createClass({
 										onChange={this.changeGDValue.bind(this,'customer_name')}
 										placeholder="客戶名稱..." /> { }
 										<label className="sr-only">產品名稱</label> { }
-										<input type="text" className="form-control" 
-										value={searchData.product_name}
-										onChange={this.changeGDValue.bind(this,'product_name')}
-										placeholder="產品名稱..." /> { }
-										<button className="btn-primary" type="submit"><i className="fa-search"></i>{ }搜尋</button> { } 
+										<span className="input-group">
+											<input type="text" className="form-control" value={this.state.show_product} disabled/>
+											<span className="input-group-btn">
+												<button className="btn-default" type="button" onClick={this.showProductSelect}><i className="fa-plus"></i> 選取產品</button>
+											</span>
+										</span>
+									</div>
+									<div className="form-group">
+										<label className="sr-only">客戶類別</label> { }
+										<select className="form-control"
+			                                    value={searchData.customer_type}
+			                                    onChange={this.changeGDValue.bind(this,'customer_type')}>
+			                                <option value="">客戶類別</option>
+			                                <option value="1">店家</option>
+			                                <option value="2">直客</option>
+			                            </select>
+
+			                            <label className="sr-only">通路級別</label> { }
+			                            <select className="form-control"
+			                                    value={searchData.channel_type}
+			                                    onChange={this.changeGDValue.bind(this,'channel_type')}>
+			                                <option value="">通路級別</option>
+			                                <option value="1">即飲</option>
+			                                <option value="2">外帶</option>
+			                            </select>
+
+			                         	<label className="sr-only">銷售等級</label> { }
+			                            <select className="form-control"
+			                                    value={searchData.evaluate}
+			                                    onChange={this.changeGDValue.bind(this,'evaluate')}>
+			                                <option value="">銷售等級</option>
+			                                <option value="1">A</option>
+			                                <option value="2">B</option>
+			                                <option value="3">C</option>
+			                            </select>
+
+			                         	<label className="sr-only">客戶型態</label> { }
+			                            <select className="form-control"
+			                                    value={searchData.store_type}
+			                                    onChange={this.changeGDValue.bind(this,'store_type')}>
+			                                <option value="">客戶型態</option>
+			                                <option value="1">LS</option>
+			                                <option value="2">Beer Store</option>
+			                                <option value="3">Dancing</option>
+			                                <option value="4">Bar</option>
+			                                <option value="5">Cafe</option>
+			                                <option value="6">Bistro</option>
+			                                <option value="7">Restaurant</option>
+			                            </select>
+
+			                         	<label className="sr-only">型態等級</label> { }
+			                            <select className="form-control"
+			                                    value={searchData.store_level}
+			                                    onChange={this.changeGDValue.bind(this,'store_level')}>
+			                                <option value="">型態等級</option>
+			                                <option value="1">G</option>
+			                                <option value="2">S</option>
+			                                <option value="3">B</option>
+			                            </select> { }
+
+										<button className="btn-primary" type="submit"><i className="fa-search"></i>{ }搜尋</button> { }
 										<button className="btn-success" type="button" onClick={this.excelPrint}><i className="fa-print"></i> 列印</button>
 									</div>
 								</div>
