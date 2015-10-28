@@ -338,7 +338,7 @@ namespace ProcCore.Business.DB0
     }
     public class ExcelCustomerProduct : CustomerProduct
     {
-        public List<decimal> p_qtys { get; set; }
+        public List<PQList> p_qtys { get; set; }
         public bool is_hide { get; set; }
     }
     public class CustomerErrorMsg
@@ -354,6 +354,11 @@ namespace ProcCore.Business.DB0
         public string tw_city { get; set; }
         public string tw_country { get; set; }
         public string tw_address { get; set; }
+    }
+    public class PQList
+    {
+        public int p_id { get; set; }
+        public decimal qty { get; set; }
     }
     #endregion
 

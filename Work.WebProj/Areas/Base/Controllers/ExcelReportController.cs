@@ -434,10 +434,16 @@ namespace DotWeb.Areas.Base.Controllers
                                        store_level = g.Key.store_level
                                    })).ToList();
 
-
                 foreach (var itemA in getPrintVal)
                 {
-                    itemA.p_qtys = new List<decimal>();
+
+                    itemA.p_qtys = new List<PQList>();
+                    #region 設定產品分部統計版型變數
+                    foreach (var id in parm.ids)
+                    {
+                        itemA.p_qtys.Add(new PQList() { p_id = id, qty = 0 });
+                    }
+                    #endregion
                     decimal sum_qty = 0;//加總判斷,如果加總為零就不顯示
                     foreach (var itemB in getSum)
                     {
@@ -449,11 +455,8 @@ namespace DotWeb.Areas.Base.Controllers
                                 //改為統計產品分布,不是進貨數量
                                 if (itemB.qty != 0)
                                 {
-                                    itemA.p_qtys.Add(1);
-                                }
-                                else
-                                {
-                                    itemA.p_qtys.Add(0);
+                                    var getPQList = itemA.p_qtys.Where(x => x.p_id == itemB.product_id).First();
+                                    getPQList.qty = 1;
                                 }
 
                                 sum_qty += itemB.qty;
@@ -514,8 +517,8 @@ namespace DotWeb.Areas.Base.Controllers
                         int qty_index = 7;
                         foreach (var i in item.p_qtys)
                         {
-                            sheet.Cells[detail_row, qty_index].Value = i;
-                            row_sum[qty_index - 7] += i;
+                            sheet.Cells[detail_row, qty_index].Value = i.qty;
+                            row_sum[qty_index - 7] += i.qty;
                             qty_index++;
                         }
 
@@ -1502,11 +1505,7 @@ namespace DotWeb.Areas.Base.Controllers
             }
         }
     }
-    public class PQList
-    {
-        public int p_id { get; set; }
-        public decimal qty { get; set; }
-    }
+
     public class SalesList
     {
         public string Name { get; set; }
