@@ -415,11 +415,11 @@ namespace DotWeb.Api
                                 qty = y.qty,
                                 y = x.Stock.y,
                                 m = x.Stock.m,
-                                customer_type=y.Customer.customer_type,
-                                channel_type =y.Customer.channel_type,
-                                evaluate=y.Customer.evaluate,
-                                store_type=y.Customer.store_type,
-                                store_level=y.Customer.store_level
+                                customer_type = y.Customer.customer_type,
+                                channel_type = y.Customer.channel_type,
+                                evaluate = y.Customer.evaluate,
+                                store_type = y.Customer.store_type,
+                                store_level = y.Customer.store_level
                             });
 
                 if (parm.start_date != null && parm.end_date != null)
@@ -1649,6 +1649,7 @@ namespace DotWeb.Api
                                 customers = new { x.Key.customer_id, x.Key.customer_name },
                                 products = x.Select(y => new { y.stock_detail_qty_id, y.StockDetail.product_id, y.qty })
                             })
+                            .OrderBy(x => x.customers.customer_name)
                             .ToListAsync();
 
                 return Ok(new { result = true, data = items });
@@ -1754,6 +1755,7 @@ namespace DotWeb.Api
                         customers = new { x.Key.customer_id, x.Key.customer_name },
                         products = x.Select(y => new { y.stock_detail_qty_id, y.StockDetail.product_id, y.qty })
                     })
+                    .OrderBy(x => x.customers.customer_name)
                     .ToListAsync();
 
 
