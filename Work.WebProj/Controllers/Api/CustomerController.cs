@@ -17,10 +17,11 @@ namespace DotWeb.Api
     {
         public async Task<IHttpActionResult> Get(int id)
         {
+
             using (db0 = getDB0())
             {
                 item = await db0.Customer.FindAsync(id);
-                r.data = item;
+                r = new ResultInfo<Customer>() { data = item };
             }
 
             return Ok(r);
