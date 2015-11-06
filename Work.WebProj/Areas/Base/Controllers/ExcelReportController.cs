@@ -705,10 +705,52 @@ namespace DotWeb.Areas.Base.Controllers
                 #endregion
 
                 #region 內容
+                string subtotal_product_name = string.Empty;
+                int subtotal_distributed = 0;//分布 小計
+                decimal subtotal_qty = 0;//進貨量 小計
                 foreach (var item in getPrintVal)
                 {
                     if (item.distributed)//沒分布就不顯示
                     {
+                        #region 小計判斷
+                        if (detail_row == 3)
+                        {
+                            subtotal_product_name = item.product_name;//第一筆資料
+                        }
+                        else if (subtotal_product_name != item.product_name)//產品變換時,做一次小計
+                        {
+
+                            #region 小計
+
+                            #region 小計欄位,合併及文字顏色
+                            sheet.Cells[detail_row, 1].Value = "[小計]";
+                            setFontColor_red(sheet, detail_row, 1);
+                            sheet.Cells[detail_row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            sheet.Cells[detail_row, 1, detail_row, 2].Merge = true;
+                            #endregion
+
+                            //產品分布
+                            sheet.Cells[detail_row, 3].Value = subtotal_distributed;
+                            sheet.Cells[detail_row, 3].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                            sheet.Cells[detail_row, 3].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+                            //進貨量
+                            sheet.Cells[detail_row, 4].Value =subtotal_qty;
+                            sheet.Cells[detail_row, 4].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                            sheet.Cells[detail_row, 4].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+
+                            #endregion
+                            #region 不同產品區分版面
+                            setBroder_red(sheet, detail_row + 1, 1, 9);
+                            detail_row += 1;
+                            #endregion
+
+                            detail_row++;
+                            subtotal_distributed = 0;//小計歸零
+                            subtotal_qty = 0;//小計歸零
+                            subtotal_product_name = item.product_name;//紀錄新產品
+                        }
+                        #endregion
+
                         sheet.Cells[detail_row, 1].Value = item.product_name;
                         sheet.Cells[detail_row, 2].Value = item.customer_name;
                         sheet.Cells[detail_row, 3].Value = item.distributed ? "Yes" : "No";
@@ -720,10 +762,41 @@ namespace DotWeb.Areas.Base.Controllers
                         sheet.Cells[detail_row, 8].Value = CodeSheet.GetStoreTypeVal(item.store_type);
                         sheet.Cells[detail_row, 9].Value = CodeSheet.GetStoreLevelVal(item.store_level);
 
+                        #region 小計加總計算
+                        subtotal_distributed++;
+                        subtotal_qty += item.qty;
+                        #endregion
+
                         detail_row++;
                     }
 
                 }
+                #region 最後一次小計
+
+                #region 小計欄位,合併及文字顏色
+                sheet.Cells[detail_row, 1].Value = "[小計]";
+                setFontColor_red(sheet, detail_row, 1);
+                sheet.Cells[detail_row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet.Cells[detail_row, 1, detail_row, 2].Merge = true;
+                #endregion
+
+                //產品分布
+                sheet.Cells[detail_row, 3].Value = subtotal_distributed;
+                sheet.Cells[detail_row, 3].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                sheet.Cells[detail_row, 3].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+                //進貨量
+                sheet.Cells[detail_row, 4].Value = subtotal_qty;
+                sheet.Cells[detail_row, 4].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                sheet.Cells[detail_row, 4].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+
+                #region 不同產品區分版面
+                setBroder_red(sheet, detail_row + 1, 1, 9);
+                detail_row += 1;
+                #endregion
+
+                detail_row++;
+                #endregion
+
                 #endregion
 
                 #region excel排版
