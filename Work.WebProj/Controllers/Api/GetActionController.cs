@@ -4,7 +4,6 @@ using ProcCore.Business.DB0;
 using ProcCore.HandleResult;
 using ProcCore.WebCore;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -15,6 +14,7 @@ using System.Web;
 using System.Web.Http;
 namespace DotWeb.Api
 {
+    [Authorize]
     public class GetActionController : BaseApiController
     {
         /// <summary>

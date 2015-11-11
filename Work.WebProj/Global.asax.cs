@@ -24,9 +24,6 @@ namespace DotWeb.AppStart
             {
                 ContextCondition = (x => (new WebInfo()).isTablet()) 
             });
-            
-            
-
         }
         protected void Application_BeginRequest(Object sender, EventArgs e)
         {
@@ -49,8 +46,8 @@ namespace DotWeb.AppStart
 
             if (WebLang != null)
             {
-                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(WebLang.Value);
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(WebLang.Value);
+                System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture(WebLang.Value);
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.Name, false);
             }
         }
     }

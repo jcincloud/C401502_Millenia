@@ -28,7 +28,9 @@ function isValidJSONDate(value, userFormat) {
                 y = date[i];
         }
         ;
-        return (m > 0 && m < 13 && y && y.length === 4 && d > 0 && d <= (new Date(y, m, 0)).getDate());
+        return (m > 0 && m < 13 &&
+            y && y.length === 4 &&
+            d > 0 && d <= (new Date(y, m, 0)).getDate());
     };
     return isDate(theDate, theFormat);
 }
@@ -137,13 +139,13 @@ function jqDelete(url, data) {
     });
 }
 function tosMessage(title, message, type) {
-    if (type == 1 /* success */)
+    if (type == emToastrType.success)
         toastr.success(message, title);
-    if (type == 3 /* error */)
+    if (type == emToastrType.error)
         toastr.error(message, title);
-    if (type == 2 /* warning */)
+    if (type == emToastrType.warning)
         toastr.warning(message, title);
-    if (type == 0 /* info */)
+    if (type == emToastrType.info)
         toastr.info(message, title);
 }
 function formatFileSize(byte_size) {
@@ -176,7 +178,12 @@ function getBrower() {
     var Sys = {};
     var ua = navigator.userAgent.toLowerCase();
     var s;
-    (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] : (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] : (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] : (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] : (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] : (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+    (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :
+        (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+            (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+                (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+                    (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+                        (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
     if (Sys.ie)
         return ('IE: ' + Sys.ie);
     if (Sys.firefox)
