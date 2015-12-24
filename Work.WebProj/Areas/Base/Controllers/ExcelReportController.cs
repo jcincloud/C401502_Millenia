@@ -1146,7 +1146,7 @@ namespace DotWeb.Areas.Base.Controllers
         {
             ExcelPackage excel = null;
             MemoryStream fs = null;
-            char test = Convert.ToChar(64 + 9);
+            //char test = Convert.ToChar(64 + 9);
             var db0 = getDB0();
             try
             {
@@ -1226,10 +1226,10 @@ namespace DotWeb.Areas.Base.Controllers
                 {
                     items = items.Where(x => x.area_id == parm.area);
                 }
-                //if (parm.months_p != null)
-                //{
-                //    items = items.Where(x => parm.months_p.Contains(x.m));
-                //}
+                if (parm.months_p != null)
+                {
+                    items = items.Where(x => parm.months_p.Contains(x.m));
+                }
                 if (parm.ids != null)
                 {
                     items = items.Where(x => parm.ids.Contains(x.product_id));
@@ -1360,29 +1360,25 @@ namespace DotWeb.Areas.Base.Controllers
                 setMerge_label(sheet, 2, 3, 1, 8);//上下合併儲存格
                 setWrapText(sheet, 2, 3, 8);// \n換行設定
                 const int month_start = 9;
+                int month_end = month_start + parm.months_p.Length - 1;
 
-                sheet.Cells[3, 9].Value = "[1月份]";
-                sheet.Cells[3, 10].Value = "[2月份]";
-                sheet.Cells[3, 11].Value = "[3月份]";
-                sheet.Cells[3, 12].Value = "[4月份]";
-                sheet.Cells[3, 13].Value = "[5月份]";
-                sheet.Cells[3, 14].Value = "[6月份]";
-                sheet.Cells[3, 15].Value = "[7月份]";
-                sheet.Cells[3, 16].Value = "[8月份]";
-                sheet.Cells[3, 17].Value = "[9月份]";
-                sheet.Cells[3, 18].Value = "[10月份]";
-                sheet.Cells[3, 19].Value = "[11月份]";
-                sheet.Cells[3, 20].Value = "[12月份]";
-                sheet.Cells[3, 21].Value = "[加總]";
+                int temp_index = month_start;
+                foreach (var i in parm.months_p)
+                {
+                    sheet.Cells[3, temp_index].Value = "[" + i + "月份]";
+                    temp_index++;
+                }
 
-                sheet.Cells[2, month_start].Value = date_range + "產品進貨數量(1~12月)";
-                sheet.Cells[2, month_start, 2, month_start + 11].Merge = true;
+                sheet.Cells[3, temp_index].Value = "[加總]";
 
-                setFontColor_LabelBord(sheet, 2, 1, month_start + 11);//儲存格框線+藍字
-                setFontColor_LabelBord(sheet, 3, 1, month_start + 11);
+                sheet.Cells[2, month_start].Value = date_range + "產品進貨數量(" + parm.months_p[0] + "~" + parm.months_p[parm.months_p.Length] + "月)";
+                sheet.Cells[2, month_start, 2, month_end].Merge = true;
+
+                setFontColor_LabelBord(sheet, 2, 1, month_end);//儲存格框線+藍字
+                setFontColor_LabelBord(sheet, 3, 1, month_end);
                 setFontColor_blue(sheet, 1, 1);
-                setFontColor_red(sheet, 3, month_start + 12);//紅字
-                sheet.Cells[3, month_start + 12].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                setFontColor_red(sheet, 3, month_end + 1);//紅字
+                sheet.Cells[3, month_end + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 #endregion
 
                 #region 內容
@@ -1409,16 +1405,17 @@ namespace DotWeb.Areas.Base.Controllers
                             sheet.Cells[detail_row, 8].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                             //sheet.Cells[detail_row, 1, detail_row, 8].Merge = true;
                             #endregion
-
-                            for (var i = 0; i < 12; i++)
+                            temp_index = month_start;
+                            foreach (var i in parm.months_p)
                             {
-                                sheet.Cells[detail_row, i + month_start].Value = row_subtotal[i];
-                                sheet.Cells[detail_row, i + month_start].Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                                sheet.Cells[detail_row, i + month_start].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+                                sheet.Cells[detail_row, temp_index].Value = row_subtotal[i - 1];
+                                sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                                sheet.Cells[detail_row, temp_index].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+                                temp_index++;
                             }
                             #endregion
                             #region 不同產品區分版面
-                            setBroder_red(sheet, detail_row + 1, 1, month_start + 11);
+                            setBroder_red(sheet, detail_row + 1, 1, month_end);
                             detail_row += 1;
                             #endregion
 
@@ -1437,19 +1434,57 @@ namespace DotWeb.Areas.Base.Controllers
                         sheet.Cells[detail_row, 7].Value = CodeSheet.GetStoreTypeVal(item.store_type);
                         sheet.Cells[detail_row, 8].Value = CodeSheet.GetStoreLevelVal(item.store_level);
 
-                        sheet.Cells[detail_row, 9].Value = item.qty_1;
-                        sheet.Cells[detail_row, 10].Value = item.qty_2;
-                        sheet.Cells[detail_row, 11].Value = item.qty_3;
-                        sheet.Cells[detail_row, 12].Value = item.qty_4;
-                        sheet.Cells[detail_row, 13].Value = item.qty_5;
-                        sheet.Cells[detail_row, 14].Value = item.qty_6;
-                        sheet.Cells[detail_row, 15].Value = item.qty_7;
-                        sheet.Cells[detail_row, 16].Value = item.qty_8;
-                        sheet.Cells[detail_row, 17].Value = item.qty_9;
-                        sheet.Cells[detail_row, 18].Value = item.qty_10;
-                        sheet.Cells[detail_row, 19].Value = item.qty_11;
-                        sheet.Cells[detail_row, 20].Value = item.qty_12;
-                        sheet.Cells[detail_row, 21].Formula = string.Format("=SUM(I{0}:T{0})", detail_row);
+                        temp_index = month_start;
+                        foreach (var i in parm.months_p)
+                        {
+                            #region getQtyVal
+                            decimal temp_qyt = 0;
+                            switch (i)
+                            {
+                                case 1:
+                                    temp_qyt = item.qty_1;
+                                    break;
+                                case 2:
+                                    temp_qyt = item.qty_2;
+                                    break;
+                                case 3:
+                                    temp_qyt = item.qty_3;
+                                    break;
+                                case 4:
+                                    temp_qyt = item.qty_4;
+                                    break;
+                                case 5:
+                                    temp_qyt = item.qty_5;
+                                    break;
+                                case 6:
+                                    temp_qyt = item.qty_6;
+                                    break;
+                                case 7:
+                                    temp_qyt = item.qty_7;
+                                    break;
+                                case 8:
+                                    temp_qyt = item.qty_8;
+                                    break;
+                                case 9:
+                                    temp_qyt = item.qty_9;
+                                    break;
+                                case 10:
+                                    temp_qyt = item.qty_10;
+                                    break;
+                                case 11:
+                                    temp_qyt = item.qty_11;
+                                    break;
+                                case 12:
+                                    temp_qyt = item.qty_12;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            #endregion
+                            sheet.Cells[detail_row, temp_index].Value = temp_qyt;
+                            temp_index++;
+                        }
+                        sheet.Cells[detail_row, month_end + 1].Formula = string.Format("=SUM(I{0}:{1}{0})", detail_row, Convert.ToChar(64 + month_end));
 
                         #region 小計加總計算
                         row_subtotal[0] += item.qty_1;
@@ -1492,16 +1527,16 @@ namespace DotWeb.Areas.Base.Controllers
                 sheet.Cells[detail_row, 8].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 //sheet.Cells[detail_row, 1, detail_row, 8].Merge = true;
                 #endregion
-
-                for (var i = 0; i < 12; i++)
+                temp_index = month_start;
+                foreach (var i in parm.months_p)
                 {
-                    sheet.Cells[detail_row, i + month_start].Value = row_subtotal[i];
-                    sheet.Cells[detail_row, i + month_start].Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                    sheet.Cells[detail_row, i + month_start].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+                    sheet.Cells[detail_row, temp_index].Value = row_subtotal[i - 1];
+                    sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    sheet.Cells[detail_row, temp_index].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+                    temp_index++;
                 }
-
                 #region 不同產品區分版面
-                setBroder_red(sheet, detail_row + 1, 1, month_start + 11);
+                setBroder_red(sheet, detail_row + 1, 1, month_end);
                 detail_row += 1;
                 #endregion
 
@@ -1515,12 +1550,13 @@ namespace DotWeb.Areas.Base.Controllers
                 sheet.Cells[detail_row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 sheet.Cells[detail_row, 1, detail_row, 8].Merge = true;
                 #endregion
-
-                for (var i = 0; i < 12; i++)
+                temp_index = month_start;
+                foreach (var i in parm.months_p)
                 {
-                    sheet.Cells[detail_row, i + month_start].Value = row_sum[i];
-                    sheet.Cells[detail_row, i + month_start].Style.Border.Top.Style = ExcelBorderStyle.Double;
-                    sheet.Cells[detail_row, i + month_start].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+                    sheet.Cells[detail_row, temp_index].Value = row_sum[i - 1];
+                    sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Double;
+                    sheet.Cells[detail_row, temp_index].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+                    temp_index++;
                 }
                 #endregion
                 #endregion

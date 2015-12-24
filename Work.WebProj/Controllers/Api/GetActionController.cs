@@ -475,10 +475,10 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.area_id == parm.area);
                 }
-                //if (parm.months != null)
-                //{
-                //    items = items.Where(x => parm.months.Contains(x.m));
-                //}
+                if (parm.months != null)
+                {
+                    items = items.Where(x => parm.months.Contains(x.m));
+                }
 
                 if (parm.products != null)
                 {

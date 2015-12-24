@@ -170,12 +170,12 @@ var GirdForm = React.createClass({
         for (var key in this.state.searchData.products) {
             ids.push('ids=' + this.state.searchData.products[key].product_id);
         }
-        // var months = [];
-        // for (var key in this.state.searchData.months) {
-        //     months.push('months_p=' + this.state.searchData.months[key]);
-        // }
+        var months = [];
+        for (var key in this.state.searchData.months) {
+            months.push('months_p=' + this.state.searchData.months[key]);
+        }
 
-        var url_parms=url_parms+'&'+ids.join('&');
+        var url_parms=url_parms+'&'+ids.join('&')+months.join('&');
 
 		var print_url = gb_approot + 'Base/ExcelReport/downloadExcel_CustomerAgent?' + url_parms;
 
@@ -340,7 +340,7 @@ var GirdForm = React.createClass({
 												value={searchData.end_date} />
 											</span>
 										{ }
-										{/*<label>月份區間</label> { }
+										<label>月份區間</label> { }
 										<select className="form-control"
 														onChange={this.setMonthRange.bind(this,'start')}
 														value={this.state.month_range.start}>
@@ -359,7 +359,7 @@ var GirdForm = React.createClass({
 												return <option key={itemData} value={itemData}>{itemData} 月</option>;
 											})
 										}
-										</select>*/}
+										</select>
 										{ }
 										<label className="sr-only">客戶名稱</label> { }
 										<input type="text" className="form-control" 
