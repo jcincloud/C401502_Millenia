@@ -31,19 +31,26 @@ var GirdForm = React.createClass({
 		return {
 			gridData:{rows:[],page:1},
 			fieldData:{},
-			searchData:{products:[],start_date:new Date().getFullYear()+'/1/1',end_date:moment(Date()).format('YYYY/MM/DD')},
+			searchData:{
+				products:[],
+				start_date:new Date().getFullYear()+'/1/1',
+				end_date:moment(Date()).format('YYYY/MM/DD'),
+				months:[1,2,3,4,5,6,7,8,9,10,11,12]
+			},
 			edit_type:0,
 			checkAll:false,
 			isShowProductSelect:false,
 			option_product:[],
-			show_product:''
+			show_product:'',
+			month_range:{start:1,end:12}
 		};  
 	},
 	getDefaultProps:function(){
 		return{	
 			fdName:'fieldData',
 			gdName:'searchData',
-			apiPathName:gb_approot+'api/GetAction/GetCustomerAgent'
+			apiPathName:gb_approot+'api/GetAction/GetCustomerAgent',
+			month:[1,2,3,4,5,6,7,8,9,10,11,12]
 		};
 	},	
 	componentDidMount:function(){
@@ -163,6 +170,11 @@ var GirdForm = React.createClass({
         for (var key in this.state.searchData.products) {
             ids.push('ids=' + this.state.searchData.products[key].product_id);
         }
+        // var months = [];
+        // for (var key in this.state.searchData.months) {
+        //     months.push('months_p=' + this.state.searchData.months[key]);
+        // }
+
         var url_parms=url_parms+'&'+ids.join('&');
 
 		var print_url = gb_approot + 'Base/ExcelReport/downloadExcel_CustomerAgent?' + url_parms;
@@ -229,6 +241,24 @@ var GirdForm = React.createClass({
 		// 	item.is_take = false;
 		// }
 		this.setState({option_product:obj});
+	},
+	setMonthRange:function(name,e){
+		var searchData=this.state.searchData;
+		var obj=this.state.month_range;
+		var old=obj[name];
+		obj[name]=e.target.value;
+
+		if(parseInt(obj.start)>parseInt(obj.end)){
+			alert('起始月份不可大於結束月份~!!');
+			obj[name]=old;
+		}else{
+			var months=[];
+			for(var i=parseInt(obj.start);i<=parseInt(obj.end);i++){
+				months.push(i);
+			}
+			searchData.months=months;
+		}
+		this.setState({month_range:obj,searchData:searchData});
 	},
 	render: function() {
 		var outHtml = null;
@@ -310,7 +340,27 @@ var GirdForm = React.createClass({
 												value={searchData.end_date} />
 											</span>
 										{ }
-									
+										{/*<label>月份區間</label> { }
+										<select className="form-control"
+														onChange={this.setMonthRange.bind(this,'start')}
+														value={this.state.month_range.start}>
+										{
+											this.props.month.map(function(itemData,i) {
+												return <option key={itemData} value={itemData}>{itemData} 月</option>;
+											})
+										}
+										</select> { }
+										<label>~</label> { }
+										<select className="form-control"
+														onChange={this.setMonthRange.bind(this,'end')}
+														value={this.state.month_range.end}>
+										{
+											this.props.month.map(function(itemData,i) {
+												return <option key={itemData} value={itemData}>{itemData} 月</option>;
+											})
+										}
+										</select>*/}
+										{ }
 										<label className="sr-only">客戶名稱</label> { }
 										<input type="text" className="form-control" 
 										value={searchData.customer_name}
@@ -325,6 +375,17 @@ var GirdForm = React.createClass({
 										</span>
 									</div>
 									<div className="form-group">
+									<label className="sr-only">選擇區域</label>
+										<select className="form-control"
+														onChange={this.changeGDValue.bind(this,'area')}
+														value={searchData.area}>
+											<option value="">選擇區域</option>
+										{
+											CommData.AreasData.map(function(itemData,i) {
+												return <option key={itemData.id} value={itemData.id}>{itemData.label}</option>;
+											})
+										}
+										</select>												
 										<label className="sr-only">客戶類別</label> { }
 										<select className="form-control"
 			                                    value={searchData.customer_type}

@@ -211,6 +211,8 @@ namespace DotWeb.Api
                                 evaluate = y.Customer.evaluate,
                                 store_type = y.Customer.store_type,
                                 store_level = y.Customer.store_level,
+                                area_id = y.Customer.area_id,
+                                area_name = y.Customer.Area.area_name,
                                 qty = y.qty,
                                 y = x.Stock.y,
                                 m = x.Stock.m
@@ -250,6 +252,10 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.store_level == parm.store_level);
                 }
+                if (parm.area != null)
+                {
+                    items = items.Where(x => x.area_id == parm.area);
+                }
                 if (parm.products != null)
                 {
                     List<int> p_list = new List<int>();
@@ -259,6 +265,7 @@ namespace DotWeb.Api
                     }
                     items = items.Where(x => p_list.Contains(x.product_id));
                 }
+
 
                 int page = (parm.page == 0 ? 1 : parm.page);
                 int startRecord = PageCount.PageInfo(page, page_size, items.Count());
@@ -311,6 +318,8 @@ namespace DotWeb.Api
                                 evaluate = y.Customer.evaluate,
                                 store_type = y.Customer.store_type,
                                 store_level = y.Customer.store_level,
+                                area_id = y.Customer.area_id,
+                                area_name = y.Customer.Area.area_name,
                                 qty = y.qty,
                                 y = x.Stock.y,
                                 m = x.Stock.m
@@ -349,6 +358,10 @@ namespace DotWeb.Api
                 if (parm.store_level != null)
                 {
                     items = items.Where(x => x.store_level == parm.store_level);
+                }
+                if (parm.area != null)
+                {
+                    items = items.Where(x => x.area_id == parm.area);
                 }
 
                 if (parm.products != null)
@@ -419,7 +432,9 @@ namespace DotWeb.Api
                                 channel_type = y.Customer.channel_type,
                                 evaluate = y.Customer.evaluate,
                                 store_type = y.Customer.store_type,
-                                store_level = y.Customer.store_level
+                                store_level = y.Customer.store_level,
+                                area_id = y.Customer.area_id,
+                                area_name = y.Customer.Area.area_name
                             });
 
                 if (parm.start_date != null && parm.end_date != null)
@@ -456,6 +471,15 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.store_level == parm.store_level);
                 }
+                if (parm.area != null)
+                {
+                    items = items.Where(x => x.area_id == parm.area);
+                }
+                //if (parm.months != null)
+                //{
+                //    items = items.Where(x => parm.months.Contains(x.m));
+                //}
+
                 if (parm.products != null)
                 {
                     List<int> p_list = new List<int>();

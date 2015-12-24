@@ -243,6 +243,10 @@ namespace ProcCore.Business.DB0
         }
         public int[] ids { get; set; }
         public string[] names { get; set; }
+        ////getValue
+        //public int[] months { get; set; }
+        ////printValue
+        //public int[] months_p { get; set; }
     }
     public class CustomerVisit
     {
@@ -293,6 +297,9 @@ namespace ProcCore.Business.DB0
         public byte? evaluate { get; set; }
         public byte store_type { get; set; }
         public byte store_level { get; set; }
+
+        public int area_id { get; set; }
+        public string area_name { get; set; }
     }
     public class ExcleCustomerAgent : CustomerAgent
     {
@@ -332,6 +339,8 @@ namespace ProcCore.Business.DB0
         public byte? evaluate { get; set; }
         public byte store_type { get; set; }
         public byte store_level { get; set; }
+        public int area_id { get; set; }
+        public string area_name { get; set; }
         public int y { get; set; }
         public int m { get; set; }
         public DateTime? inester_datetime { get; set; }
@@ -358,7 +367,8 @@ namespace ProcCore.Business.DB0
     public class PQList
     {
         public int p_id { get; set; }
-        public decimal qty { get; set; }
+        public decimal qty { get; set; }//分布統計
+        public decimal stock_qty { get; set; }//進貨量
     }
     #endregion
 

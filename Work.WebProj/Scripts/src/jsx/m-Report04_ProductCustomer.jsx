@@ -341,6 +341,17 @@ var GirdForm = React.createClass({
 										</span>
 									</div>
 									<div className="form-group">
+									<label className="sr-only">選擇區域</label>
+										<select className="form-control"
+														onChange={this.changeGDValue.bind(this,'area')}
+														value={searchData.area}>
+											<option value="">選擇區域</option>
+										{
+											CommData.AreasData.map(function(itemData,i) {
+												return <option key={itemData.id} value={itemData.id}>{itemData.label}</option>;
+											})
+										}
+										</select>									
 										<label className="sr-only">客戶類別</label> { }
 										<select className="form-control"
 			                                    value={searchData.customer_type}
