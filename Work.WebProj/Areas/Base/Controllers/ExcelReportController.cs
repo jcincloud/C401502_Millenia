@@ -1371,7 +1371,7 @@ namespace DotWeb.Areas.Base.Controllers
 
                 sheet.Cells[3, temp_index].Value = "[加總]";
 
-                sheet.Cells[2, month_start].Value = date_range + "產品進貨數量(" + parm.months_p[0] + "~" + parm.months_p[parm.months_p.Length] + "月)";
+                sheet.Cells[2, month_start].Value = date_range + "產品進貨數量(" + parm.months_p[0] + "~" + parm.months_p[parm.months_p.Length - 1] + "月)";
                 sheet.Cells[2, month_start, 2, month_end].Merge = true;
 
                 setFontColor_LabelBord(sheet, 2, 1, month_end);//儲存格框線+藍字

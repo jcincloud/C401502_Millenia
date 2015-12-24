@@ -175,7 +175,7 @@ var GirdForm = React.createClass({
             months.push('months_p=' + this.state.searchData.months[key]);
         }
 
-        var url_parms=url_parms+'&'+ids.join('&')+months.join('&');
+        var url_parms=url_parms+'&'+ids.join('&')+'&'+months.join('&');
 
 		var print_url = gb_approot + 'Base/ExcelReport/downloadExcel_CustomerAgent?' + url_parms;
 
