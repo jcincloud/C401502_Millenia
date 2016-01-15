@@ -34,23 +34,21 @@ var GirdForm = React.createClass({
 			searchData:{
 				products:[],
 				start_date:new Date().getFullYear()+'/1/1',
-				end_date:moment(Date()).format('YYYY/MM/DD'),
-				months:[1,2,3,4,5,6,7,8,9,10,11,12]
+				end_date:moment(Date()).format('YYYY/MM/DD')
 			},
 			edit_type:0,
 			checkAll:false,
 			isShowProductSelect:false,
 			option_product:[],
 			show_product:'',
-			month_range:{start:1,end:12}
+			list_err:true
 		};  
 	},
 	getDefaultProps:function(){
 		return{	
 			fdName:'fieldData',
 			gdName:'searchData',
-			apiPathName:gb_approot+'api/GetAction/GetCustomerAgent',
-			month:[1,2,3,4,5,6,7,8,9,10,11,12]
+			apiPathName:gb_approot+'api/GetAction/GetCustomerAgent'
 		};
 	},	
 	componentDidMount:function(){
@@ -99,7 +97,12 @@ var GirdForm = React.createClass({
 	queryGridData:function(page){
 		this.gridData(page)
 		.done(function(data, textStatus, jqXHRdata) {
-			this.setState({gridData:data});
+			if(data.result){
+			this.setState({gridData:data,list_err:false});
+			}else{
+				alert(data.msg);
+				this.setState({gridData:{rows:[],page:1},list_err:true});
+			}
 		}.bind(this))
 		.fail(function(jqXHR, textStatus, errorThrown) {
 			showAjaxError(errorThrown);
@@ -170,12 +173,12 @@ var GirdForm = React.createClass({
         for (var key in this.state.searchData.products) {
             ids.push('ids=' + this.state.searchData.products[key].product_id);
         }
-        var months = [];
-        for (var key in this.state.searchData.months) {
-            months.push('months_p=' + this.state.searchData.months[key]);
-        }
+        // var months = [];
+        // for (var key in this.state.searchData.months) {
+        //     months.push('months_p=' + this.state.searchData.months[key]);
+        // }
 
-        var url_parms=url_parms+'&'+ids.join('&')+'&'+months.join('&');
+        var url_parms=url_parms+'&'+ids.join('&');
 
 		var print_url = gb_approot + 'Base/ExcelReport/downloadExcel_CustomerAgent?' + url_parms;
 
@@ -340,7 +343,7 @@ var GirdForm = React.createClass({
 												value={searchData.end_date} />
 											</span>
 										{ }
-										<label>月份區間</label> { }
+										{/*<label>月份區間</label> { }
 										<select className="form-control"
 														onChange={this.setMonthRange.bind(this,'start')}
 														value={this.state.month_range.start}>
@@ -359,7 +362,7 @@ var GirdForm = React.createClass({
 												return <option key={itemData} value={itemData}>{itemData} 月</option>;
 											})
 										}
-										</select>
+										</select>*/}
 										{ }
 										<label className="sr-only">客戶名稱</label> { }
 										<input type="text" className="form-control" 
@@ -439,7 +442,7 @@ var GirdForm = React.createClass({
 			                            </select> { }
 
 										<button className="btn-primary" type="submit"><i className="fa-search"></i>{ }搜尋</button> { }
-										<button className="btn-success" type="button" onClick={this.excelPrint}><i className="fa-print"></i> 列印</button>
+										<button className="btn-success" type="button" onClick={this.excelPrint} disabled={this.state.list_err}><i className="fa-print"></i> 列印</button>
 									</div>
 								</div>
 							</div>

@@ -49,7 +49,8 @@ var GirdForm = React.createClass({
 			isShowProductSelect:false,
 			option_product:[],
 			show_product:'',
-			print_excel:true
+			print_excel:true,
+			list_err:true
 		};  
 	},
 	getDefaultProps:function(){
@@ -105,7 +106,12 @@ var GirdForm = React.createClass({
 	queryGridData:function(page){
 		this.gridData(page)
 		.done(function(data, textStatus, jqXHRdata) {
-			this.setState({gridData:data});
+			if(data.result){
+			this.setState({gridData:data,list_err:false});
+			}else{
+				alert(data.msg);
+				this.setState({gridData:{rows:[],page:1},list_err:true});
+			}
 		}.bind(this))
 		.fail(function(jqXHR, textStatus, errorThrown) {
 			showAjaxError(errorThrown);
@@ -411,7 +417,7 @@ var GirdForm = React.createClass({
 			                                <option value="3">B</option>
 			                            </select> { }
 			                            <button className="btn-primary" type="submit"><i className="fa-search"></i>{ }搜尋</button> { }
-			                        	<button className="btn-success" type="button" onClick={this.excelPrint} disabled={this.state.print_excel}><i className="fa-print"></i> 列印</button>
+			                        	<button className="btn-success" type="button" onClick={this.excelPrint} disabled={this.state.print_excel || this.state.list_err}><i className="fa-print"></i> 列印</button>
 			                        </div>
 								</div>
 							</div>

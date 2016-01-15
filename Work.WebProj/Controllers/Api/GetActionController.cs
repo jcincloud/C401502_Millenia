@@ -221,8 +221,21 @@ namespace DotWeb.Api
 
                 if (parm.start_date != null && parm.end_date != null)
                 {
-                    items = items.Where(x => x.y >= ((DateTime)parm.start_date).Year && x.m >= ((DateTime)parm.start_date).Month);
-                    items = items.Where(x => x.y <= ((DateTime)parm.end_date).Year && x.m <= ((DateTime)parm.end_date).Month);
+                    DateTime start = (DateTime)parm.start_date;
+                    DateTime end = (DateTime)parm.end_date;
+                    if (start.Year == end.Year)
+                    {//同年
+                        items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
+                    }
+                    else {//不同年
+                        if ((end.Year - start.Year) > 1)
+                        {
+                            return Ok(new { result = false, msg = "日期區間最多跨兩年度" });
+                        }
+                        List<int> start_m = startMonth(start.Month);
+                        List<int> end_m = endMonth(end.Month);
+                        items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
+                    }
                 }
                 if (parm.customer_name != null)
                 {
@@ -273,6 +286,7 @@ namespace DotWeb.Api
 
                 return Ok(new
                 {
+                    result = true,
                     rows = resultItems,
                     total = PageCount.TotalPage,
                     page = PageCount.Page,
@@ -284,7 +298,7 @@ namespace DotWeb.Api
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
-                return null;
+                return Ok(new { result = false, msg = ex.Message });
             }
             finally
             {
@@ -328,8 +342,21 @@ namespace DotWeb.Api
 
                 if (parm.start_date != null && parm.end_date != null)
                 {
-                    items = items.Where(x => x.y >= ((DateTime)parm.start_date).Year && x.m >= ((DateTime)parm.start_date).Month);
-                    items = items.Where(x => x.y <= ((DateTime)parm.end_date).Year && x.m <= ((DateTime)parm.end_date).Month);
+                    DateTime start = (DateTime)parm.start_date;
+                    DateTime end = (DateTime)parm.end_date;
+                    if (start.Year == end.Year)
+                    {//同年
+                        items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
+                    }
+                    else {//不同年
+                        if ((end.Year - start.Year) > 1)
+                        {
+                            return Ok(new { result = false, msg = "日期區間最多跨兩年度" });
+                        }
+                        List<int> start_m = startMonth(start.Month);
+                        List<int> end_m = endMonth(end.Month);
+                        items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
+                    }
                 }
                 if (parm.customer_name != null)
                 {
@@ -381,6 +408,7 @@ namespace DotWeb.Api
 
                 return Ok(new
                 {
+                    result = true,
                     rows = resultItems,
                     total = PageCount.TotalPage,
                     page = PageCount.Page,
@@ -392,7 +420,7 @@ namespace DotWeb.Api
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
-                return null;
+                return Ok(new { result = false, msg = ex.Message });
             }
             finally
             {
@@ -439,8 +467,21 @@ namespace DotWeb.Api
 
                 if (parm.start_date != null && parm.end_date != null)
                 {
-                    items = items.Where(x => x.y >= ((DateTime)parm.start_date).Year && x.m >= ((DateTime)parm.start_date).Month);
-                    items = items.Where(x => x.y <= ((DateTime)parm.end_date).Year && x.m <= ((DateTime)parm.end_date).Month);
+                    DateTime start = (DateTime)parm.start_date;
+                    DateTime end = (DateTime)parm.end_date;
+                    if (start.Year == end.Year)
+                    {//同年
+                        items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
+                    }
+                    else {//不同年
+                        if ((end.Year - start.Year) > 1)
+                        {
+                            return Ok(new { result = false, msg = "日期區間最多跨兩年度" });
+                        }
+                        List<int> start_m = startMonth(start.Month);
+                        List<int> end_m = endMonth(end.Month);
+                        items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
+                    }
                 }
                 if (parm.product_name != null)
                 {
@@ -475,10 +516,10 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.area_id == parm.area);
                 }
-                if (parm.months != null)
-                {
-                    items = items.Where(x => parm.months.Contains(x.m));
-                }
+                //if (parm.months != null)
+                //{
+                //    items = items.Where(x => parm.months.Contains(x.m));
+                //}
 
                 if (parm.products != null)
                 {
@@ -496,6 +537,7 @@ namespace DotWeb.Api
 
                 return Ok(new
                 {
+                    result = true,
                     rows = resultItems,
                     total = PageCount.TotalPage,
                     page = PageCount.Page,
@@ -2233,6 +2275,49 @@ namespace DotWeb.Api
             }
         }
         #endregion
+
+        #region 計算日期區間
+        public List<YearMonth> getRange(DateTime start, DateTime end)
+        {
+            List<YearMonth> result = new List<YearMonth>();
+            for (int i = start.Year; i <= end.Year; i++)
+            {
+                List<int> m = new List<int>();
+                if (i == start.Year)
+                {
+                    for (int j = start.Month; j <= 12; j++) { m.Add(j); }
+                }
+                else if (i == end.Year)
+                {
+                    for (int j = 1; j <= start.Month; j++) { m.Add(j); }
+                }
+                else {
+                    m = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+                }
+
+                YearMonth obj = new YearMonth()
+                {
+                    y = i,
+                    m = m
+                };
+                result.Add(obj);
+            }
+            return result;
+        }
+
+        public List<int> startMonth(int m)
+        {
+            List<int> start = new List<int>();
+            for (int j = m; j <= 12; j++) { start.Add(j); }
+            return start;
+        }
+        public List<int> endMonth(int m)
+        {
+            List<int> end = new List<int>();
+            for (int j = 1; j <= m; j++) { end.Add(j); }
+            return end;
+        }
+        #endregion
     }
     #region Parm
     public class ParmSetVisit
@@ -2375,5 +2460,13 @@ namespace DotWeb.Api
         public int a_customer_id { get; set; }
         public int b_customer_id { get; set; }
     }
+
+    //excel 跨年日期區間搜尋用
+    public class YearMonth
+    {
+        public int y { get; set; }
+        public List<int> m { get; set; }
+    }
+
     #endregion
 }

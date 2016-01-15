@@ -351,8 +351,17 @@ namespace DotWeb.Areas.Base.Controllers
 
                 if (parm.start_date != null && parm.end_date != null)
                 {
-                    items = items.Where(x => x.y >= ((DateTime)parm.start_date).Year && x.m >= ((DateTime)parm.start_date).Month);
-                    items = items.Where(x => x.y <= ((DateTime)parm.end_date).Year && x.m <= ((DateTime)parm.end_date).Month);
+                    DateTime start = (DateTime)parm.start_date;
+                    DateTime end = (DateTime)parm.end_date;
+                    if (start.Year == end.Year)
+                    {//同年
+                        items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
+                    }
+                    else {//不同年
+                        List<int> start_m = startMonth(start.Month);
+                        List<int> end_m = endMonth(end.Month);
+                        items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
+                    }
                     date_range = "(" + ((DateTime)parm.start_date).ToString("yyyy/MM/dd") + "~" + ((DateTime)parm.end_date).ToString("yyyy/MM/dd") + ")";
                 }
                 if (parm.customer_name != null)
@@ -487,7 +496,7 @@ namespace DotWeb.Areas.Base.Controllers
 
                 #region 標題
                 sheet.Cells[1, 1].Value = "R03產品分佈統計表(客戶-產品)" + date_range;
-                sheet.Cells[1, 1, 1, 7].Merge = true;
+                //sheet.Cells[1, 1, 1, 7].Merge = true;
                 sheet.Cells[2, 1].Value = "[客戶名稱]";
                 sheet.Cells[2, 2].Value = "[區域\n群組]";
                 sheet.Cells[2, 3].Value = "[客戶\n類別]";
@@ -503,15 +512,15 @@ namespace DotWeb.Areas.Base.Controllers
                 foreach (var i in parm.names)
                 {
                     sheet.Cells[3, name_index].Value = "[" + i + "]";
-                    sheet.Cells[3, name_index, 3, name_index + 1].Merge = true;
+                    //sheet.Cells[3, name_index, 3, name_index + 1].Merge = true;
                     sheet.Cells[4, name_index].Value = "分布";
                     sheet.Cells[4, name_index + 1].Value = "進貨量";
                     name_index += 2;
                 }
                 sheet.Cells[2, product_column].Value = "產品分布";
-                sheet.Cells[2, product_column, 2, name_index - 1].Merge = true;
+                //sheet.Cells[2, product_column, 2, name_index - 1].Merge = true;
 
-                setMerge_label(sheet, 2, 4, 1, 7);//合併上下儲存格 客戶名稱~型態等級
+                //setMerge_label(sheet, 2, 4, 1, 7);//合併上下儲存格 客戶名稱~型態等級
                 setFontColor_LabelBord(sheet, 2, 1, name_index - 1);//儲存格畫線+文字藍色
                 setFontColor_LabelBord(sheet, 3, 1, name_index - 1);
                 setFontColor_LabelBord(sheet, 4, 1, name_index - 1);
@@ -551,7 +560,7 @@ namespace DotWeb.Areas.Base.Controllers
                 sheet.Cells[detail_row, 1].Value = "[分布統計加總]";
                 setFontColor_red(sheet, detail_row, 1);
                 sheet.Cells[detail_row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                sheet.Cells[detail_row, 1, detail_row, 7].Merge = true;
+                //sheet.Cells[detail_row, 1, detail_row, 7].Merge = true;
 
                 for (var i = 0; i < parm.ids.Count(); i++)
                 {
@@ -639,8 +648,17 @@ namespace DotWeb.Areas.Base.Controllers
 
                 if (parm.start_date != null && parm.end_date != null)
                 {
-                    items = items.Where(x => x.y >= ((DateTime)parm.start_date).Year && x.m >= ((DateTime)parm.start_date).Month);
-                    items = items.Where(x => x.y <= ((DateTime)parm.end_date).Year && x.m <= ((DateTime)parm.end_date).Month);
+                    DateTime start = (DateTime)parm.start_date;
+                    DateTime end = (DateTime)parm.end_date;
+                    if (start.Year == end.Year)
+                    {//同年
+                        items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
+                    }
+                    else {//不同年
+                        List<int> start_m = startMonth(start.Month);
+                        List<int> end_m = endMonth(end.Month);
+                        items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
+                    }
                     date_range = "(" + ((DateTime)parm.start_date).ToString("yyyy/MM/dd") + "~" + ((DateTime)parm.end_date).ToString("yyyy/MM/dd") + ")";
                 }
                 if (parm.customer_name != null)
@@ -723,7 +741,7 @@ namespace DotWeb.Areas.Base.Controllers
 
                 #region 標題
                 sheet.Cells[1, 1].Value = "R04產品分佈統計表(產品-客戶)" + date_range;
-                sheet.Cells[1, 1, 1, 5].Merge = true;
+                //sheet.Cells[1, 1, 1, 5].Merge = true;
                 sheet.Cells[2, 1].Value = "[產品名稱]";
                 sheet.Cells[2, 2].Value = "[客戶名稱]";
                 sheet.Cells[2, 3].Value = "[區域群組]";
@@ -1186,11 +1204,24 @@ namespace DotWeb.Areas.Base.Controllers
                                 area_id = y.Customer.area_id,
                                 area_name = y.Customer.Area.area_name
                             });
-
+                //列印月份用
+                List<int> months = new List<int>();
                 if (parm.start_date != null && parm.end_date != null)
                 {
-                    items = items.Where(x => x.y >= ((DateTime)parm.start_date).Year && x.m >= ((DateTime)parm.start_date).Month);
-                    items = items.Where(x => x.y <= ((DateTime)parm.end_date).Year && x.m <= ((DateTime)parm.end_date).Month);
+                    DateTime start = (DateTime)parm.start_date;
+                    DateTime end = (DateTime)parm.end_date;
+                    if (start.Year == end.Year)
+                    {//同年
+                        items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
+                        months = startToEndMonth(start.Month, end.Month);
+                    }
+                    else {//不同年
+                        List<int> start_m = startMonth(start.Month);
+                        List<int> end_m = endMonth(end.Month);
+                        months.AddRange(start_m);
+                        months.AddRange(end_m);
+                        items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
+                    }
                     date_range = "(" + ((DateTime)parm.start_date).ToString("yyyy/MM/dd") + "~" + ((DateTime)parm.end_date).ToString("yyyy/MM/dd") + ")";
                 }
                 if (parm.product_name != null)
@@ -1226,10 +1257,10 @@ namespace DotWeb.Areas.Base.Controllers
                 {
                     items = items.Where(x => x.area_id == parm.area);
                 }
-                if (parm.months_p != null)
-                {
-                    items = items.Where(x => parm.months_p.Contains(x.m));
-                }
+                //if (parm.months_p != null)
+                //{
+                //    items = items.Where(x => parm.months_p.Contains(x.m));
+                //}
                 if (parm.ids != null)
                 {
                     items = items.Where(x => parm.ids.Contains(x.product_id));
@@ -1346,7 +1377,7 @@ namespace DotWeb.Areas.Base.Controllers
 
                 #region 標題
                 sheet.Cells[1, 1].Value = "R05客戶進貨統計表(客戶-多經銷商)" + date_range;
-                sheet.Cells[1, 1, 1, 8].Merge = true;
+                //sheet.Cells[1, 1, 1, 8].Merge = true;
                 sheet.Cells[2, 1].Value = "[產品名稱]";
                 sheet.Cells[2, 2].Value = "[客戶名稱]";
 
@@ -1357,13 +1388,13 @@ namespace DotWeb.Areas.Base.Controllers
                 sheet.Cells[2, 7].Value = "[客戶\n型態]";
                 sheet.Cells[2, 8].Value = "[型態\n等級]";
 
-                setMerge_label(sheet, 2, 3, 1, 8);//上下合併儲存格
+                //setMerge_label(sheet, 2, 3, 1, 8);//上下合併儲存格
                 setWrapText(sheet, 2, 3, 8);// \n換行設定
                 const int month_start = 9;
-                int month_end = month_start + parm.months_p.Length - 1;
+                int month_end = month_start + months.Count() - 1;
 
                 int temp_index = month_start;
-                foreach (var i in parm.months_p)
+                foreach (var i in months)
                 {
                     sheet.Cells[3, temp_index].Value = "[" + i + "月份]";
                     temp_index++;
@@ -1371,8 +1402,8 @@ namespace DotWeb.Areas.Base.Controllers
 
                 sheet.Cells[3, temp_index].Value = "[加總]";
 
-                sheet.Cells[2, month_start].Value = date_range + "產品進貨數量(" + parm.months_p[0] + "~" + parm.months_p[parm.months_p.Length - 1] + "月)";
-                sheet.Cells[2, month_start, 2, month_end].Merge = true;
+                sheet.Cells[2, month_start].Value = date_range + "產品進貨數量(" + months[0] + "~" + months[months.Count() - 1] + "月)";
+                //sheet.Cells[2, month_start, 2, month_end].Merge = true;
 
                 setFontColor_LabelBord(sheet, 2, 1, month_end);//儲存格框線+藍字
                 setFontColor_LabelBord(sheet, 3, 1, month_end);
@@ -1406,7 +1437,7 @@ namespace DotWeb.Areas.Base.Controllers
                             //sheet.Cells[detail_row, 1, detail_row, 8].Merge = true;
                             #endregion
                             temp_index = month_start;
-                            foreach (var i in parm.months_p)
+                            foreach (var i in months)
                             {
                                 sheet.Cells[detail_row, temp_index].Value = row_subtotal[i - 1];
                                 sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Thin;
@@ -1435,7 +1466,7 @@ namespace DotWeb.Areas.Base.Controllers
                         sheet.Cells[detail_row, 8].Value = CodeSheet.GetStoreLevelVal(item.store_level);
 
                         temp_index = month_start;
-                        foreach (var i in parm.months_p)
+                        foreach (var i in months)
                         {
                             #region getQtyVal
                             decimal temp_qyt = 0;
@@ -1528,7 +1559,7 @@ namespace DotWeb.Areas.Base.Controllers
                 //sheet.Cells[detail_row, 1, detail_row, 8].Merge = true;
                 #endregion
                 temp_index = month_start;
-                foreach (var i in parm.months_p)
+                foreach (var i in months)
                 {
                     sheet.Cells[detail_row, temp_index].Value = row_subtotal[i - 1];
                     sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Thin;
@@ -1548,10 +1579,10 @@ namespace DotWeb.Areas.Base.Controllers
                 sheet.Cells[detail_row, 1].Value = "[加總]";
                 setFontColor_red(sheet, detail_row, 1);
                 sheet.Cells[detail_row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                sheet.Cells[detail_row, 1, detail_row, 8].Merge = true;
+                //sheet.Cells[detail_row, 1, detail_row, 8].Merge = true;
                 #endregion
                 temp_index = month_start;
-                foreach (var i in parm.months_p)
+                foreach (var i in months)
                 {
                     sheet.Cells[detail_row, temp_index].Value = row_sum[i - 1];
                     sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Double;
@@ -1665,6 +1696,28 @@ namespace DotWeb.Areas.Base.Controllers
                 sheet.Cells[row, start_column].Style.WrapText = true;
             }
         }
+
+        #region 日期區間
+        public List<int> startMonth(int m)
+        {
+            List<int> start = new List<int>();
+            for (int j = m; j <= 12; j++) { start.Add(j); }
+            return start;
+        }
+        public List<int> endMonth(int m)
+        {
+            List<int> end = new List<int>();
+            for (int j = 1; j <= m; j++) { end.Add(j); }
+            return end;
+        }
+        public List<int> startToEndMonth(int s, int e)
+        {
+            List<int> rang = new List<int>();
+            for (int j = s; j <= e; j++) { rang.Add(j); }
+            return rang;
+        }
+        #endregion
+
     }
 
     public class SalesList

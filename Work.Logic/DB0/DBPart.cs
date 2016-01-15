@@ -243,10 +243,10 @@ namespace ProcCore.Business.DB0
         }
         public int[] ids { get; set; }
         public string[] names { get; set; }
-        //getValue
-        public int[] months { get; set; }
-        //printValue
-        public int[] months_p { get; set; }
+        ////getValue
+        //public int[] months { get; set; }
+        ////printValue
+        //public int[] months_p { get; set; }
     }
     public class CustomerVisit
     {
