@@ -79,83 +79,83 @@ namespace DotWeb.Areas.Base.Controllers
             var userManager = UserManager;
 
             LoginResult getLoginResult = new LoginResult();
-
-            if (!ModelState.IsValid)
+            try
             {
-                getLoginResult.result = false;
-                getLoginResult.message = "資訊不完整";
-                return defJSON(getLoginResult);
-            }
-
-            #region 驗證碼檢查程序
-            if (string.IsNullOrEmpty(Session["CheckCode"].ToString()))
-            {
-                Session["CheckCode"] = Guid.NewGuid();
-                getLoginResult.result = false;
-                getLoginResult.message = Resources.Res.Log_Err_ImgValideNotEquel;
-                return defJSON(getLoginResult);
-            }
-
-            getLoginResult.vildate = Session["CheckCode"].Equals(model.validate) ? true : false;
-#if DEBUG
-            getLoginResult.vildate = true;
-#endif
-            if (!getLoginResult.vildate)
-            {
-                Session["CheckCode"] = Guid.NewGuid(); //只要有錯先隨意產生唯一碼 以防暴力破解，新的CheckCode會在Validate產生。
-                getLoginResult.result = false;
-                getLoginResult.message = Resources.Res.Log_Err_ImgValideNotEquel;
-                return defJSON(getLoginResult);
-            }
-            #endregion
-
-            #region 帳密碼檢查
-            var item = await userManager.FindAsync(model.account, model.password);
-            if (item == null)
-            {
-                getLoginResult.result = false;
-                getLoginResult.message = Resources.Res.Login_Err_Password;
-                return defJSON(getLoginResult);
-            }
-            await SignInAsync(item, model.rememberme);
-            getLoginResult.result = true;
-
-            //SiteMaps.ReleaseSiteMap();
-
-            if (isTablet)
-            {
-                getLoginResult.url = Url.Content(CommWebSetup.ManageTabletCTR); //是行動裝置
-            }
-            else
-            {
-                //不是行動裝置
-                var get_user_roles_id = item.Roles.Select(x => x.RoleId);
-
-                ApplicationDbContext context = ApplicationDbContext.Create();
-                var roleManage = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-                var get_user_roles_name = roleManage.Roles.Where(x => get_user_roles_id.Contains(x.Id)).Select(x => x.Name);
-
-                if (get_user_roles_name.Contains("Admins") || get_user_roles_name.Contains("Managers"))
+                if (!ModelState.IsValid)
                 {
-                    getLoginResult.url = Url.Content(CommWebSetup.ManageDefCTR);
+                    getLoginResult.result = false;
+                    getLoginResult.message = "資訊不完整";
+                    return defJSON(getLoginResult);
+                }
+
+                #region 驗證碼檢查程序
+                if (string.IsNullOrEmpty(Session["CheckCode"].ToString()))
+                {
+                    Session["CheckCode"] = Guid.NewGuid();
+                    getLoginResult.result = false;
+                    getLoginResult.message = Resources.Res.Log_Err_ImgValideNotEquel;
+                    return defJSON(getLoginResult);
+                }
+
+                getLoginResult.vildate = Session["CheckCode"].Equals(model.validate) ? true : false;
+#if DEBUG
+                getLoginResult.vildate = true;
+#endif
+                if (!getLoginResult.vildate)
+                {
+                    Session["CheckCode"] = Guid.NewGuid(); //只要有錯先隨意產生唯一碼 以防暴力破解，新的CheckCode會在Validate產生。
+                    getLoginResult.result = false;
+                    getLoginResult.message = Resources.Res.Log_Err_ImgValideNotEquel;
+                    return defJSON(getLoginResult);
+                }
+                #endregion
+
+                #region 帳密碼檢查
+                var item = await userManager.FindAsync(model.account, model.password);
+                if (item == null)
+                {
+                    getLoginResult.result = false;
+                    getLoginResult.message = Resources.Res.Login_Err_Password;
+                    return defJSON(getLoginResult);
+                }
+                await SignInAsync(item, model.rememberme);
+                getLoginResult.result = true;
+
+                //SiteMaps.ReleaseSiteMap();
+
+                if (isTablet)
+                {
+                    getLoginResult.url = Url.Content(CommWebSetup.ManageTabletCTR); //是行動裝置
                 }
                 else
                 {
-                    getLoginResult.url = Url.Content("~/Active/Stock");
+                    //不是行動裝置
+                    var get_user_roles_id = item.Roles.Select(x => x.RoleId);
+
+                    ApplicationDbContext context = ApplicationDbContext.Create();
+                    var roleManage = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                    var get_user_roles_name = roleManage.Roles.Where(x => get_user_roles_id.Contains(x.Id)).Select(x => x.Name);
+
+                    if (get_user_roles_name.Contains("Admins") || get_user_roles_name.Contains("Managers"))
+                    {
+                        getLoginResult.url = Url.Content(CommWebSetup.ManageDefCTR);
+                    }
+                    else
+                    {
+                        getLoginResult.url = Url.Content("~/Active/Stock");
+                    }
                 }
-            }
 
-            Response.Cookies.Add(new HttpCookie(CommWebSetup.Cookie_UserName, item.UserName));
-            Response.Cookies.Add(new HttpCookie(CommWebSetup.Cookie_LastLogin, DateTime.Now.ToString()));
-            #endregion
+                Response.Cookies.Add(new HttpCookie(CommWebSetup.Cookie_UserName, item.UserName));
+                Response.Cookies.Add(new HttpCookie(CommWebSetup.Cookie_LastLogin, DateTime.Now.ToString()));
+                #endregion
 
-            //語系使用
-            HttpCookie WebLang = Request.Cookies[CommWebSetup.WebCookiesId + ".Lang"];
-            WebLang.Value = model.lang;
-            Response.Cookies.Add(WebLang);
+                //語系使用
+                HttpCookie WebLang = Request.Cookies[CommWebSetup.WebCookiesId + ".Lang"];
+                WebLang.Value = model.lang;
+                Response.Cookies.Add(WebLang);
 
-            try
-            {
+
                 var db = getDB0();
 
                 var item_department = await db.Department.FindAsync(item.department_id);
@@ -173,6 +173,8 @@ namespace DotWeb.Areas.Base.Controllers
             }
             catch (Exception ex)
             {
+                Log.Write(ex.Message);
+                Log.Write(ex.ToString());
                 getLoginResult.result = false;
                 getLoginResult.message = ex.Message;
                 return defJSON(getLoginResult);
