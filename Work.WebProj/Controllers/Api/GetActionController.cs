@@ -227,7 +227,8 @@ namespace DotWeb.Api
                     {//同年
                         items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
                     }
-                    else {//不同年
+                    else
+                    {//不同年
                         if ((end.Year - start.Year) > 1)
                         {
                             return Ok(new { result = false, msg = "日期區間最多跨兩年度" });
@@ -348,7 +349,8 @@ namespace DotWeb.Api
                     {//同年
                         items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
                     }
-                    else {//不同年
+                    else
+                    {//不同年
                         if ((end.Year - start.Year) > 1)
                         {
                             return Ok(new { result = false, msg = "日期區間最多跨兩年度" });
@@ -473,7 +475,8 @@ namespace DotWeb.Api
                     {//同年
                         items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
                     }
-                    else {//不同年
+                    else
+                    {//不同年
                         if ((end.Year - start.Year) > 1)
                         {
                             return Ok(new { result = false, msg = "日期區間最多跨兩年度" });
@@ -557,7 +560,7 @@ namespace DotWeb.Api
             try
             {
                 var products_id = db0.MapSalesProduct
-                   //.Where(x => x.users_id != "17bcea5f-0bad-4018-b782-5f3927d73c26" && x.users_id != "aa9bd408-8ab7-47d7-8717-fe9c4e5f51fd")
+                    //.Where(x => x.users_id != "17bcea5f-0bad-4018-b782-5f3927d73c26" && x.users_id != "aa9bd408-8ab7-47d7-8717-fe9c4e5f51fd")
                    .GroupBy(x => x.product_id)
                    .Select(x => new SalesProductSum() { product_id = x.Key, Sum = x.Count(y => y.product_id == x.Key) }).ToList();//取得產品負責業務統計數
 
@@ -792,7 +795,7 @@ namespace DotWeb.Api
 
                 if (visit_products.Count() == 0)
                 {
-                    var products = db0.MapSalesProduct.Where(x => x.users_id == this.UserId).Select(x => x.Product);
+                    var products = db0.MapSalesProduct.Where(x => x.users_id == this.UserId).Select(x => x.Product).OrderBy(x => x.product_sn);
                     foreach (var product in products)
                     {
                         db0.VisitDetailProduct.Add(new VisitDetailProduct()
@@ -2291,7 +2294,8 @@ namespace DotWeb.Api
                 {
                     for (int j = 1; j <= start.Month; j++) { m.Add(j); }
                 }
-                else {
+                else
+                {
                     m = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
                 }
 
