@@ -225,10 +225,13 @@ var GirdForm = React.createClass({
 		if(!confirm('確定將此帳號停權?')){
 			return;
 		}
+		var obj = this.state[this.props.fdName];
 		jqPut(gb_approot + 'api/GetAction/setLockOutAccount',{ID:this.state.fieldData.Id,lockoutEnable:true})
 			.done(function(data, textStatus, jqXHRdata) {
 				if(data.result){
 					tosMessage(null,'帳號已停權',1);
+					obj.LockoutEnabled=true;
+					this.setState({fieldData:obj});
 				}else{
 					alert(data.message);
 				}
@@ -238,10 +241,13 @@ var GirdForm = React.createClass({
 			});
 	},
 	setUnLockOutAccout:function(){
+		var obj = this.state[this.props.fdName];
 		jqPut(gb_approot + 'api/GetAction/setLockOutAccount',{ID:this.state.fieldData.Id,lockoutEnable:false})
 			.done(function(data, textStatus, jqXHRdata) {
 				if(data.result){
 					tosMessage(null,'帳號已啟用',1);
+					obj.LockoutEnabled=false;
+					this.setState({fieldData:obj});
 				}else{
 					alert(data.message);
 				}
