@@ -80,6 +80,8 @@ namespace DotWeb.Api
                 item.Email = md.Email;
                 item.user_name_c = md.user_name_c;
                 item.sort = md.sort;
+                //item.PasswordHash = UserManager.PasswordHasher.HashPassword(md.PasswordHash);
+                
 
                 var roles = item.Roles;
 

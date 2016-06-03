@@ -349,4 +349,7 @@
   <data name="ViewbagMenuName" xml:space="preserve">
     <value>功能選單</value>
   </data>
+  <data name="Log_Err_AccountLock" xml:space="preserve">
+    <value>此帳號已停權，無法登入後台！</value>
+  </data>
 </root>

@@ -221,6 +221,35 @@ var GirdForm = React.createClass({
 		item.role_use = !item.role_use;
 		this.setState({fieldData:obj});
 	},
+	setLockOutAccout:function(){
+		if(!confirm('確定將此帳號停權?')){
+			return;
+		}
+		jqPut(gb_approot + 'api/GetAction/setLockOutAccount',{ID:this.state.fieldData.Id,lockoutEnable:true})
+			.done(function(data, textStatus, jqXHRdata) {
+				if(data.result){
+					tosMessage(null,'帳號已停權',1);
+				}else{
+					alert(data.message);
+				}
+			}.bind(this))
+			.fail(function( jqXHR, textStatus, errorThrown ) {
+				showAjaxError(errorThrown);
+			});
+	},
+	setUnLockOutAccout:function(){
+		jqPut(gb_approot + 'api/GetAction/setLockOutAccount',{ID:this.state.fieldData.Id,lockoutEnable:false})
+			.done(function(data, textStatus, jqXHRdata) {
+				if(data.result){
+					tosMessage(null,'帳號已啟用',1);
+				}else{
+					alert(data.message);
+				}
+			}.bind(this))
+			.fail(function( jqXHR, textStatus, errorThrown ) {
+				showAjaxError(errorThrown);
+			});
+	},
 	render: function() {
 		var outHtml = null;
 
@@ -301,6 +330,24 @@ var GirdForm = React.createClass({
 		else if(this.state.edit_type==1 || this.state.edit_type==2)
 		{
 			var fieldData = this.state.fieldData;
+			var lockAccount_html=null;//LockoutEnabled
+			var lock_button=null;
+			if(this.state.edit_type==2){
+				if(fieldData.LockoutEnabled){
+					lock_button=<button type="button" className="btn btn-success" onClick={this.setUnLockOutAccout}>啟用</button>;
+				}else{
+					lock_button=<button type="button" className="btn btn-danger" onClick={this.setLockOutAccout}>停權</button>;
+				}
+			lockAccount_html=(
+						<div className="form-group">
+							<label className="col-xs-2 control-label text-danger">帳號 停權/啟用</label>
+							<div className="col-xs-6">
+								{lock_button}
+							</div>
+						</div>
+			);
+			}
+
 
 			outHtml=(
 			<div>
@@ -321,6 +368,7 @@ var GirdForm = React.createClass({
 								value={fieldData.UserName}
 								onChange={this.changeFDValue.bind(this,'UserName')}
 								maxLength="256"
+								disabled={this.state.edit_type==2}
 								required />
 							</div>
 						</div>
@@ -332,6 +380,7 @@ var GirdForm = React.createClass({
 								value={fieldData.PasswordHash}
 								onChange={this.changeFDValue.bind(this,'PasswordHash')}
 								maxLength="256"
+								disabled={this.state.edit_type==2}
 								required />
 							</div>
 							<small className="col-xs-4 help-inline">至少6個字元</small>
@@ -367,6 +416,7 @@ var GirdForm = React.createClass({
 								 />
 							</div>
 						</div>
+						{lockAccount_html}
 
 						<div className="form-group">
 							<label className="col-xs-2 control-label">角色</label>

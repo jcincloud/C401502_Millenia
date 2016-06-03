@@ -118,6 +118,12 @@ namespace DotWeb.Areas.Base.Controllers
                     getLoginResult.message = Resources.Res.Login_Err_Password;
                     return defJSON(getLoginResult);
                 }
+                if (await userManager.GetLockoutEnabledAsync(item.Id))
+                {
+                    getLoginResult.result = false;
+                    getLoginResult.message = Resources.Res.Log_Err_AccountLock;
+                    return defJSON(getLoginResult);
+                }
                 await SignInAsync(item, model.rememberme);
                 getLoginResult.result = true;
 

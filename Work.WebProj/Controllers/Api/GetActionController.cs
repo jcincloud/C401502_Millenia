@@ -2322,6 +2322,35 @@ namespace DotWeb.Api
             return end;
         }
         #endregion
+
+        #region 帳號停權/啟用
+        [HttpPut]
+        public async Task<IHttpActionResult> setLockOutAccount([FromBody]setLockOutAccount parm)
+        {
+            ResultInfo r = new ResultInfo();
+
+            try
+            {
+                #region working a
+                db0 = getDB0();
+                await UserManager.SetLockoutEnabledAsync(parm.ID, parm.lockoutEnable);
+
+                r.result = true;
+                return Ok(r);
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+                return Ok(r);
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+        }
+        #endregion
     }
     #region Parm
     public class ParmSetVisit
@@ -2471,6 +2500,10 @@ namespace DotWeb.Api
         public int y { get; set; }
         public List<int> m { get; set; }
     }
-
+    public class setLockOutAccount
+    {
+        public string ID { get; set; }
+        public bool lockoutEnable { get; set; }
+    }
     #endregion
 }
