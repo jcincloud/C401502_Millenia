@@ -169,7 +169,8 @@ var GirdForm = React.createClass({
 			city:this.state.searchData.city,
 			word:this.state.searchData.word,
 			country:this.state.searchData.country,
-			address:this.state.searchData.address
+			address:this.state.searchData.address,
+			store_type:this.state.searchData.store_type
 		};
 
 		jqGet(gb_approot+'api/GetAction/GetMyCustomer',parm)
@@ -255,6 +256,7 @@ var GirdForm = React.createClass({
 				<tbody>
 					<tr>
 						<th>店名</th>
+						<th>客戶型態</th>
 						<th>縣市</th>
 						<th>鄉鎮市</th>
 						<th>地址</th>
@@ -264,6 +266,7 @@ var GirdForm = React.createClass({
 								var out_html =                     
 											<tr key={itemData.customer_id}>
 						                        <td>{itemData.customer_name}</td>
+						                        <td><StateForGrid id={itemData.store_type} stateData={CommData.StoreType}/></td>
 						                        <td>{itemData.tw_city}</td>
 						                        <td>{itemData.tw_country}</td>
 						                        <td>{itemData.tw_address}</td>
@@ -278,6 +281,7 @@ var GirdForm = React.createClass({
 				<tbody>
 					<tr>
 						<th>店名</th>
+						<th>客戶型態</th>
 						<th>縣市</th>
 						<th>鄉鎮市</th>
 						<th>地址</th>
@@ -302,6 +306,7 @@ var GirdForm = React.createClass({
 								var out_html =                     
 											<tr key={itemData.customer_id}>
 						                        <td>{itemData.customer_name}</td>
+												<td><StateForGrid id={itemData.store_type} stateData={CommData.StoreType} /></td>
 						                        <td>{itemData.tw_city}</td>
 						                        <td>{itemData.tw_country}</td>
 						                        <td>{itemData.tw_address}</td>
@@ -337,6 +342,17 @@ var GirdForm = React.createClass({
 	        <h4 className="pull-left">業務員所屬客戶名單</h4>
 	        <form action="" className="table-form form-inline pull-left col-xs-offset-1">
 	            <div className="form-group">
+					<select className="form-control" 
+	                	value={this.state.searchData.store_type}
+	                	onChange={this.changeGDValue.bind(this,'store_type')}>
+	                    <option value="">客戶型態</option>
+	                    {
+							CommData.StoreType.map(function(itemData,i) {
+								var out_option = <option value={itemData.id} key={itemData.id}>{itemData.label}</option>;
+								return out_option;
+							}.bind(this))
+						}
+	                </select>
 	                <select className="form-control" 
 	                	value={this.state.searchData.city}
 	                	onChange={this.changeGDValue.bind(this,'city')}>

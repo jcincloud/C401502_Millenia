@@ -662,6 +662,10 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.customer_name.Contains(parm.word));
                 }
+                if (parm.store_type != null)
+                {
+                    items = items.Where(x => x.store_type == parm.store_type);
+                }
 
                 int page = (parm.page == 0 ? 1 : parm.page);
                 int startRecord = PageCount.PageInfo(page, page_size, items.Count());
@@ -2412,6 +2416,8 @@ namespace DotWeb.Api
         public string country { get; set; }
         public string address { get; set; }
         public string word { get; set; }
+
+        public int? store_type { get; set; }
     }
     public class PutPauseCustomer
     {

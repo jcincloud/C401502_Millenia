@@ -495,13 +495,13 @@
     ];
     export var StoreType = [
         { id: 0, label: 'None', className: 'label label-default', code: 'none' },
-        { id: 1, label: 'LS', className: 'label label-default', code: '' },
-        { id: 2, label: 'Beer Store', className: 'label label-default', code: '' },
-        { id: 3, label: 'Dancing', className: 'label label-default', code: '' },
-        { id: 4, label: 'Bar', className: 'label label-default', code: '' },
-        { id: 5, label: 'Cafe', className: 'label label-default', code: '' },
-        { id: 6, label: 'Bistro', className: 'label label-default', code: '' },
-        { id: 7, label: 'Restaurant', className: 'label label-default', code: '' }
+        { id: 1, label: 'LS', className: 'label label-info', code: '' },
+        { id: 2, label: 'Beer Store', className: 'label label-info', code: '' },
+        { id: 3, label: 'Dancing', className: 'label label-info', code: '' },
+        { id: 4, label: 'Bar', className: 'label label-info', code: '' },
+        { id: 5, label: 'Cafe', className: 'label label-info', code: '' },
+        { id: 6, label: 'Bistro', className: 'label label-info', code: '' },
+        { id: 7, label: 'Restaurant', className: 'label label-info', code: '' }
     ]
     export var StoreLevel = [
         { id: 0, label: '無', className: 'label label-default', code: 'none' },
