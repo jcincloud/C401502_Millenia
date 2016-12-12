@@ -1826,7 +1826,7 @@ namespace DotWeb.Api
                     .Select(x => new
                     {
                         customers = new { x.Key.customer_id, x.Key.customer_name },
-                        products = x.Select(y => new { y.stock_detail_qty_id, y.StockDetail.product_id, y.qty })
+                        products = x.Select(y => new { y.stock_detail_id, y.stock_detail_qty_id, y.StockDetail.product_id, y.qty }).OrderBy(y => y.stock_detail_id)
                     })
                     .OrderBy(x => x.customers.customer_name)
                     .ToListAsync();
