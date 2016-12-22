@@ -446,14 +446,12 @@ var GirdForm = React.createClass({
 								value={fieldData.store_type}
 								onChange={this.changeFDValue.bind(this,'store_type')}
 								disabled>
-									<option value="0"></option>
-									<option value="1">LS</option>
-									<option value="2">Beer Store</option>
-									<option value="3">Dancing</option>
-									<option value="4">Bar</option>
-									<option value="5">Cafe</option>
-									<option value="6">Bistro</option>
-									<option value="7">Restaurant</option>
+											{
+												CommData.StoreType.map(function(itemData,i) {
+													var out_option = <option value={itemData.id} key={itemData.id}>{itemData.label}</option>;
+													return out_option;
+												}.bind(this))
+											}
 								</select>
 							</div>
 							<label for="" className="control-label col-xs-2">型態等級</label>

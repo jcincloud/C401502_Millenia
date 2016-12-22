@@ -501,7 +501,10 @@
         { id: 4, label: 'Bar', className: 'label label-info', code: '' },
         { id: 5, label: 'Cafe', className: 'label label-info', code: '' },
         { id: 6, label: 'Bistro', className: 'label label-info', code: '' },
-        { id: 7, label: 'Restaurant', className: 'label label-info', code: '' }
+        { id: 7, label: 'Restaurant', className: 'label label-info', code: '' },
+        { id: 8, label: 'HyperMarket', className: 'label label-info', code: '' },
+        { id: 9, label: 'SuperMarket', className: 'label label-info', code: '' },
+        { id: 10, label: 'hotel', className: 'label label-info', code: '' }
     ]
     export var StoreLevel = [
         { id: 0, label: '無', className: 'label label-default', code: 'none' },
