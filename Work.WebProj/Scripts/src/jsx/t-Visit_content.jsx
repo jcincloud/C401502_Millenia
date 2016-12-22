@@ -49,6 +49,14 @@ var GirdForm = React.createClass({
     updateCustomer: function (e) {
         //e.preventDefault();
         var fieldData=this.state.fieldData;
+		if(fieldData['customer_type']==0 || fieldData['customer_type']==undefined){
+		   		tosMessage(gb_title_from_invalid,'客戶類別未選擇',3);
+		   		return;
+		   }
+		   if(fieldData['store_type']==0 || fieldData['store_type']==undefined){
+		   		tosMessage(gb_title_from_invalid,'客戶型態未選擇',3);
+		   		return;
+		   }
         if(fieldData.tel=="" || fieldData.tel==null){
             alert("電話欄位不可空白!");
             return;
@@ -473,7 +481,8 @@ var GirdForm = React.createClass({
 							<div className="col-xs-4">
 								<select className="form-control"
                                         value={fieldData.customer_type}
-                                        onChange={this.changeFDValue.bind(this,'customer_type')}>
+                                        onChange={this.changeFDValue.bind(this,'customer_type')}
+										required>
 								<option value="0"></option>
 								<option value="1">店家</option>
 								<option value="2">直客</option>
@@ -497,7 +506,8 @@ var GirdForm = React.createClass({
 							<div className="col-xs-4">
 								<select className="form-control"
                                         value={fieldData.store_type}
-                                        onChange={this.changeFDValue.bind(this,'store_type')}>
+                                        onChange={this.changeFDValue.bind(this,'store_type')}
+										required>
 											{
 												CommData.StoreType.map(function(itemData,i) {
 													var out_option = <option value={itemData.id} key={itemData.id}>{itemData.label}</option>;

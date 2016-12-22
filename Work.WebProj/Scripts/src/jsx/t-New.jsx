@@ -51,6 +51,15 @@ var GirdForm = React.createClass({
 
 		   }
 
+		   if(this.state.fieldData['customer_type']==0 || this.state.fieldData['customer_type']==undefined){
+		   		tosMessage(gb_title_from_invalid,'客戶類別未選擇',3);
+		   		return;
+		   }
+		   if(this.state.fieldData['store_type']==0 || this.state.fieldData['store_type']==undefined){
+		   		tosMessage(gb_title_from_invalid,'客戶型態未選擇',3);
+		   		return;
+		   }
+
 		   	if(this.state.fieldData['area_id'] == undefined){
 				tosMessage(gb_title_from_invalid,'區域群組未選擇',3);
 				return;
@@ -117,6 +126,14 @@ var GirdForm = React.createClass({
 	handleSubmit2: function(e) {
 
 		e.preventDefault();
+		   if(this.state.fieldData['customer_type']==0 || this.state.fieldData['customer_type']==undefined){
+		   		tosMessage(gb_title_from_invalid,'客戶類別未選擇',3);
+		   		return;
+		   }
+		   if(this.state.fieldData['store_type']==0 || this.state.fieldData['store_type']==undefined){
+		   		tosMessage(gb_title_from_invalid,'客戶型態未選擇',3);
+		   		return;
+		   }
 
 		if(this.state.edit_type==1){
 
@@ -495,7 +512,8 @@ var GirdForm = React.createClass({
 			                        <div className="col-xs-4">
 			                            <select className="form-control"
 			                                    value={fieldData.customer_type}
-			                                    onChange={this.changeFDValue.bind(this,'customer_type')}>
+			                                    onChange={this.changeFDValue.bind(this,'customer_type')}
+												required>
 			                                <option value="0"></option>
 			                                <option value="1">店家</option>
 			                                <option value="2">直客</option>
@@ -517,7 +535,8 @@ var GirdForm = React.createClass({
 			                        <div className="col-xs-4">
 			                            <select className="form-control"
 			                                    value={fieldData.store_type}
-			                                    onChange={this.changeFDValue.bind(this,'store_type')}>
+			                                    onChange={this.changeFDValue.bind(this,'store_type')}
+												required>
 											{
 												CommData.StoreType.map(function(itemData,i) {
 													var out_option = <option value={itemData.id} key={itemData.id}>{itemData.label}</option>;
