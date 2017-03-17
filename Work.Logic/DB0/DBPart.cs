@@ -303,19 +303,14 @@ namespace ProcCore.Business.DB0
     }
     public class ExcleCustomerAgent : CustomerAgent
     {
-        public decimal qty_1 { get; set; }
-        public decimal qty_2 { get; set; }
-        public decimal qty_3 { get; set; }
-        public decimal qty_4 { get; set; }
-        public decimal qty_5 { get; set; }
-        public decimal qty_6 { get; set; }
-        public decimal qty_7 { get; set; }
-        public decimal qty_8 { get; set; }
-        public decimal qty_9 { get; set; }
-        public decimal qty_10 { get; set; }
-        public decimal qty_11 { get; set; }
-        public decimal qty_12 { get; set; }
-        public decimal sum_qtys { get; set; }
+        public decimal sum_qtys { get; set; }//總進貨
+        public IList<StockYYMMQty> ym_qty { get; set; }
+    }
+    public class StockYYMMQty
+    {
+        public int YY { get; set; }
+        public int MM { get; set; }
+        public decimal Qty { get; set; }//進貨
     }
     public class SalesProductSum
     {

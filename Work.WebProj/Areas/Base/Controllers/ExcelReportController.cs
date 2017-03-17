@@ -357,7 +357,8 @@ namespace DotWeb.Areas.Base.Controllers
                     {//同年
                         items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
                     }
-                    else {//不同年
+                    else
+                    {//不同年
                         List<int> start_m = startMonth(start.Month);
                         List<int> end_m = endMonth(end.Month);
                         items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
@@ -654,7 +655,8 @@ namespace DotWeb.Areas.Base.Controllers
                     {//同年
                         items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
                     }
-                    else {//不同年
+                    else
+                    {//不同年
                         List<int> start_m = startMonth(start.Month);
                         List<int> end_m = endMonth(end.Month);
                         items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
@@ -882,284 +884,286 @@ namespace DotWeb.Areas.Base.Controllers
                 db0.Dispose();
             }
         }
+        #region downloadExcel_CustomerAgent_old
         /// <summary>
         /// R05報表-2015/7/28修改將經銷商移除但保留之前程式碼
         /// </summary>
         /// <param name="parm"></param>
         /// <returns></returns>
-        public FileResult downloadExcel_CustomerAgent_old(ParmGetCustomerVisit parm)
-        {
-            ExcelPackage excel = null;
-            MemoryStream fs = null;
-            var db0 = getDB0();
-            try
-            {
+        //public FileResult downloadExcel_CustomerAgent_old(ParmGetCustomerVisit parm)
+        //{
+        //    ExcelPackage excel = null;
+        //    MemoryStream fs = null;
+        //    var db0 = getDB0();
+        //    try
+        //    {
 
-                fs = new MemoryStream();
-                excel = new ExcelPackage(fs);
-                excel.Workbook.Worksheets.Add("CustomerAgentData");
-                ExcelWorksheet sheet = excel.Workbook.Worksheets["CustomerAgentData"];
+        //        fs = new MemoryStream();
+        //        excel = new ExcelPackage(fs);
+        //        excel.Workbook.Worksheets.Add("CustomerAgentData");
+        //        ExcelWorksheet sheet = excel.Workbook.Worksheets["CustomerAgentData"];
 
-                sheet.View.TabSelected = true;
+        //        sheet.View.TabSelected = true;
 
-                #region 取得客戶進貨數量
-                string date_range = "(All)";
+        //        #region 取得客戶進貨數量
+        //        string date_range = "(All)";
 
-                var items = from x in db0.StockDetail
-                            join y in db0.StockDetailQty
-                            on x.stock_detail_id equals y.stock_detail_id
-                            orderby x.Stock.y, x.Stock.m, x.Stock.agent_id, y.customer_id
-                            select (new CustomerAgent()
-                            {
-                                stock_detail_id = x.stock_detail_id,
-                                stock_detail_qty_id = y.stock_detail_qty_id,
-                                agent_id = x.Stock.agent_id,
-                                agent_name = x.Stock.Agent.agent_name,
-                                product_id = x.product_id,
-                                product_name = x.Product.product_name,
-                                customer_id = y.customer_id,
-                                customer_name = y.Customer.customer_name,
-                                qty = y.qty,
-                                y = x.Stock.y,
-                                m = x.Stock.m
-                            });
+        //        var items = from x in db0.StockDetail
+        //                    join y in db0.StockDetailQty
+        //                    on x.stock_detail_id equals y.stock_detail_id
+        //                    orderby x.Stock.y, x.Stock.m, x.Stock.agent_id, y.customer_id
+        //                    select (new CustomerAgent()
+        //                    {
+        //                        stock_detail_id = x.stock_detail_id,
+        //                        stock_detail_qty_id = y.stock_detail_qty_id,
+        //                        agent_id = x.Stock.agent_id,
+        //                        agent_name = x.Stock.Agent.agent_name,
+        //                        product_id = x.product_id,
+        //                        product_name = x.Product.product_name,
+        //                        customer_id = y.customer_id,
+        //                        customer_name = y.Customer.customer_name,
+        //                        qty = y.qty,
+        //                        y = x.Stock.y,
+        //                        m = x.Stock.m
+        //                    });
 
-                if (parm.start_date != null && parm.end_date != null)
-                {
-                    items = items.Where(x => x.y >= ((DateTime)parm.start_date).Year && x.m >= ((DateTime)parm.start_date).Month);
-                    items = items.Where(x => x.y <= ((DateTime)parm.end_date).Year && x.m <= ((DateTime)parm.end_date).Month);
-                    date_range = "(" + ((DateTime)parm.start_date).ToString("yyyy/MM/dd") + "~" + ((DateTime)parm.end_date).ToString("yyyy/MM/dd") + ")";
-                }
-                if (parm.product_name != null)
-                {
-                    items = items.Where(x => x.product_name.Contains(parm.product_name));
-                }
-                if (parm.customer_name != null)
-                {
-                    items = items.Where(x => x.customer_name.Contains(parm.customer_name));
-                }
-                var getTempVal = items.ToList();
-                #endregion
+        //        if (parm.start_date != null && parm.end_date != null)
+        //        {
+        //            items = items.Where(x => x.y >= ((DateTime)parm.start_date).Year && x.m >= ((DateTime)parm.start_date).Month);
+        //            items = items.Where(x => x.y <= ((DateTime)parm.end_date).Year && x.m <= ((DateTime)parm.end_date).Month);
+        //            date_range = "(" + ((DateTime)parm.start_date).ToString("yyyy/MM/dd") + "~" + ((DateTime)parm.end_date).ToString("yyyy/MM/dd") + ")";
+        //        }
+        //        if (parm.product_name != null)
+        //        {
+        //            items = items.Where(x => x.product_name.Contains(parm.product_name));
+        //        }
+        //        if (parm.customer_name != null)
+        //        {
+        //            items = items.Where(x => x.customer_name.Contains(parm.customer_name));
+        //        }
+        //        var getTempVal = items.ToList();
+        //        #endregion
 
-                #region 整理報表列印格式
-                //取得每月進貨加總
-                var getSumMonth = from x in getTempVal
-                                  group x by new
-                                  {
-                                      x.agent_id,
-                                      x.agent_name,
-                                      x.product_id,
-                                      x.product_name,
-                                      x.customer_id,
-                                      x.customer_name,
-                                      x.m
-                                  } into g
-                                  select (new CustomerAgent()
-                                  {
-                                      agent_id = g.Key.agent_id,
-                                      agent_name = g.Key.agent_name,
-                                      product_id = g.Key.product_id,
-                                      product_name = g.Key.product_name,
-                                      customer_id = g.Key.customer_id,
-                                      customer_name = g.Key.customer_name,
-                                      m = g.Key.m,
-                                      qty = g.Sum(z => z.qty)
-                                  });
-                //取得不重複客戶資料
-                var getPrintVal = (from x in getTempVal
-                                   group x by new
-                                   {
-                                       x.agent_id,
-                                       x.agent_name,
-                                       x.product_id,
-                                       x.product_name,
-                                       x.customer_id,
-                                       x.customer_name,
-                                   } into g
-                                   orderby g.Key.agent_id, g.Key.customer_id, g.Key.product_id
-                                   select (new ExcleCustomerAgent()
-                                   {
-                                       agent_id = g.Key.agent_id,
-                                       agent_name = g.Key.agent_name,
-                                       product_id = g.Key.product_id,
-                                       product_name = g.Key.product_name,
-                                       customer_id = g.Key.customer_id,
-                                       customer_name = g.Key.customer_name,
-                                   })).ToList();
+        //        #region 整理報表列印格式
+        //        //取得每月進貨加總
+        //        var getSumMonth = from x in getTempVal
+        //                          group x by new
+        //                          {
+        //                              x.agent_id,
+        //                              x.agent_name,
+        //                              x.product_id,
+        //                              x.product_name,
+        //                              x.customer_id,
+        //                              x.customer_name,
+        //                              x.m
+        //                          } into g
+        //                          select (new CustomerAgent()
+        //                          {
+        //                              agent_id = g.Key.agent_id,
+        //                              agent_name = g.Key.agent_name,
+        //                              product_id = g.Key.product_id,
+        //                              product_name = g.Key.product_name,
+        //                              customer_id = g.Key.customer_id,
+        //                              customer_name = g.Key.customer_name,
+        //                              m = g.Key.m,
+        //                              qty = g.Sum(z => z.qty)
+        //                          });
+        //        //取得不重複客戶資料
+        //        var getPrintVal = (from x in getTempVal
+        //                           group x by new
+        //                           {
+        //                               x.agent_id,
+        //                               x.agent_name,
+        //                               x.product_id,
+        //                               x.product_name,
+        //                               x.customer_id,
+        //                               x.customer_name,
+        //                           } into g
+        //                           orderby g.Key.agent_id, g.Key.customer_id, g.Key.product_id
+        //                           select (new ExcleCustomerAgent()
+        //                           {
+        //                               agent_id = g.Key.agent_id,
+        //                               agent_name = g.Key.agent_name,
+        //                               product_id = g.Key.product_id,
+        //                               product_name = g.Key.product_name,
+        //                               customer_id = g.Key.customer_id,
+        //                               customer_name = g.Key.customer_name,
+        //                           })).ToList();
 
-                foreach (var itemA in getPrintVal)
-                {
-                    foreach (var itemB in getSumMonth)
-                    {
-                        if (itemA.agent_id == itemB.agent_id && itemA.customer_id == itemB.customer_id && itemA.product_id == itemB.product_id)
-                        {
-                            switch (itemB.m)
-                            {
-                                case 1:
-                                    itemA.qty_1 = itemB.qty;
-                                    break;
-                                case 2:
-                                    itemA.qty_2 = itemB.qty;
-                                    break;
-                                case 3:
-                                    itemA.qty_3 = itemB.qty;
-                                    break;
-                                case 4:
-                                    itemA.qty_4 = itemB.qty;
-                                    break;
-                                case 5:
-                                    itemA.qty_5 = itemB.qty;
-                                    break;
-                                case 6:
-                                    itemA.qty_6 = itemB.qty;
-                                    break;
-                                case 7:
-                                    itemA.qty_7 = itemB.qty;
-                                    break;
-                                case 8:
-                                    itemA.qty_8 = itemB.qty;
-                                    break;
-                                case 9:
-                                    itemA.qty_9 = itemB.qty;
-                                    break;
-                                case 10:
-                                    itemA.qty_10 = itemB.qty;
-                                    break;
-                                case 11:
-                                    itemA.qty_11 = itemB.qty;
-                                    break;
-                                case 12:
-                                    itemA.qty_12 = itemB.qty;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                }
-                #endregion
+        //        foreach (var itemA in getPrintVal)
+        //        {
+        //            foreach (var itemB in getSumMonth)
+        //            {
+        //                if (itemA.agent_id == itemB.agent_id && itemA.customer_id == itemB.customer_id && itemA.product_id == itemB.product_id)
+        //                {
+        //                    switch (itemB.m)
+        //                    {
+        //                        case 1:
+        //                            itemA.qty_1 = itemB.qty;
+        //                            break;
+        //                        case 2:
+        //                            itemA.qty_2 = itemB.qty;
+        //                            break;
+        //                        case 3:
+        //                            itemA.qty_3 = itemB.qty;
+        //                            break;
+        //                        case 4:
+        //                            itemA.qty_4 = itemB.qty;
+        //                            break;
+        //                        case 5:
+        //                            itemA.qty_5 = itemB.qty;
+        //                            break;
+        //                        case 6:
+        //                            itemA.qty_6 = itemB.qty;
+        //                            break;
+        //                        case 7:
+        //                            itemA.qty_7 = itemB.qty;
+        //                            break;
+        //                        case 8:
+        //                            itemA.qty_8 = itemB.qty;
+        //                            break;
+        //                        case 9:
+        //                            itemA.qty_9 = itemB.qty;
+        //                            break;
+        //                        case 10:
+        //                            itemA.qty_10 = itemB.qty;
+        //                            break;
+        //                        case 11:
+        //                            itemA.qty_11 = itemB.qty;
+        //                            break;
+        //                        case 12:
+        //                            itemA.qty_12 = itemB.qty;
+        //                            break;
+        //                        default:
+        //                            break;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        #endregion
 
-                #region Excel Handle
+        //        #region Excel Handle
 
-                int detail_row = 4;
+        //        int detail_row = 4;
 
-                #region 標題
-                sheet.Cells[1, 1].Value = "R05客戶進貨統計表(客戶-多經銷商)" + date_range;
-                sheet.Cells[1, 1, 1, 4].Merge = true;
-                sheet.Cells[2, 1].Value = "[經銷商名稱]";
-                sheet.Cells[2, 2].Value = "[客戶名稱]";
-                sheet.Cells[2, 3].Value = "[產品名稱]";
+        //        #region 標題
+        //        sheet.Cells[1, 1].Value = "R05客戶進貨統計表(客戶-多經銷商)" + date_range;
+        //        sheet.Cells[1, 1, 1, 4].Merge = true;
+        //        sheet.Cells[2, 1].Value = "[經銷商名稱]";
+        //        sheet.Cells[2, 2].Value = "[客戶名稱]";
+        //        sheet.Cells[2, 3].Value = "[產品名稱]";
 
-                setMerge_label(sheet, 2, 3, 1, 3);
+        //        setMerge_label(sheet, 2, 3, 1, 3);
 
 
-                sheet.Cells[3, 4].Value = "[1月份]";
-                sheet.Cells[3, 5].Value = "[2月份]";
-                sheet.Cells[3, 6].Value = "[3月份]";
-                sheet.Cells[3, 7].Value = "[4月份]";
-                sheet.Cells[3, 8].Value = "[5月份]";
-                sheet.Cells[3, 9].Value = "[6月份]";
-                sheet.Cells[3, 10].Value = "[7月份]";
-                sheet.Cells[3, 11].Value = "[8月份]";
-                sheet.Cells[3, 12].Value = "[9月份]";
-                sheet.Cells[3, 13].Value = "[10月份]";
-                sheet.Cells[3, 14].Value = "[11月份]";
-                sheet.Cells[3, 15].Value = "[12月份]";
-                sheet.Cells[3, 16].Value = "[加總]";
+        //        sheet.Cells[3, 4].Value = "[1月份]";
+        //        sheet.Cells[3, 5].Value = "[2月份]";
+        //        sheet.Cells[3, 6].Value = "[3月份]";
+        //        sheet.Cells[3, 7].Value = "[4月份]";
+        //        sheet.Cells[3, 8].Value = "[5月份]";
+        //        sheet.Cells[3, 9].Value = "[6月份]";
+        //        sheet.Cells[3, 10].Value = "[7月份]";
+        //        sheet.Cells[3, 11].Value = "[8月份]";
+        //        sheet.Cells[3, 12].Value = "[9月份]";
+        //        sheet.Cells[3, 13].Value = "[10月份]";
+        //        sheet.Cells[3, 14].Value = "[11月份]";
+        //        sheet.Cells[3, 15].Value = "[12月份]";
+        //        sheet.Cells[3, 16].Value = "[加總]";
 
-                sheet.Cells[2, 4].Value = "產品進貨數量(1~12月)";
-                sheet.Cells[2, 4, 2, 15].Merge = true;
+        //        sheet.Cells[2, 4].Value = "產品進貨數量(1~12月)";
+        //        sheet.Cells[2, 4, 2, 15].Merge = true;
 
-                setFontColor_LabelBord(sheet, 2, 1, 15);
-                setFontColor_LabelBord(sheet, 3, 1, 15);
-                setFontColor_blue(sheet, 1, 1);
-                setFontColor_red(sheet, 3, 16);
-                sheet.Cells[3, 16].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                #endregion
+        //        setFontColor_LabelBord(sheet, 2, 1, 15);
+        //        setFontColor_LabelBord(sheet, 3, 1, 15);
+        //        setFontColor_blue(sheet, 1, 1);
+        //        setFontColor_red(sheet, 3, 16);
+        //        sheet.Cells[3, 16].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        //        #endregion
 
-                #region 內容
-                decimal[] row_sum = new decimal[12];
-                foreach (var item in getPrintVal)
-                {
-                    sheet.Cells[detail_row, 1].Value = item.agent_name;
-                    sheet.Cells[detail_row, 2].Value = item.customer_name;
-                    sheet.Cells[detail_row, 3].Value = item.product_name;
+        //        #region 內容
+        //        decimal[] row_sum = new decimal[12];
+        //        foreach (var item in getPrintVal)
+        //        {
+        //            sheet.Cells[detail_row, 1].Value = item.agent_name;
+        //            sheet.Cells[detail_row, 2].Value = item.customer_name;
+        //            sheet.Cells[detail_row, 3].Value = item.product_name;
 
-                    sheet.Cells[detail_row, 4].Value = item.qty_1;
-                    sheet.Cells[detail_row, 5].Value = item.qty_2;
-                    sheet.Cells[detail_row, 6].Value = item.qty_3;
-                    sheet.Cells[detail_row, 7].Value = item.qty_4;
-                    sheet.Cells[detail_row, 8].Value = item.qty_5;
-                    sheet.Cells[detail_row, 9].Value = item.qty_6;
-                    sheet.Cells[detail_row, 10].Value = item.qty_7;
-                    sheet.Cells[detail_row, 11].Value = item.qty_8;
-                    sheet.Cells[detail_row, 12].Value = item.qty_9;
-                    sheet.Cells[detail_row, 13].Value = item.qty_10;
-                    sheet.Cells[detail_row, 14].Value = item.qty_11;
-                    sheet.Cells[detail_row, 15].Value = item.qty_12;
-                    sheet.Cells[detail_row, 16].Formula = string.Format("=SUM(D{0}:O{0})", detail_row);
+        //            sheet.Cells[detail_row, 4].Value = item.qty_1;
+        //            sheet.Cells[detail_row, 5].Value = item.qty_2;
+        //            sheet.Cells[detail_row, 6].Value = item.qty_3;
+        //            sheet.Cells[detail_row, 7].Value = item.qty_4;
+        //            sheet.Cells[detail_row, 8].Value = item.qty_5;
+        //            sheet.Cells[detail_row, 9].Value = item.qty_6;
+        //            sheet.Cells[detail_row, 10].Value = item.qty_7;
+        //            sheet.Cells[detail_row, 11].Value = item.qty_8;
+        //            sheet.Cells[detail_row, 12].Value = item.qty_9;
+        //            sheet.Cells[detail_row, 13].Value = item.qty_10;
+        //            sheet.Cells[detail_row, 14].Value = item.qty_11;
+        //            sheet.Cells[detail_row, 15].Value = item.qty_12;
+        //            sheet.Cells[detail_row, 16].Formula = string.Format("=SUM(D{0}:O{0})", detail_row);
 
-                    row_sum[0] += item.qty_1;
-                    row_sum[1] += item.qty_2;
-                    row_sum[2] += item.qty_3;
-                    row_sum[3] += item.qty_4;
-                    row_sum[4] += item.qty_5;
-                    row_sum[5] += item.qty_6;
-                    row_sum[6] += item.qty_7;
-                    row_sum[7] += item.qty_8;
-                    row_sum[8] += item.qty_9;
-                    row_sum[9] += item.qty_10;
-                    row_sum[10] += item.qty_11;
-                    row_sum[11] += item.qty_12;
+        //            row_sum[0] += item.qty_1;
+        //            row_sum[1] += item.qty_2;
+        //            row_sum[2] += item.qty_3;
+        //            row_sum[3] += item.qty_4;
+        //            row_sum[4] += item.qty_5;
+        //            row_sum[5] += item.qty_6;
+        //            row_sum[6] += item.qty_7;
+        //            row_sum[7] += item.qty_8;
+        //            row_sum[8] += item.qty_9;
+        //            row_sum[9] += item.qty_10;
+        //            row_sum[10] += item.qty_11;
+        //            row_sum[11] += item.qty_12;
 
-                    detail_row++;
-                }
-                #region 底部加總
-                int start_row = 4;
-                sheet.Cells[detail_row, 1].Value = "[加總]";
-                setFontColor_red(sheet, detail_row, 1);
-                sheet.Cells[detail_row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                sheet.Cells[detail_row, 1, detail_row, 3].Merge = true;
-                string[] row_eng = new string[] { "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" };
-                for (var i = 0; i < 12; i++)
-                {
-                    //sheet.Cells[detail_row, i + 4].Value = string.Format("SUM({0}{1}:{0}{2})", row_eng[i], start_row, detail_row - 1);
-                    sheet.Cells[detail_row, i + 4].Value = row_sum[i];
-                    sheet.Cells[detail_row, i + 4].Style.Border.Top.Style = ExcelBorderStyle.Double;
-                    sheet.Cells[detail_row, i + 4].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
-                }
-                #endregion
-                #endregion
+        //            detail_row++;
+        //        }
+        //        #region 底部加總
+        //        int start_row = 4;
+        //        sheet.Cells[detail_row, 1].Value = "[加總]";
+        //        setFontColor_red(sheet, detail_row, 1);
+        //        sheet.Cells[detail_row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        //        sheet.Cells[detail_row, 1, detail_row, 3].Merge = true;
+        //        string[] row_eng = new string[] { "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" };
+        //        for (var i = 0; i < 12; i++)
+        //        {
+        //            //sheet.Cells[detail_row, i + 4].Value = string.Format("SUM({0}{1}:{0}{2})", row_eng[i], start_row, detail_row - 1);
+        //            sheet.Cells[detail_row, i + 4].Value = row_sum[i];
+        //            sheet.Cells[detail_row, i + 4].Style.Border.Top.Style = ExcelBorderStyle.Double;
+        //            sheet.Cells[detail_row, i + 4].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+        //        }
+        //        #endregion
+        //        #endregion
 
-                #region excel排版
-                int startColumn = sheet.Dimension.Start.Column;
-                int endColumn = sheet.Dimension.End.Column;
-                for (int j = startColumn; j <= endColumn; j++)
-                {
-                    //sheet.Column(j).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;//靠左對齊
-                    //sheet.Column(j).Width = 30;//固定寬度寫法
-                    sheet.Column(j).AutoFit();//依內容fit寬度
-                }//End for
-                #endregion
-                sheet.Calculate(); //要對所以Cell做公計計算 否則樣版中的公式值是不會變的
+        //        #region excel排版
+        //        int startColumn = sheet.Dimension.Start.Column;
+        //        int endColumn = sheet.Dimension.End.Column;
+        //        for (int j = startColumn; j <= endColumn; j++)
+        //        {
+        //            //sheet.Column(j).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;//靠左對齊
+        //            //sheet.Column(j).Width = 30;//固定寬度寫法
+        //            sheet.Column(j).AutoFit();//依內容fit寬度
+        //        }//End for
+        //        #endregion
+        //        sheet.Calculate(); //要對所以Cell做公計計算 否則樣版中的公式值是不會變的
 
-                #endregion
+        //        #endregion
 
-                string filename = "R05客戶進貨統計表(客戶-多經銷商)" + "[" + DateTime.Now.ToString("yyyyMMddHHmm") + "].xlsx";
-                excel.Save();
-                fs.Position = 0;
-                return File(fs, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-                return null;
-            }
-            finally
-            {
-                db0.Dispose();
-            }
-        }
+        //        string filename = "R05客戶進貨統計表(客戶-多經銷商)" + "[" + DateTime.Now.ToString("yyyyMMddHHmm") + "].xlsx";
+        //        excel.Save();
+        //        fs.Position = 0;
+        //        return File(fs, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.Write(ex.Message);
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        db0.Dispose();
+        //    }
+        //}
+        #endregion
         public FileResult downloadExcel_CustomerAgent(ParmReportR04 parm)
         {
             ExcelPackage excel = null;
@@ -1183,6 +1187,7 @@ namespace DotWeb.Areas.Base.Controllers
                             join y in db0.StockDetailQty
                             on x.stock_detail_id equals y.stock_detail_id
                             orderby x.Stock.y, x.Stock.m, x.product_id, y.customer_id
+                            where y.qty != 0
                             select (new CustomerAgent()
                             {
                                 stock_detail_id = x.stock_detail_id,
@@ -1205,7 +1210,7 @@ namespace DotWeb.Areas.Base.Controllers
                                 area_name = y.Customer.Area.area_name
                             });
                 //列印月份用
-                List<int> months = new List<int>();
+                List<CountMonth> months = new List<CountMonth>();
                 if (parm.start_date != null && parm.end_date != null)
                 {
                     DateTime start = (DateTime)parm.start_date;
@@ -1213,14 +1218,17 @@ namespace DotWeb.Areas.Base.Controllers
                     if (start.Year == end.Year)
                     {//同年
                         items = items.Where(x => x.y == start.Year && x.m >= start.Month && x.m <= end.Month);
-                        months = startToEndMonth(start.Month, end.Month);
+                        months = startToEndMonth(start.Year, start.Month, end.Month);
                     }
-                    else {//不同年
-                        List<int> start_m = startMonth(start.Month);
-                        List<int> end_m = endMonth(end.Month);
+                    else
+                    {//不同年
+                        List<CountMonth> start_m = startToEndMonth(start.Year, start.Month, 12);
+                        List<CountMonth> end_m = startToEndMonth(end.Year, 1, end.Month);
                         months.AddRange(start_m);
                         months.AddRange(end_m);
-                        items = items.Where(x => (x.y == start.Year && start_m.Contains(x.m)) || (x.y == end.Year && end_m.Contains(x.m)));
+                        List<int> S_m = start_m.Select(x => x.M).ToList();
+                        List<int> E_m = end_m.Select(x => x.M).ToList();
+                        items = items.Where(x => (x.y == start.Year && S_m.Contains(x.m)) || (x.y == end.Year && E_m.Contains(x.m)));
                     }
                     date_range = "(" + ((DateTime)parm.start_date).ToString("yyyy/MM/dd") + "~" + ((DateTime)parm.end_date).ToString("yyyy/MM/dd") + ")";
                 }
@@ -1269,26 +1277,6 @@ namespace DotWeb.Areas.Base.Controllers
                 #endregion
 
                 #region 整理報表列印格式
-                //取得每月進貨加總
-                var getSumMonth = from x in getTempVal
-                                  group x by new
-                                  {
-                                      x.product_id,
-                                      x.product_name,
-                                      x.customer_id,
-                                      x.customer_name,
-                                      x.m
-                                  } into g
-                                  select (new CustomerAgent()
-                                  {
-                                      product_id = g.Key.product_id,
-                                      product_name = g.Key.product_name,
-                                      customer_id = g.Key.customer_id,
-                                      customer_name = g.Key.customer_name,
-                                      m = g.Key.m,
-                                      qty = g.Sum(z => z.qty)
-                                  });
-                //取得不重複客戶資料
                 var getPrintVal = (from x in getTempVal
                                    group x by new
                                    {
@@ -1315,60 +1303,18 @@ namespace DotWeb.Areas.Base.Controllers
                                        evaluate = g.Key.evaluate,
                                        store_type = g.Key.store_type,
                                        store_level = g.Key.store_level,
-                                       area_name = g.Key.area_name
+                                       area_name = g.Key.area_name,
+                                       sum_qtys = g.Sum(z => z.qty),//總進貨
+                                       ym_qty = (from z in g
+                                                 group z by new { z.y, z.m } into a
+                                                 orderby a.Key.y, a.Key.m
+                                                 select new StockYYMMQty()
+                                                 {
+                                                     YY = a.Key.y,
+                                                     MM = a.Key.m,
+                                                     Qty = a.Sum(b => b.qty)
+                                                 }).ToList()
                                    })).ToList();
-
-                foreach (var itemA in getPrintVal)
-                {
-                    foreach (var itemB in getSumMonth)
-                    {
-                        if (itemA.customer_id == itemB.customer_id && itemA.product_id == itemB.product_id)
-                        {
-                            itemA.sum_qtys += itemB.qty;
-                            switch (itemB.m)
-                            {
-                                case 1:
-                                    itemA.qty_1 = itemB.qty;
-                                    break;
-                                case 2:
-                                    itemA.qty_2 = itemB.qty;
-                                    break;
-                                case 3:
-                                    itemA.qty_3 = itemB.qty;
-                                    break;
-                                case 4:
-                                    itemA.qty_4 = itemB.qty;
-                                    break;
-                                case 5:
-                                    itemA.qty_5 = itemB.qty;
-                                    break;
-                                case 6:
-                                    itemA.qty_6 = itemB.qty;
-                                    break;
-                                case 7:
-                                    itemA.qty_7 = itemB.qty;
-                                    break;
-                                case 8:
-                                    itemA.qty_8 = itemB.qty;
-                                    break;
-                                case 9:
-                                    itemA.qty_9 = itemB.qty;
-                                    break;
-                                case 10:
-                                    itemA.qty_10 = itemB.qty;
-                                    break;
-                                case 11:
-                                    itemA.qty_11 = itemB.qty;
-                                    break;
-                                case 12:
-                                    itemA.qty_12 = itemB.qty;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                }
                 #endregion
 
                 #region Excel Handle
@@ -1396,14 +1342,13 @@ namespace DotWeb.Areas.Base.Controllers
                 int temp_index = month_start;
                 foreach (var i in months)
                 {
-                    sheet.Cells[3, temp_index].Value = "[" + i + "月份]";
+                    sheet.Cells[3, temp_index].Value = "[" + i.M + "月份]";
                     temp_index++;
                 }
 
                 sheet.Cells[3, temp_index].Value = "[加總]";
 
-                sheet.Cells[2, month_start].Value = date_range + "產品進貨數量(" + months[0] + "~" + months[months.Count() - 1] + "月)";
-                //sheet.Cells[2, month_start, 2, month_end].Merge = true;
+                sheet.Cells[2, month_start].Value = date_range + "產品進貨數量(" + months[0].M + "~" + months[months.Count() - 1].M + "月)";
 
                 setFontColor_LabelBord(sheet, 2, 1, month_end);//儲存格框線+藍字
                 setFontColor_LabelBord(sheet, 3, 1, month_end);
@@ -1413,9 +1358,8 @@ namespace DotWeb.Areas.Base.Controllers
                 #endregion
 
                 #region 內容
-                decimal[] row_sum = new decimal[12];//底部加總計算
-                decimal[] row_subtotal = new decimal[12];//每個產品小計計算
                 string subtotal_product_name = string.Empty;
+                int subtotal_start_row = detail_row;
                 foreach (var item in getPrintVal)
                 {
                     if (item.sum_qtys != 0)//如果1~12月都沒有進貨,就不顯示
@@ -1434,12 +1378,11 @@ namespace DotWeb.Areas.Base.Controllers
                             sheet.Cells[detail_row, 8].Value = "[小計]";
                             setFontColor_red(sheet, detail_row, 8);
                             sheet.Cells[detail_row, 8].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            //sheet.Cells[detail_row, 1, detail_row, 8].Merge = true;
                             #endregion
                             temp_index = month_start;
                             foreach (var i in months)
                             {
-                                sheet.Cells[detail_row, temp_index].Value = row_subtotal[i - 1];
+                                sheet.Cells[detail_row, temp_index].Formula = string.Format("=SUM({0}{1}:{0}{2})", Convert.ToChar(64 + temp_index), subtotal_start_row, detail_row - 1);
                                 sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Thin;
                                 sheet.Cells[detail_row, temp_index].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
                                 temp_index++;
@@ -1451,8 +1394,8 @@ namespace DotWeb.Areas.Base.Controllers
                             #endregion
 
                             detail_row++;
-                            row_subtotal = new decimal[12];//小計歸零
                             subtotal_product_name = item.product_name;//紀錄新產品
+                            subtotal_start_row = detail_row;//重新紀錄小計第一行
                         }
                         #endregion
                         sheet.Cells[detail_row, 1].Value = item.product_name;
@@ -1469,83 +1412,16 @@ namespace DotWeb.Areas.Base.Controllers
                         foreach (var i in months)
                         {
                             #region getQtyVal
-                            decimal temp_qyt = 0;
-                            switch (i)
-                            {
-                                case 1:
-                                    temp_qyt = item.qty_1;
-                                    break;
-                                case 2:
-                                    temp_qyt = item.qty_2;
-                                    break;
-                                case 3:
-                                    temp_qyt = item.qty_3;
-                                    break;
-                                case 4:
-                                    temp_qyt = item.qty_4;
-                                    break;
-                                case 5:
-                                    temp_qyt = item.qty_5;
-                                    break;
-                                case 6:
-                                    temp_qyt = item.qty_6;
-                                    break;
-                                case 7:
-                                    temp_qyt = item.qty_7;
-                                    break;
-                                case 8:
-                                    temp_qyt = item.qty_8;
-                                    break;
-                                case 9:
-                                    temp_qyt = item.qty_9;
-                                    break;
-                                case 10:
-                                    temp_qyt = item.qty_10;
-                                    break;
-                                case 11:
-                                    temp_qyt = item.qty_11;
-                                    break;
-                                case 12:
-                                    temp_qyt = item.qty_12;
-                                    break;
-                                default:
-                                    break;
-                            }
+                            var getStockQty = item.ym_qty.Where(x => x.YY == i.Y & x.MM == i.M).FirstOrDefault();
+                            decimal temp_qyt = getStockQty != null ? getStockQty.Qty : 0;
                             #endregion
                             sheet.Cells[detail_row, temp_index].Value = temp_qyt;
+                            #region 底部加總計算
+                            i.qty += temp_qyt;
+                            #endregion
                             temp_index++;
                         }
                         sheet.Cells[detail_row, month_end + 1].Formula = string.Format("=SUM(I{0}:{1}{0})", detail_row, Convert.ToChar(64 + month_end));
-
-                        #region 小計加總計算
-                        row_subtotal[0] += item.qty_1;
-                        row_subtotal[1] += item.qty_2;
-                        row_subtotal[2] += item.qty_3;
-                        row_subtotal[3] += item.qty_4;
-                        row_subtotal[4] += item.qty_5;
-                        row_subtotal[5] += item.qty_6;
-                        row_subtotal[6] += item.qty_7;
-                        row_subtotal[7] += item.qty_8;
-                        row_subtotal[8] += item.qty_9;
-                        row_subtotal[9] += item.qty_10;
-                        row_subtotal[10] += item.qty_11;
-                        row_subtotal[11] += item.qty_12;
-                        #endregion
-
-                        #region 底部加總計算
-                        row_sum[0] += item.qty_1;
-                        row_sum[1] += item.qty_2;
-                        row_sum[2] += item.qty_3;
-                        row_sum[3] += item.qty_4;
-                        row_sum[4] += item.qty_5;
-                        row_sum[5] += item.qty_6;
-                        row_sum[6] += item.qty_7;
-                        row_sum[7] += item.qty_8;
-                        row_sum[8] += item.qty_9;
-                        row_sum[9] += item.qty_10;
-                        row_sum[10] += item.qty_11;
-                        row_sum[11] += item.qty_12;
-                        #endregion
 
                         detail_row++;
                     }
@@ -1561,7 +1437,7 @@ namespace DotWeb.Areas.Base.Controllers
                 temp_index = month_start;
                 foreach (var i in months)
                 {
-                    sheet.Cells[detail_row, temp_index].Value = row_subtotal[i - 1];
+                    sheet.Cells[detail_row, temp_index].Formula = string.Format("=SUM({0}{1}:{0}{2})", Convert.ToChar(64 + temp_index), subtotal_start_row, detail_row - 1);
                     sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     sheet.Cells[detail_row, temp_index].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
                     temp_index++;
@@ -1584,7 +1460,7 @@ namespace DotWeb.Areas.Base.Controllers
                 temp_index = month_start;
                 foreach (var i in months)
                 {
-                    sheet.Cells[detail_row, temp_index].Value = row_sum[i - 1];
+                    sheet.Cells[detail_row, temp_index].Value = i.qty;
                     sheet.Cells[detail_row, temp_index].Style.Border.Top.Style = ExcelBorderStyle.Double;
                     sheet.Cells[detail_row, temp_index].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
                     temp_index++;
@@ -1710,13 +1586,19 @@ namespace DotWeb.Areas.Base.Controllers
             for (int j = 1; j <= m; j++) { end.Add(j); }
             return end;
         }
-        public List<int> startToEndMonth(int s, int e)
+        public List<CountMonth> startToEndMonth(int y, int s, int e)
         {
-            List<int> rang = new List<int>();
-            for (int j = s; j <= e; j++) { rang.Add(j); }
+            List<CountMonth> rang = new List<CountMonth>();
+            for (int j = s; j <= e; j++) { rang.Add(new CountMonth() { Y = y, M = j }); }
             return rang;
         }
         #endregion
+        public class CountMonth
+        {//計算月份有哪些
+            public int Y { get; set; }
+            public int M { get; set; }
+            public decimal qty { get; set; }//總進貨量 暫存位置
+        }
 
     }
 
