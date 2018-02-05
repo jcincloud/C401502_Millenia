@@ -339,7 +339,7 @@ var GirdForm = React.createClass({
     <div className="row">
 
 	    <div className="col-md-8">
-	        <h4 className="pull-left">業務員所屬客戶名單</h4>
+	        <h4 className="pull-left">業務員所屬客戶名單<small>(僅列出銷售等級A、B之客戶)</small></h4>
 	        <form action="" className="table-form form-inline pull-left col-xs-offset-1">
 	            <div className="form-group">
 					<select className="form-control" 

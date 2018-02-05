@@ -642,6 +642,7 @@ var GirdForm = React.createClass({
 								<option value="1">A</option>
 								<option value="2">B</option>
 								<option value="3">C</option>
+								<option value="4">D</option>
 							</select>
 						</div>
 						<label className="col-xs-2 control-label">客戶狀態</label>

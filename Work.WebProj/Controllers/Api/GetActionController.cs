@@ -639,11 +639,14 @@ namespace DotWeb.Api
 
 
                 int page_size = 8;
+                //排型行程時只能出現 銷售等級 1,2 的客戶
+                List<int?> evaluate = new List<int?>() { 3, 4 };
 
                 var items = db0.Customer
                     .OrderByDescending(x => x.i_InsertDateTime)
                     .Where(x => !visit_customer_id.Contains(x.customer_id) &&
-                        my_area.Contains(x.area_id))
+                        my_area.Contains(x.area_id) &
+                        !evaluate.Contains(x.evaluate))
                     .Select(x => new { x.customer_id, x.customer_name, x.customer_all_name, x.tw_city, x.tw_country, x.tw_address, x.store_type, x.state, x.evaluate, x.mark_err });
 
                 if (parm.city != null)
